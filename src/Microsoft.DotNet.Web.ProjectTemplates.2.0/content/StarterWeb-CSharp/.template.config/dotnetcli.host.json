@@ -76,6 +76,14 @@
     "UserSecretsId": {
       "isHidden": true
     },
+    "AspNetCoreVersion": {
+      "longName": "aspnet-core-version",
+      "shortName": "acv"
+    },
+    "EntityFrameworkCoreVersion": {
+      "longName": "entity-framework-core-version",
+      "shortName": "efcv"
+    },
     "UseBrowserLink": {
       "longName": "use-browserlink",
       "shortName": ""
