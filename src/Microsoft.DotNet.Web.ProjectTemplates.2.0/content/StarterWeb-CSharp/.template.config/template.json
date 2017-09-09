@@ -32,8 +32,16 @@
           ]
         },
         {
+          "condition": "(!IndividualLocalAuth)",
+          "exclude": [ "Areas/**" ]
+        },
+        {
           "condition": "(!IndividualAuth || UseLocalDB)",
           "exclude": [ "app.db" ]
+        },
+        {
+          "condition": "(!CustomAspNetCoreVersion && !CustomEntityFrameworkCoreVersion)",
+          "exclude": [ "NuGet.config" ]
         },
         {
           "condition": "(!IndividualLocalAuth)",
@@ -111,10 +119,34 @@
         {
           "choice": "Windows",
           "description": "Windows authentication"
+        },
+        {
+          "choice": "IndividualTokenService",
+          "description": "Individual authentication with a token server"
         }
       ],
       "defaultValue": "None",
       "description": "The type of authentication to use"
+    },
+    "AspNetCoreVersion": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "The version for AspNet Core packages",
+      "replaces": "$(TemplateAspNetCoreVersion)"
+    },
+    "CustomAspNetCoreVersion": {
+      "type": "computed",
+      "value": "(AspNetCoreVersion != \"\")"
+    },
+    "EntityFrameworkCoreVersion": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "The version for Entity Framework Core packages",
+      "replaces": "$(TemplateEntityFrameworkVersion)"
+    },
+    "CustomEntityFrameworkCoreVersion": {
+      "type": "computed",
+      "value": "(EntityFrameworkVersion != \"\")"
     },
     "AAdB2CInstance": {
       "type": "parameter",
