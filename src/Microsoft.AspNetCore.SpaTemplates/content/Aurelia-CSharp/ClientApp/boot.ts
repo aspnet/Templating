@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 declare const IS_DEV_BUILD: boolean; // The value is supplied by Webpack during the build
 
+import 'jquery';
+(<any>window).jQuery = (<any>window).$ = $;
+
 export function configure(aurelia: Aurelia) {
     aurelia.use.standardConfiguration();
 
