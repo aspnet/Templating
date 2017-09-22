@@ -7,7 +7,7 @@ module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     return [{
         stats: { modules: false },
-        entry: { 'app': 'aurelia-bootstrapper' },
+        entry: { 'app': ['es6-promise/auto', 'aurelia-bootstrapper'] }, // Include automatic Promise shim for IE11
         resolve: {
             extensions: ['.ts', '.js'],
             modules: ['ClientApp', 'node_modules'],
