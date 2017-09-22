@@ -26,6 +26,7 @@ module.exports = (env) => {
             ]
         },
         plugins: [
+            new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Included to allow global creation of window.$ in boot.ts
             new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(isDevBuild) }),
             new webpack.DllReferencePlugin({
                 context: __dirname,
