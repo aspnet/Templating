@@ -7,7 +7,7 @@ module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     return [{
         stats: { modules: false },
-        entry: { 'app': 'aurelia-bootstrapper' },
+        entry: { 'app': ['es6-promise/auto', 'aurelia-bootstrapper'] }, // Include automatic Promise shim for IE11
         resolve: {
             extensions: ['.ts', '.js'],
             modules: ['ClientApp', 'node_modules'],
@@ -26,6 +26,7 @@ module.exports = (env) => {
             ]
         },
         plugins: [
+            new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Included to allow global creation of window.$ in boot.ts
             new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(isDevBuild) }),
             new webpack.DllReferencePlugin({
                 context: __dirname,
