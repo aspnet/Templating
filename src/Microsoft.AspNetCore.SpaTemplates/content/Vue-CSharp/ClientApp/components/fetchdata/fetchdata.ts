@@ -21,12 +21,5 @@ export default class FetchDataComponent extends Vue {
         catch (err) {
             console.log(err);
         }
-        /*
-        fetch('api/SampleData/WeatherForecasts')
-            .then(response => response.json() as Promise<WeatherForecast[]>)
-            .then(data => {
-                this.forecasts = data;
-            });
-        */
     }
 }
