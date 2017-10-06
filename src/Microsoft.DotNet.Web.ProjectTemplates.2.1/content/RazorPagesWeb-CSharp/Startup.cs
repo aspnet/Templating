@@ -129,7 +129,7 @@ namespace Company.WebApplication1
             app.UseAuthentication();
 
 #endif
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
         }
     }
 }
