@@ -30,6 +30,9 @@
     </Exec>
     <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
 
+    <!-- Ensure NPM packages are installed -->
+    <Exec Command="npm install" />
+    
     <!-- In development, the dist files won't exist on the first run or when cloning to
          a different machine, so rebuild them if not already present. -->
     <Message Importance="high" Text="Performing first-run Webpack build..." />
