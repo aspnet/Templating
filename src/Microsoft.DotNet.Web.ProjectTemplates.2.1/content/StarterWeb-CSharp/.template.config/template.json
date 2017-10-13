@@ -38,7 +38,7 @@
         {
           "condition": "(!IndividualLocalAuth)",
           "exclude": [
-            "Areas/**"
+            "Areas/Identity/**"
           ]
         },
         {
