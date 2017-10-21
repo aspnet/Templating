@@ -2,6 +2,15 @@
   "name": "AureliaSpa",
   "private": true,
   "version": "0.0.0",
+  "scripts": {
+    "start": "dotnet run",
+    "build:vendor": "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js",
+    "build:app": "node node_modules/webpack/bin/webpack.js",
+    "build": "npm run build:vendor && npm run build:app",
+    "build:vendor:rel": "npm run build:vendor -- --env.prod",
+    "build:app:rel": "npm run build:app -- --env.prod",
+    "build:rel": "npm run build:vendor:rel && npm run build:app:rel"
+  },
   "devDependencies": {
     "@types/webpack-env": "^1.13.0",
     "aspnet-webpack": "^2.0.1",
