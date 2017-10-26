@@ -78,10 +78,6 @@ namespace Company.WebApplication1
 
 #endif
 
-            services.AddHttpsRedirection(options =>
-            {
-                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
-            });
             services.AddHsts(options =>
             {
                 options.MaxAge = TimeSpan.FromDays(30);
