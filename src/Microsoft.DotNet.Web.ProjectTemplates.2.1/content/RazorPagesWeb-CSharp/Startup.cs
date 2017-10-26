@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 #endif
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 #if (OrganizationalAuth)
 using Microsoft.AspNetCore.Mvc.Authorization;
 #endif
@@ -103,6 +104,14 @@ namespace Company.WebApplication1
 #else
             services.AddMvc();
 #endif
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+            });
+            services.AddHsts(options =>
+            {
+                options.MaxAge = TimeSpan.FromDays(30);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,9 +130,11 @@ namespace Company.WebApplication1
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
             app.UseStaticFiles();
+            app.UseHttpsRedirection();
 
 #if (OrganizationalAuth || IndividualAuth)
             app.UseAuthentication();

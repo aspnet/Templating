@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 #endif
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 #if (OrganizationalAuth && OrgReadAccess)
@@ -76,6 +77,16 @@ namespace Company.WebApplication1
             .AddCookie();
 
 #endif
+
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+            });
+            services.AddHsts(options =>
+            {
+                options.MaxAge = TimeSpan.FromDays(30);
+            });
+
             services.AddMvc();
         }
 
@@ -95,6 +106,7 @@ namespace Company.WebApplication1
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
             app.UseStaticFiles();
@@ -103,6 +115,7 @@ namespace Company.WebApplication1
             app.UseAuthentication();
 
 #endif
+            app.UseHttpsRedirection();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
