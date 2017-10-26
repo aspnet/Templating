@@ -109,13 +109,13 @@ namespace Company.WebApplication1
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
 #if (OrganizationalAuth || IndividualAuth)
             app.UseAuthentication();
 
 #endif
-            app.UseHttpsRedirection();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

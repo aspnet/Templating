@@ -78,6 +78,16 @@ namespace Company.WebApplication1
             .AddCookie();
 
 #endif
+
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+            });
+            services.AddHsts(options =>
+            {
+                options.MaxAge = TimeSpan.FromDays(30);
+            });
+
 #if (IndividualLocalAuth)
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
@@ -104,14 +114,6 @@ namespace Company.WebApplication1
 #else
             services.AddMvc();
 #endif
-            services.AddHttpsRedirection(options =>
-            {
-                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
-            });
-            services.AddHsts(options =>
-            {
-                options.MaxAge = TimeSpan.FromDays(30);
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -133,8 +135,8 @@ namespace Company.WebApplication1
                 app.UseHsts();
             }
 
-            app.UseStaticFiles();
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
 #if (OrganizationalAuth || IndividualAuth)
             app.UseAuthentication();
