@@ -3,7 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "test": "karma start ClientApp/test/karma.conf.js"
+    "start": "dotnet run",
+    "test": "karma start ClientApp/test/karma.conf.js",
+    "build:vendor": "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js",
+    "build:app": "node node_modules/webpack/bin/webpack.js",
+    "build": "npm run build:vendor && npm run build:app",
+    "build:vendor:rel": "npm run build:vendor -- --env.prod",
+    "build:app:rel": "npm run build:app -- --env.prod",
+    "build:rel": "npm run build:vendor:rel && npm run build:app:rel"
   },
   "devDependencies": {
     "@angular/animations": "4.2.5",
