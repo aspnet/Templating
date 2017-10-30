@@ -78,10 +78,6 @@ namespace Company.WebApplication1
             .AddCookie();
 
 #endif
-            services.AddHsts(options =>
-            {
-                options.MaxAge = TimeSpan.FromDays(30);
-            });
 
 #if (IndividualLocalAuth)
             services.AddMvc()
@@ -127,7 +123,6 @@ namespace Company.WebApplication1
             else
             {
                 app.UseExceptionHandler("/Error");
-                app.UseHsts();
             }
 
             app.UseHttpsRedirection();

@@ -40,11 +40,6 @@ namespace Company.WebApplication1
     #endif
 
 #endif
-            services.AddHsts(options =>
-            {
-                options.MaxAge = TimeSpan.FromDays(30);
-            });
-
             services.AddMvc();
         }
 
@@ -54,10 +49,6 @@ namespace Company.WebApplication1
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
             }
 
             app.UseHttpsRedirection();

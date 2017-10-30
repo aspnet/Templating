@@ -78,11 +78,6 @@ namespace Company.WebApplication1
 
 #endif
 
-            services.AddHsts(options =>
-            {
-                options.MaxAge = TimeSpan.FromDays(30);
-            });
-
             services.AddMvc();
         }
 
@@ -102,7 +97,6 @@ namespace Company.WebApplication1
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
