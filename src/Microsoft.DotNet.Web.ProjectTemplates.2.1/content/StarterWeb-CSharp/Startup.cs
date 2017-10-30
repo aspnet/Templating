@@ -77,7 +77,6 @@ namespace Company.WebApplication1
             .AddCookie();
 
 #endif
-
             services.AddMvc();
         }
 

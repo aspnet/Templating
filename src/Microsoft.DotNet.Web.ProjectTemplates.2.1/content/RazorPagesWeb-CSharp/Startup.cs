@@ -78,7 +78,6 @@ namespace Company.WebApplication1
             .AddCookie();
 
 #endif
-
 #if (IndividualLocalAuth)
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
