@@ -50,6 +50,10 @@ namespace Company.WebApplication1
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
 #if (OrganizationalAuth || IndividualAuth)

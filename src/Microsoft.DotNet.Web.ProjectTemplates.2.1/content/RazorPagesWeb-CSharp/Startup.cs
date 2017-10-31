@@ -122,6 +122,7 @@ namespace Company.WebApplication1
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
