@@ -100,12 +100,12 @@ namespace Company.WebApplication1
 
             if (env.IsDevelopment())
             {
+#if (UseBrowserLink)
+                app.UseBrowserLink();
+#endif
                 app.UseDeveloperExceptionPage();
 #if (IndividualAuth)
                 app.UseDatabaseErrorPage();
-#endif
-#if (UseBrowserLink)
-                app.UseBrowserLink();
 #endif
             }
             else
