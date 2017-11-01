@@ -43,8 +43,8 @@ namespace AureliaSpa
                 app.UseHsts();
             }
 
-            app.UseStaticFiles();
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
