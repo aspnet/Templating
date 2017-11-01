@@ -45,7 +45,7 @@ namespace VueSpa
 
             app.UseStaticFiles();
             app.UseHttpsRedirection();
-            
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

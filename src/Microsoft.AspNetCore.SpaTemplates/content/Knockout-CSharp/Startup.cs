@@ -45,7 +45,7 @@ namespace KnockoutSpa
 
             app.UseStaticFiles();
             app.UseHttpsRedirection();
-            
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
