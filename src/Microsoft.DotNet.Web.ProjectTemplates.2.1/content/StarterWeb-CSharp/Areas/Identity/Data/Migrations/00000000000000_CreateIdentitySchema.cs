@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-#if (UseLocalDB)
 using System.Linq;
 using System.Threading.Tasks;
+#if (UseLocalDB)
 using Microsoft.EntityFrameworkCore.Metadata;
 #endif
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Company.WebApplication1.Identity.Data.Migrations
+namespace Company.WebApplication1.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
@@ -25,26 +25,6 @@ namespace Company.WebApplication1.Identity.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,7 +60,7 @@ namespace Company.WebApplication1.Identity.Data.Migrations
 #if (UseLocalDB)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
 #else
-                        .Annotation("Autoincrement", true),
+                        .Annotation("Sqlite:Autoincrement", true),
 #endif
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
@@ -105,7 +85,7 @@ namespace Company.WebApplication1.Identity.Data.Migrations
 #if (UseLocalDB)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
 #else
-                        .Annotation("Autoincrement", true),
+                        .Annotation("Sqlite:Autoincrement", true),
 #endif
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
@@ -166,16 +146,41 @@ namespace Company.WebApplication1.Identity.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
-                unique: true);
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+#if (UseLocalDB)
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+#else
+                unique: true);
+#endif
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -201,7 +206,12 @@ namespace Company.WebApplication1.Identity.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
+#if (UseLocalDB)
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+#else
                 unique: true);
+#endif
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
