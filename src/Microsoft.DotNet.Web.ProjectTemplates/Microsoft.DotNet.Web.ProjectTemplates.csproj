@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PackageId>Microsoft.DotNet.Web.ProjectTemplates.1.x</PackageId>
-    <NuspecFile>Microsoft.DotNet.Web.ProjectTemplates.1.x.nuspec</NuspecFile>
+    <NuspecFile>Microsoft.DotNet.Web.ProjectTemplates.nuspec</NuspecFile>
   </PropertyGroup>
 
 </Project>
