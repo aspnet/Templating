@@ -12,12 +12,7 @@ namespace Templates.Test.Helpers
 
         private static readonly string[] _templatePackages = new[]
         {
-            "Microsoft.DotNet.Web.Client.ItemTemplates",
-            "Microsoft.DotNet.Web.ItemTemplates",
-            "Microsoft.DotNet.Web.ProjectTemplates.2.0",
-            "Microsoft.DotNet.Web.ProjectTemplates.2.1",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates",
-            "Microsoft.AspNetCore.SpaTemplates",
+            "Microsoft.DotNet.Web.ProjectTemplates.1.x"
         };
 
         public static void EnsureTemplatePackagesWereReinstalled(ITestOutputHelper output)
