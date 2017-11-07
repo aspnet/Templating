@@ -14,7 +14,6 @@ namespace Templates.Test.Helpers
         {
             "Microsoft.DotNet.Web.Client.ItemTemplates",
             "Microsoft.DotNet.Web.ItemTemplates",
-            "Microsoft.DotNet.Web.ProjectTemplates.2.0",
             "Microsoft.DotNet.Web.ProjectTemplates.2.1",
             "Microsoft.DotNet.Web.Spa.ProjectTemplates",
             "Microsoft.AspNetCore.SpaTemplates",
@@ -73,21 +72,26 @@ namespace Templates.Test.Helpers
         private static void VerifyCannotFindTemplate(ITestOutputHelper output, string templateName)
         {
             // Verify we really did remove the previous templates
-            var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("D"));
+            var tempDir = Path.Combine(Directory.GetCurrentDirectory(), Guid.NewGuid().ToString("D"));
             Directory.CreateDirectory(tempDir);
 
-            var proc = ProcessEx.Run(
-                output,
-                tempDir,
-                "dotnet",
-                $"new \"{templateName}\"");
-            proc.WaitForExit(assertSuccess: false);
-            if (!proc.Error.Contains($"No templates matched the input template name: {templateName}."))
+            try
             {
-                throw new InvalidOperationException($"Failed to uninstall previous templates. The template '{templateName}' could still be found.");
+                var proc = ProcessEx.Run(
+                    output,
+                    tempDir,
+                    "dotnet",
+                    $"new \"{templateName}\"");
+                    proc.WaitForExit(assertSuccess: false);
+                if (!proc.Error.Contains($"No templates matched the input template name: {templateName}."))
+                {
+                    throw new InvalidOperationException($"Failed to uninstall previous templates. The template '{templateName}' could still be found.");
+                }
             }
-
-            Directory.Delete(tempDir);
+            finally
+            {
+                Directory.Delete(tempDir);
+            }
         }
 
         private static string FindAncestorDirectoryContaining(string filename)
