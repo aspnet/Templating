@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -11,7 +12,8 @@ namespace Templates.Test.Helpers
     public static class WebDriverFactory
     {
         public static bool HostSupportsBrowserAutomation
-            => IsAppVeyor || OSSupportsEdge();
+            => string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_DISABLED")) &&
+               (IsAppVeyor || OSSupportsEdge());
 
         private static bool IsAppVeyor
             => Environment.GetEnvironmentVariables().Contains("APPVEYOR");
@@ -24,13 +26,20 @@ namespace Templates.Test.Helpers
             var result = IsAppVeyor ? CreateFirefoxDriver() : CreateEdgeDriver();
             result.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             return result;
+
+            IWebDriver CreateFirefoxDriver()
+            {
+                return WebDriverFactory.CreateFirefoxDriver(new FirefoxOptions(){
+                    AcceptInsecureCertificates = true
+                });
+            }
         }
 
         private static IWebDriver CreateEdgeDriver()
             => new EdgeDriver(EdgeDriverService.CreateDefaultService(BinDir));
 
-        private static IWebDriver CreateFirefoxDriver()
-            => new FirefoxDriver(FirefoxDriverService.CreateDefaultService(BinDir));
+        private static IWebDriver CreateFirefoxDriver(FirefoxOptions options)
+            => new FirefoxDriver(FirefoxDriverService.CreateDefaultService(BinDir), options, TimeSpan.FromSeconds(1));
 
         private static string BinDir
             => Path.GetDirectoryName(typeof(WebDriverFactory).Assembly.Location);
