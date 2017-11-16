@@ -26,6 +26,6 @@
       "useHttps": false
     }
   ],
-  "includeLaunchSettings": true,
+  "excludeLaunchSettings": false,
   "minFullFrameworkVersion": "4.6.1"
 }
