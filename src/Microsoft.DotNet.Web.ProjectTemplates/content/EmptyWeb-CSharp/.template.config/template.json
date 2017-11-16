@@ -26,7 +26,7 @@
     {
       "modifiers": [
         {
-          "condition": "(!IncludeLaunchSettings)",
+          "condition": "(ExcludeLaunchSettings)",
           "exclude": [
             "Properties/launchSettings.json"
           ]
@@ -41,11 +41,11 @@
       "datatype": "string",
       "defaultValue": "2.1.0-preview2-25624-02"
     },
-    "IncludeLaunchSettings": {
+    "ExcludeLaunchSettings": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
-      "description": "Whether to include launchSettings.json in the generated template."
+      "description": "Whether to exclude launchSettings.json from the generated template."
     },
     "KestrelPort": {
       "type": "parameter",

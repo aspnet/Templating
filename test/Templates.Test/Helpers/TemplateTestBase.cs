@@ -25,7 +25,7 @@ namespace Templates.Test
             TemplatePackageInstaller.EnsureTemplatePackagesWereReinstalled(output);
 
             Output = output;
-            ProjectName = Guid.NewGuid().ToString().Replace("-", "");
+            ProjectName = $"AspNet.Template.{Guid.NewGuid().ToString("N")}";
 
             var assemblyPath = GetType().GetTypeInfo().Assembly.CodeBase;
             var assemblyUri = new Uri(assemblyPath, UriKind.Absolute);
