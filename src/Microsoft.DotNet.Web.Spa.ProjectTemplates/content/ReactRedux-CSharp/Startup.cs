@@ -1,11 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-<<<<<<< HEAD
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-=======
 using Microsoft.AspNetCore.SpaServices.Webpack;
->>>>>>> 6c00264... Revert "Adds Hsts and HttpsRedirection to spa templates (#137)"
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
