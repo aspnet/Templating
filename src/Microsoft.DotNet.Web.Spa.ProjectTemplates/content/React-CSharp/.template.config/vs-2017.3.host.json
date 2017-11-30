@@ -18,18 +18,10 @@
   ],
   "ports": [
     {
-      "name": "IISExpressPort",
-      "useHttps": false
-    },
-    {
-      "name": "KestrelPort",
-      "useHttps": false
-    },
-    {
       "name": "HttpsPort",
       "useHttps": true
     }
   ],
-  "excludeLaunchSettings": "false",
+  "excludeLaunchSettings": false,
   "minFullFrameworkVersion": "4.6.1"
 }

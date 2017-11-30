@@ -27,12 +27,11 @@ namespace Templates.Test.Helpers
             result.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             return result;
 
-            IWebDriver CreateFirefoxDriver()
-            {
-                return WebDriverFactory.CreateFirefoxDriver(new FirefoxOptions(){
+            IWebDriver CreateFirefoxDriver() =>
+                WebDriverFactory.CreateFirefoxDriver(new FirefoxOptions()
+                {
                     AcceptInsecureCertificates = true
                 });
-            }
         }
 
         private static IWebDriver CreateEdgeDriver()

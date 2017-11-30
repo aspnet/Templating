@@ -13,10 +13,7 @@
       "longName": "no-restore",
       "shortName": ""
     },
-    "KestrelPort": {
-      "isHidden": true
-    },
-    "IISExpressPort": {
+    "HttpPort": {
       "isHidden": true
     },
     "HttpsPort": {
