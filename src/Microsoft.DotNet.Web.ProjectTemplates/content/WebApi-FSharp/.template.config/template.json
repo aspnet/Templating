@@ -2,7 +2,6 @@
   "author": "Microsoft",
   "classifications": [
     "Web",
-    "API",
     "WebAPI"
   ],
   "name": "ASP.NET Core Web API",
