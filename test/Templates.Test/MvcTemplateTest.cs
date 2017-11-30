@@ -13,18 +13,14 @@ namespace Templates.Test
         {
         }
 
-        [ConditionalTheory]
+        [ConditionalFact]
         [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
-        [InlineData(null)]
-        [InlineData("F#")]
-        public void MvcTemplate_NoAuth_Works_NetFramework(string languageOverride)
-            => MvcTemplate_NoAuthImpl("net461", languageOverride);
+        public void MvcTemplate_NoAuth_Works_NetFramework()
+            => MvcTemplate_NoAuthImpl("net461", languageOverride: null);
 
-        [Theory]
-        [InlineData(null)]
-        [InlineData("F#")]
-        public void MvcTemplate_NoAuth_Works_NetCore(string languageOverride)
-            => MvcTemplate_NoAuthImpl(null, languageOverride);
+        [Fact]
+        public void MvcTemplate_NoAuth_Works_NetCore()
+            => MvcTemplate_NoAuthImpl(null, languageOverride: null);
 
         private void MvcTemplate_NoAuthImpl(string targetFrameworkOverride, string languageOverride)
         {

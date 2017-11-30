@@ -9,10 +9,7 @@
     "Framework": {
       "longName": "framework"
     },
-    "KestrelPort": {
-      "isHidden": true
-    },
-    "IISExpressPort": {
+    "HttpPort": {
       "isHidden": true
     },
     "HttpsPort": {

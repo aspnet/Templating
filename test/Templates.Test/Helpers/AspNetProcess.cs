@@ -9,6 +9,7 @@ using Microsoft.Extensions.CommandLineUtils;
 using Xunit;
 using Xunit.Abstractions;
 using Microsoft.AspNetCore.Certificates.Generation;
+using System.Threading;
 
 namespace Templates.Test.Helpers
 {
@@ -16,7 +17,7 @@ namespace Templates.Test.Helpers
     {
         private const string DefaultFramework = "netcoreapp2.0";
         private const string ListeningMessagePrefix = "Now listening on: ";
-        private static readonly Random rnd = new Random(Seed: 0);
+        private static int Port = 5000 + new Random(Seed: 0).Next(3000);
 
         private readonly ProcessEx _process;
         private readonly Uri _listeningUri;
@@ -61,8 +62,8 @@ namespace Templates.Test.Helpers
                     .WaitForExit(assertSuccess: true);
             }
 
-            _httpPort = 5000 + rnd.Next(2000);
-            _httpsPort = 44300 + rnd.Next(1000);
+            _httpPort = Interlocked.Increment(ref Port);
+            _httpsPort = Interlocked.Increment(ref Port);
             var envVars = new Dictionary<string, string>
             {
                 { "ASPNETCORE_URLS", $"http://localhost:{_httpPort};https://localhost:{_httpsPort}" },

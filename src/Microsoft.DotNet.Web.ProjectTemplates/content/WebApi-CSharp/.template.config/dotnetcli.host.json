@@ -44,13 +44,10 @@
       "longName": "no-restore",
       "shortName": ""
     },
+    "HttpPort": {
+      "isHidden": true
+    },
     "HttpsPort": {
-      "isHidden": true
-    },
-    "KestrelPort": {
-      "isHidden": true
-    },
-    "IISExpressPort": {
       "isHidden": true
     },
     "ExcludeLaunchSettings": {
