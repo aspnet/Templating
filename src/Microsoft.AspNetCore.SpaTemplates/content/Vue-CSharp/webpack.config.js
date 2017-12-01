@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const bundleOutputDir = './wwwroot/dist';
 
 module.exports = (env) => {
@@ -10,12 +9,11 @@ module.exports = (env) => {
     return [{
         stats: { modules: false },
         context: __dirname,
-        resolve: { extensions: [ '.js', '.ts' ] },
+        resolve: { extensions: [ '.js', '.ts', 'vue' ] },
         entry: { 'main': './ClientApp/boot.ts' },
         module: {
             rules: [
-                { test: /\.vue\.html$/, include: /ClientApp/, loader: 'vue-loader', options: { loaders: { js: 'awesome-typescript-loader?silent=true' } } },
-                { test: /\.ts$/, include: /ClientApp/, use: 'awesome-typescript-loader?silent=true' },
+                { test: /\.vue$/, include: /ClientApp/, loader: 'vue-loader', options: { esModule: false } },
                 { test: /\.css$/, use: isDevBuild ? [ 'style-loader', 'css-loader' ] : ExtractTextPlugin.extract({ use: 'css-loader?minimize' }) },
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
             ]
@@ -26,7 +24,6 @@ module.exports = (env) => {
             publicPath: 'dist/'
         },
         plugins: [
-            new CheckerPlugin(),
             new webpack.DefinePlugin({
                 'process.env': {
                     NODE_ENV: JSON.stringify(isDevBuild ? 'development' : 'production')
