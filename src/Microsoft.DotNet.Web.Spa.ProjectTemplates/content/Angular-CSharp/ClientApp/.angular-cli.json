@@ -26,24 +26,6 @@
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
-    },
-    {
-      "name": "ssr",
-      "root": "src",
-      "outDir": "dist-server",
-      "assets": [
-        "assets"
-      ],
-      "main": "main.server.ts",
-      "tsconfig": "tsconfig.app-ssr.json",
-      "prefix": "app",
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      },
-      "platform": "server"
     }
   ],
   "e2e": {
