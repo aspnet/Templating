@@ -26,19 +26,19 @@ namespace Templates.Test.Helpers
             var result = IsAppVeyor ? CreateFirefoxDriver() : CreateEdgeDriver();
             result.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             return result;
-
-            IWebDriver CreateFirefoxDriver() =>
-                WebDriverFactory.CreateFirefoxDriver(new FirefoxOptions()
-                {
-                    AcceptInsecureCertificates = true
-                });
         }
 
         private static IWebDriver CreateEdgeDriver()
             => new EdgeDriver(EdgeDriverService.CreateDefaultService(BinDir));
 
-        private static IWebDriver CreateFirefoxDriver(FirefoxOptions options)
-            => new FirefoxDriver(FirefoxDriverService.CreateDefaultService(BinDir), options, TimeSpan.FromSeconds(1));
+        private static IWebDriver CreateFirefoxDriver()
+            => new FirefoxDriver(
+                FirefoxDriverService.CreateDefaultService(BinDir),
+                new FirefoxOptions()
+                {
+                    AcceptInsecureCertificates = true
+                },
+                TimeSpan.FromSeconds(1));
 
         private static string BinDir
             => Path.GetDirectoryName(typeof(WebDriverFactory).Assembly.Location);

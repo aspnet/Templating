@@ -17,7 +17,7 @@ namespace Templates.Test.Helpers
     {
         private const string DefaultFramework = "netcoreapp2.0";
         private const string ListeningMessagePrefix = "Now listening on: ";
-        private static int Port = 5000 + new Random(Seed: 0).Next(3000);
+        private static int Port = 5000 + new Random().Next(3000);
 
         private readonly ProcessEx _process;
         private readonly Uri _listeningUri;
