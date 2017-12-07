@@ -7,7 +7,7 @@
       $(RestoreSources);
       https://dotnet.myget.org/F/aspnet-2-0-2-october2017-patch/api/v3/index.json;
       https://dotnet.myget.org/F/aspnetcore-tools/api/v3/index.json;
-      https://dotnet.myget.org/F/aspnetcore-ci-dev/api/v3/index.json;
+      https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
     </RestoreSources>
     <RestoreSources Condition="'$(DotNetBuildOffline)' != 'true'">
       $(RestoreSources);
