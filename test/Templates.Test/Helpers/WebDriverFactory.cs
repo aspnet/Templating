@@ -23,9 +23,11 @@ namespace Templates.Test.Helpers
             // Where possible, it's preferable to use Edge because it's
             // far faster to automate than Chrome/Firefox. But on AppVeyor
             // only Firefox is available.
-            var result = IsAppVeyor ? CreateFirefoxDriver() : CreateEdgeDriver();
+            var result = (IsAppVeyor || UseFirefox()) ? CreateFirefoxDriver() : CreateEdgeDriver();
             result.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             return result;
+
+            bool UseFirefox() => !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_FIREFOX"));
         }
 
         private static IWebDriver CreateEdgeDriver()
