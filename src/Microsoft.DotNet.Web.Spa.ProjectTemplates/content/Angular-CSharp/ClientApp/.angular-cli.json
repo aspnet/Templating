@@ -55,6 +55,9 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {}
+    "component": {},
+    "build": {
+      "progress": true
+    }
   }
 }
