@@ -348,8 +348,14 @@ namespace Company.WebApplication1.Identity.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{userId}'.");
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : 
-                "Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (result.Succeeded)
+            {
+                return View("ConfirmEmail");
+            }
+            else
+            {
+                return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
 
         [HttpGet]
