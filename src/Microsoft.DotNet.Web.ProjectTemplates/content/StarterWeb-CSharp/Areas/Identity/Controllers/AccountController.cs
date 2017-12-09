@@ -327,6 +327,8 @@ namespace Company.WebApplication1.Identity.Controllers
                         return RedirectToLocal(returnUrl);
                     }
                 }
+
+                ViewData["LoginProvider"] = info.LoginProvider;
                 AddErrors(result);
             }
 

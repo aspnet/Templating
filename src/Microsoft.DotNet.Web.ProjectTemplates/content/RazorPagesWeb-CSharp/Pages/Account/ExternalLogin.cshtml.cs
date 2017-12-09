@@ -124,6 +124,8 @@ namespace Company.WebApplication1.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
+                LoginProvider = info.LoginProvider;
             }
 
             ReturnUrl = returnUrl;
