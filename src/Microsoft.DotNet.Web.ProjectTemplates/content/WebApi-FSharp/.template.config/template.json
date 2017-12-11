@@ -18,6 +18,24 @@
   },
   "sourceName": "Company.WebApplication1",
   "preferNameDirectory": true,
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(TargetFrameworkOverride == '')",
+          "exclude": [
+            "app.config"
+          ]
+        },
+        {
+          "condition": "(TargetFrameworkOverride == '')",
+          "exclude": [
+            "app.config"
+          ]
+        }
+      ]
+    }
+  ],
   "symbols": {
     "ExcludeLaunchSettings": {
       "type": "parameter",
