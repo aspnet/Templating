@@ -328,10 +328,10 @@ namespace Company.WebApplication1.Identity.Controllers
                     }
                 }
 
-                ViewData["LoginProvider"] = info.LoginProvider;
                 AddErrors(result);
             }
 
+            ViewData["LoginProvider"] = info.LoginProvider;
             ViewData["ReturnUrl"] = returnUrl;
             return View(nameof(ExternalLogin), model);
         }
