@@ -26,12 +26,6 @@
           "exclude": [
             "app.config"
           ]
-        },
-        {
-          "condition": "(TargetFrameworkOverride == '')",
-          "exclude": [
-            "app.config"
-          ]
         }
       ]
     }
