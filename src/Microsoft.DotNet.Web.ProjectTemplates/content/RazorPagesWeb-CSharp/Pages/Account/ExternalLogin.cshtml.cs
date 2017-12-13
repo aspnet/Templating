@@ -104,7 +104,7 @@ namespace Company.WebApplication1.Pages.Account
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                throw new ApplicationException("Error loading external login information during confirmation.");
+                    throw new InvalidOperationException("Error loading external login information during confirmation.");
             }
 
             if (ModelState.IsValid)

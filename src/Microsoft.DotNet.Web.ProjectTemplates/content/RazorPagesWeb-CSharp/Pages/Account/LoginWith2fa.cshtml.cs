@@ -48,7 +48,7 @@ namespace Company.WebApplication1.Pages.Account
 
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
             ReturnUrl = returnUrl;
@@ -67,7 +67,7 @@ namespace Company.WebApplication1.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
