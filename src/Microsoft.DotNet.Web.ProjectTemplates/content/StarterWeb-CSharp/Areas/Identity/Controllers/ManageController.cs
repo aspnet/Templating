@@ -295,6 +295,11 @@ namespace Company.WebApplication1.Identity.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+            
+            if (!await _userManager.HasPasswordAsync(user) && (await _userManager.GetLoginsAsync(user)).Count <= 1)
+            {
+                throw new ApplicationException($"User with ID '{user.Id}' attempted removing their last login when they don't have a password.");
+            }
 
             var result = await _userManager.RemoveLoginAsync(user, model.LoginProvider, model.ProviderKey);
             if (!result.Succeeded)
