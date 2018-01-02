@@ -14,7 +14,7 @@
     <MicrosoftAspNetCoreMvcRazorViewCompilationPackageVersion>2.0.1</MicrosoftAspNetCoreMvcRazorViewCompilationPackageVersion>
     <MicrosoftAspNetCorePackageVersion>2.0.1</MicrosoftAspNetCorePackageVersion>
     <MicrosoftAspNetCoreSpaServicesPackageVersion>2.0.1</MicrosoftAspNetCoreSpaServicesPackageVersion>
-    <MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>2.0.0-preview1-final</MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>
+    <MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>2.0.0-rc1-final</MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>
     <MicrosoftAspNetCoreStaticFilesPackageVersion>2.0.1</MicrosoftAspNetCoreStaticFilesPackageVersion>
     <MicrosoftAspNetCoreTestingPackageVersion>2.0.0</MicrosoftAspNetCoreTestingPackageVersion>
     <MicrosoftBuildFrameworkPackageVersion>15.3.409</MicrosoftBuildFrameworkPackageVersion>
