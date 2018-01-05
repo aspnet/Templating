@@ -8,14 +8,14 @@ open Microsoft.AspNetCore.Mvc
 
 [<Route("api/[controller]")>]
 type ValuesController () =
-    inherit Controller()
+    inherit ControllerBase()
 
     [<HttpGet>]
     member this.Get() =
         [|"value1"; "value2"|]
 
     [<HttpGet("{id}")>]
-    member this.Get(id:int) =
+    member this.Get([<FromRoute>]id:int) =
         "value"
 
     [<HttpPost>]
@@ -23,9 +23,9 @@ type ValuesController () =
         ()
 
     [<HttpPut("{id}")>]
-    member this.Put(id:int, [<FromBody>]value:string ) =
+    member this.Put([<FromRoute>]id:int, [<FromBody>]value:string ) =
         ()
 
     [<HttpDelete("{id}")>]
-    member this.Delete(id:int) =
+    member this.Delete([<FromRoute>]id:int) =
         ()
