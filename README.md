@@ -10,3 +10,4 @@ This project is part of ASP.NET Core. You can find samples, documentation and ge
 ## Building Templates
 - Running build.cmd in this repo requires NPM which can be installed from https://nodejs.org/en/.
 - The ASP.NET localhost development certificate must also be installed and trusted or else you'll get a test error "Certificate error: Navigation blocked".
+- build.cmd (or build /t:compile) will produce nuget packages for each class of template in the artifacts directory. These can be installed via `dotnet new -i {nugetpackage path}`
