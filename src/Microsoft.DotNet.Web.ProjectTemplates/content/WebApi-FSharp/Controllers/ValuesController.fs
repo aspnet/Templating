@@ -1,12 +1,9 @@
 ﻿namespace Company.WebApplication1.Controllers
 
-open System
-open System.Collections.Generic
-open System.Linq
-open System.Threading.Tasks
 open Microsoft.AspNetCore.Mvc
 
 [<Route("api/[controller]")>]
+[<ApiController>]
 type ValuesController () =
     inherit ControllerBase()
 
@@ -15,17 +12,17 @@ type ValuesController () =
         [|"value1"; "value2"|]
 
     [<HttpGet("{id}")>]
-    member this.Get([<FromRoute>]id:int) =
+    member this.Get(id:int) =
         "value"
 
     [<HttpPost>]
-    member this.Post([<FromBody>]value:string) =
+    member this.Post([<FromBody>] value:string) =
         ()
 
     [<HttpPut("{id}")>]
-    member this.Put([<FromRoute>]id:int, [<FromBody>]value:string ) =
+    member this.Put(id:int, [<FromBody>] value:string ) =
         ()
 
     [<HttpDelete("{id}")>]
-    member this.Delete([<FromRoute>]id:int) =
+    member this.Delete(id:int) =
         ()
