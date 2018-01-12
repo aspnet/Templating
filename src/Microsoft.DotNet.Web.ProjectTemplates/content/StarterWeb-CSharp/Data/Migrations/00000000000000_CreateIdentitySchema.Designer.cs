@@ -16,8 +16,10 @@ namespace Company.WebApplication1.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
 #if (UseLocalDB)
+                .HasAnnotation("ProductVersion", "2.1.0-preview1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 #else
+                .HasAnnotation("ProductVersion", "2.1.0-preview1");
 #endif
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
