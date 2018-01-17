@@ -22,8 +22,16 @@
       "target": "./",
       "exclude": [
         ".template.config/**"
+      ],
+      "modifiers": [
+        {
+          "condition": "(TargetFrameworkOverride == '')",
+          "exclude": [
+            "app.config"
+          ]
+        }
       ]
-    }
+      }
   ],
   "symbols": {
     "TargetFrameworkOverride": {
