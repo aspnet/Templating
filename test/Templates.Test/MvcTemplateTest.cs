@@ -14,7 +14,8 @@ namespace Templates.Test
         }
 
         [ConditionalTheory]
-        [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
+        [OSSkipCondition(OperatingSystems.Linux)]
+        [OSSkipCondition(OperatingSystems.MacOSX)]
         [InlineData(null)]
         [InlineData("F#")]
         public void MvcTemplate_NoAuth_Works_NetFramework(string languageOverride)
