@@ -56,7 +56,8 @@ namespace Templates.Test
         }
 
         [ConditionalFact]
-        [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
+        [OSSkipCondition(OperatingSystems.Linux)]
+        [OSSkipCondition(OperatingSystems.MacOSX)]
         public void MvcTemplate_IndividualAuth_Works_NetFramework()
             => MvcTemplate_IndividualAuthImpl("net461");
 
