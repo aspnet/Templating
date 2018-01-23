@@ -23,5 +23,8 @@
     "vue-template-compiler": "^2.2.2",
     "webpack": "^2.2.0",
     "webpack-hot-middleware": "^2.12.2"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
   }
 }
