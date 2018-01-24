@@ -9,16 +9,11 @@ namespace Templates.Test.Helpers
         private bool _disposedValue = false;
         private readonly string _exclusionPath;
 
-        public static IDisposable Create(string exclusionPath)
-        {
-            return new AddFirewallExclusion(exclusionPath);
-        }
-
-        private AddFirewallExclusion(string exclusionPath)
+        public AddFirewallExclusion(string exclusionPath)
         {
             if (!File.Exists(exclusionPath))
             {
-                throw new FileNotFoundException();
+                throw new FileNotFoundException($"File {exclusionPath} was not found.");
             }
 
             _exclusionPath = exclusionPath;
