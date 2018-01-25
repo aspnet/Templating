@@ -16,12 +16,12 @@
     </p>
     <p>
         Generating new recovery codes does not change the keys used in authenticator apps. If you wish to change the key
-        used in an authenticator app you should <a asp-action="ResetAuthenticatorWarning">reset your authenticator keys.</a>
+        used in an authenticator app you should <a asp-page="./ResetAuthenticator">reset your authenticator keys.</a>
     </p>
 </div>
 
 <div>
-    <form asp-action="GenerateRecoveryCodes" method="post" class="form-group">
+    <form method="post" class="form-group">
         <button class="btn btn-danger" type="submit">Generate Recovery Codes</button>
     </form>
 </div>
