@@ -22,9 +22,8 @@
     },
     {
       "name": "HttpsPort",
-      "useHttps": false
+      "useHttps": true
     }
   ],
-  "excludeLaunchSettings": false,
   "minFullFrameworkVersion": "4.6.1"
 }
