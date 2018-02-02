@@ -15,14 +15,13 @@
   "learnMoreLink": "https://go.microsoft.com/fwlink/?LinkID=784883",
   "uiFilters": [ "oneaspnet" ],
   "supportsDocker": true,
-  "legacyTemplateIdentity": "Microsoft.NetCore.FSharp.EmptyWeb",
   "ports": [
     {
-      "name": "IISExpressPort",
+      "name": "HttpPort",
       "useHttps": false
     },
     {
-      "name": "KestrelPort",
+      "name": "HttpsPort",
       "useHttps": false
     }
   ],
