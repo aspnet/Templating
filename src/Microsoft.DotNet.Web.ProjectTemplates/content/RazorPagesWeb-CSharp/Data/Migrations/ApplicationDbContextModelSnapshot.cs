@@ -51,8 +51,12 @@ namespace Company.WebApplication1.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
+#if (UseLocalDB)
                         .HasName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
+#else
+                        .HasName("RoleNameIndex");
+#endif
 
                     b.ToTable("AspNetRoles");
                 });
@@ -202,8 +206,12 @@ namespace Company.WebApplication1.Data.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
+#if (UseLocalDB)
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+#else
+                        .HasName("UserNameIndex");
+#endif
 
                     b.ToTable("AspNetUsers");
                 });
