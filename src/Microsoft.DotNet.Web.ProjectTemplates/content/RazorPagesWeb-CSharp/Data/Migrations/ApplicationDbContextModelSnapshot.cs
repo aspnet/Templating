@@ -19,10 +19,10 @@ namespace Company.WebApplication1.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
 #if (UseLocalDB)
-                .HasAnnotation("ProductVersion", "2.1.0-preview1")
+                .HasAnnotation("ProductVersion", "2.1.0-preview1-1:15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 #else
-                .HasAnnotation("ProductVersion", "2.1.0-preview1");
+                .HasAnnotation("ProductVersion", "2.1.0-preview1-1:15");
 #endif
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -145,7 +145,7 @@ namespace Company.WebApplication1.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebApplication27.Data.ApplicationUser", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -261,5 +261,6 @@ namespace Company.WebApplication1.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
+         }
     }
 }
