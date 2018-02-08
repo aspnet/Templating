@@ -56,6 +56,13 @@
     },
     "UserSecretsId": {
       "isHidden": true
+    },
+    "Dockerfile": {
+      "longName": "dockerfile",
+      "shortName": "dockerfile"
+    },
+    "FrameworkVersion": {
+      "isHidden":true
     }
   },
   "usageExamples": [

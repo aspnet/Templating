@@ -57,6 +57,10 @@
             "Extensions/AzureAdB2CAuthenticationBuilderExtensions.cs",
             "Extensions/AzureAdB2COptions.cs"
           ]
+        },
+        {
+          "condition": "(!dockerfile)",
+          "exclude": [ "Dockerfile", ".dockerignore" ]
         }
       ]
     }
@@ -85,6 +89,19 @@
       ],
       "defaultValue": "None",
       "description": "The type of authentication to use"
+    },
+    "dockerfile": {
+      "type": "parameter",
+      "datatype":"bool",
+      "defaultValue": "false",
+      "description": "Whether to include a Dockerfile in the generated template."
+    },
+    "FrameworkVersion": {
+      "type": "derived",
+      "valueSource": "framework",
+      "valueTransform": "TrailingNumber",
+      "description": "The trailing number on the framework",
+      "replaces": "FrameworkVersion"
     },
     "AAdB2CInstance": {
       "type": "parameter",
@@ -251,6 +268,13 @@
       "datatype": "bool",
       "description": "If specified, skips the automatic restore of the project on create.",
       "defaultValue": "false"
+    }
+  },
+  "Forms": {
+    "TrailingNumber": {
+      "identifier": "replace",
+      "pattern": ".*[^\\d](?=\\d+\\.\\d+?)",
+      "replacement": ""
     }
   },
   "primaryOutputs": [
