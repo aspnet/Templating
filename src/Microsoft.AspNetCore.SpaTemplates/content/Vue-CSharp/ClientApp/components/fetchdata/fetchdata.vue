@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in forecasts">
+                <tr v-for="(item, index) in forecasts" :key="index">
                     <td>{{ item.dateFormatted }}</td>
                     <td>{{ item.temperatureC }}</td>
                     <td>{{ item.temperatureF }}</td>
@@ -27,4 +27,4 @@
     </div>
 </template>
 
-<script src="./fetchdata.ts"></script>
+<script lang="ts" src="./fetchdata.ts"></script>
