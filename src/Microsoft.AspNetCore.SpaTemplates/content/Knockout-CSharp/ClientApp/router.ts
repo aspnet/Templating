@@ -28,7 +28,7 @@ export class Router {
         });
 
         // Make history.js watch for navigation and notify Crossroads
-        this.disposeHistory = history.listen(location => crossroads.parse(location.pathname));
+        this.disposeHistory = history.listen(location => crossroads.parse(location.pathname + document.location.search));
         this.clickEventListener = evt => {
             let target: any = evt.currentTarget;
             if (target && target.tagName === 'A') {
@@ -43,7 +43,7 @@ export class Router {
         $(document).on('click', 'a', this.clickEventListener);
 
         // Initialize Crossroads with starting location
-        crossroads.parse(history.location.pathname);
+        crossroads.parse(history.location.pathname + document.location.search);
     }
 
     public link(url: string): string {
