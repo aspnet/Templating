@@ -198,7 +198,7 @@
     },
     "bootstrap": {
       "version": "3.3.7",
-      "from": "bootstrap@>=3.3.6 <4.0.0",
+      "from": "bootstrap@3.3.7",
       "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-3.3.7.tgz",
       "dev": true
     },

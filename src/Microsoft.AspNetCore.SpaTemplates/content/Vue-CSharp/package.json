@@ -6,7 +6,7 @@
     "@types/webpack-env": "^1.13.0",
     "aspnet-webpack": "^2.0.1",
     "awesome-typescript-loader": "^3.0.0",
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^3.3.7",
     "css-loader": "^0.25.0",
     "event-source-polyfill": "^0.0.7",
     "extract-text-webpack-plugin": "^2.0.0-rc",

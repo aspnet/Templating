@@ -13,7 +13,7 @@
     "@types/webpack-env": "^1.13.0",
     "aspnet-webpack": "^2.0.1",
     "awesome-typescript-loader": "^3.0.0",
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^3.3.7",
     "bundle-loader": "^0.5.4",
     "crossroads": "^0.12.2",
     "css-loader": "^0.25.0",
