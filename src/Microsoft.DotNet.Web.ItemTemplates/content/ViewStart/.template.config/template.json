@@ -5,6 +5,10 @@
   "name": "MVC ViewStart",
   "generatorVersions": "[1.0.0.0-*)",
   "description": "A MVC ViewStart Page",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
   "groupIdentity": "Microsoft.AspNetCore.Mvc.ViewStart",
   "precedence": "100",
   "identity": "Microsoft.AspNetCore.Mvc.ViewStart",
