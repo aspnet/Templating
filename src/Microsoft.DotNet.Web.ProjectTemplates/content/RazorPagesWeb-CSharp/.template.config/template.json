@@ -80,21 +80,21 @@
           ]
         },
         {
-          "condition": "(UseLocalDb)",
+          "condition": "(UseLocalDB)",
           "rename": {
-            "Data/Migrations/SqlServer/": "Data/Migrations/",
+            "Data/SqlServer/": "Data/Migrations/",
           },
           "exclude": [
-            "Data/Migrations/SqlLite/**"
+            "Data/SqlLite/**"
           ]
         },
         {
-          "condition": "(!UseLocalDb)",
+          "condition": "(!UseLocalDB)",
           "rename": {
-            "Data/Migrations/SqlLite/": "Data/Migrations/"
+            "Data/SqlLite/": "Data/Migrations/"
           },
           "exclude": [
-            "Data/Migrations/SqlServer/**"
+            "Data/SqlServer/**"
           ]
         }
       ]
