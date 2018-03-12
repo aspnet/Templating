@@ -16,7 +16,7 @@
         "ASPNETCORE_HTTPS_PORT": "44300"
       }
     },
-    "AngularSpa": {
+    "Company.WebApplication1": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
