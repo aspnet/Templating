@@ -80,7 +80,7 @@
           ]
         },
         {
-          "condition": "(UseLocalDB)",
+          "condition": "(IndividualLocalAuth && UseLocalDB)",
           "rename": {
             "Data/SqlServer/": "Data/Migrations/",
           },
@@ -89,7 +89,7 @@
           ]
         },
         {
-          "condition": "(!UseLocalDB)",
+          "condition": "(IndividualLocalAuth && !UseLocalDB)",
           "rename": {
             "Data/SqlLite/": "Data/Migrations/"
           },
