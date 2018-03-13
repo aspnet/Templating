@@ -64,10 +64,18 @@ namespace Company.WebApplication1
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
 #endif
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.Stores.MaxLengthForKeys = 128)
+            services.AddIdentityCore<IdentityUser>(options => options.Stores.MaxLengthForKeys = 128)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication(sharedOptions =>
+            {
+                sharedOptions.DefaultScheme = IdentityConstants.ApplicationScheme;
+                sharedOptions.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+                .AddIdentityCookies(options => { });
 
 #elif (OrganizationalAuth || IndividualB2CAuth)
             services.AddAuthentication(sharedOptions =>
