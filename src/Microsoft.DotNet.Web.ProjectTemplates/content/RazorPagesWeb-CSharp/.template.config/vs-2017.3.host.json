@@ -22,7 +22,8 @@
   "supportedAuthentications": [
     {
       "auth": "None",
-      "authenticationType": "NoAuth"
+      "authenticationType": "NoAuth",
+      "allowUnsecure": true
     },
     {
       "auth": "Individual",
@@ -46,7 +47,8 @@
     },
     {
       "auth": "Windows",
-      "authenticationType": "WindowsAuth"
+      "authenticationType": "WindowsAuth",
+      "allowUnsecure": true
     }
   ],
   "ports": [
@@ -61,5 +63,6 @@
   ],
   "excludeLaunchSettings": false,
   "azureReplyUrlPortName": "HttpsPort",
-  "minFullFrameworkVersion": "4.6.1"
+  "minFullFrameworkVersion": "4.6.1",
+  "disableHttpsSymbol": "NoHttps"
 }

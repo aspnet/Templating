@@ -21,6 +21,11 @@
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+        //#if(RequiresHttps || !NoHttps)
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
+        //#else
+        "ASPNETCORE_URLS": "http://localhost:5000"
+        //#endif
       }
     }
   }
