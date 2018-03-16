@@ -66,7 +66,7 @@
         {
           "condition": "(IndividualB2CAuth)",
           "rename": {
-            "Pages/_LoginPartial" : "Pages/Shared/_LoginPartial"            
+            "Pages/_LoginPartial.cshtml" : "Pages/Shared/_LoginPartial.cshtml"            
           }
         },
         {
