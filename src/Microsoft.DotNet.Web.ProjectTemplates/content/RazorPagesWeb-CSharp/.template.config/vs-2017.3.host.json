@@ -23,7 +23,7 @@
     {
       "auth": "None",
       "authenticationType": "NoAuth",
-      "allowUnsecure": true
+      "allowUnsecured": true
     },
     {
       "auth": "Individual",
@@ -47,8 +47,7 @@
     },
     {
       "auth": "Windows",
-      "authenticationType": "WindowsAuth",
-      "allowUnsecure": true
+      "authenticationType": "WindowsAuth"
     }
   ],
   "ports": [
