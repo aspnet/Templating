@@ -64,6 +64,12 @@
           ]
         },
         {
+          "condition": "(IndividualB2CAuth)",
+          "rename": {
+            "Pages/_LoginPartial" : "Pages/Shared/_LoginPartial"            
+          }
+        },
+        {
           "condition": "(ExcludeLaunchSettings)",
           "exclude": [
             "Properties/launchSettings.json"
