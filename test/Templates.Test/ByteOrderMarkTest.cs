@@ -34,16 +34,16 @@ namespace Templates.Test
                     var filePath = Path.GetFullPath(file);
                     var fileStream = new FileStream(filePath, FileMode.Open);
 
-                    byte[] bits = new byte[3];
+                    var bits = new byte[3];
                     fileStream.Read(bits, 0, 3);
 
-                    // UTF8 BOM is like 0xEF,0xBB,0xBF
+                    // Check for UTF8 BOM 0xEF,0xBB,0xBF
                     if (bits[0] == 0xEF && bits[1] == 0xBB && bits[2] == 0xBF)
                     {
                         _output.WriteLine($"File {filePath} has UTF-8 BOM characters.");
                         checkFiles = true;
                     }
-                    //UTF16 BOM is like 0xFF, 0xFE
+                    // Check for UTF16 BOM 0xFF, 0xFE
                     if (bits[0] == 0xFF && bits[1] == 0xFE)
                     {
                         _output.WriteLine($"File {filePath} has UTF-16 BOM characters.");
