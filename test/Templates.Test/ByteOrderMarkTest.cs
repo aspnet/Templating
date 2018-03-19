@@ -24,8 +24,8 @@ namespace Templates.Test
         public void CheckForByteOrderMarkSpaTemplates(string projectType)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var repositoryPath = Path.GetFullPath(Directory.GetParent(currentDirectory).Parent.Parent.Parent.Parent.FullName);
-            var srcDirectory = Path.GetFullPath(Path.Combine(repositoryPath, "src"));
+            var repositoryPath = Directory.GetParent(currentDirectory).Parent.Parent.Parent.Parent.FullName;
+            var srcDirectory = Path.Combine(repositoryPath, "src");
             var path = Path.Combine(projectType, "content");
             var directories = Directory.GetDirectories(Path.Combine(srcDirectory, path), "*Sharp");
 
