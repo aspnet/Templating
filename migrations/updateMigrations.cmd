@@ -1,4 +1,3 @@
-ECHO on
 echo Make sure to have ran build.cmd once to ensure artifacts have been created.
 rd "Company.WebApplication1" /s /q
 mkdir "Company.WebApplication1"
