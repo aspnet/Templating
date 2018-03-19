@@ -17,13 +17,13 @@ namespace Templates.Test
         }
 
         [Theory]
-        [InlineData(@"\Microsoft.AspNetCore.SpaTemplates\content")]
-        [InlineData(@"\Microsoft.DotNet.Web.ProjectTemplates\content")]
-        [InlineData(@"\Microsoft.DotNet.Web.Spa.ProjectTemplates\content")]
+        [InlineData(@"/Microsoft.AspNetCore.SpaTemplates/content")]
+        [InlineData(@"/Microsoft.DotNet.Web.ProjectTemplates/content")]
+        [InlineData(@"/Microsoft.DotNet.Web.Spa.ProjectTemplates/content")]
         public void CheckForByteOrderMarkSpaTemplates(string path)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var srcDirectory = Path.GetFullPath(Path.Combine(currentDirectory, @"..\..\..\..\..\src"));
+            var srcDirectory = Path.GetFullPath(Path.Combine(currentDirectory, @"../../../../../src"));
             var directories = Directory.GetDirectories(srcDirectory + path, "*Sharp");
 
             var filesWithBOMCharactersPresent = false;
