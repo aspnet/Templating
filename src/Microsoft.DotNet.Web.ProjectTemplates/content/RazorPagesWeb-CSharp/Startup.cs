@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Identity;
 #endif
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-#if (RequiresHttps || !NoHttps)
+#if (RequiresHttps)
 using Microsoft.AspNetCore.HttpsPolicy;
 #endif
 using Microsoft.AspNetCore.Mvc;
@@ -146,7 +146,7 @@ namespace Company.WebApplication1
             else
             {
                 app.UseExceptionHandler("/Error");
-#if (RequiresHttps || !NoHttps)
+#if (RequiresHttps)
                 app.UseHsts();
             }
 

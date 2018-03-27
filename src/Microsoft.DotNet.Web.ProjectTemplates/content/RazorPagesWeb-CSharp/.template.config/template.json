@@ -299,7 +299,7 @@
     },
     "RequiresHttps": {
       "type": "computed",
-      "value": "(OrganizationalAuth || IndividualAuth)"
+      "value": "(OrganizationalAuth || IndividualAuth || !NoHttps)"
     },
     "NoHttps": {
       "type": "parameter",
