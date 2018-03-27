@@ -25,9 +25,40 @@
       "authenticationType": "NoAuth"
     },
     {
-      "auth": "Individual",
+      "auth": "None",
       "authenticationType": "IndividualAuth",
-      "b2cAuthenticationOptions": "CloudExisting"
+      "b2cAuthenticationOptions": "CloudExisting",
+      "snippets": [
+        {
+          "templateId": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+          "outputs": [
+            {
+              "name": "__ActiveDirectorySettings__",
+              "destinationSymbol": "__ActiveDirectorySettings__"
+            },
+            {
+              "name": "__ActiveDirectoryStartup__",
+              "destinationSymbol": "__ActiveDirectoryStartup__"
+            },
+            {
+              "name": "internalAuth",
+              "destinationSymbol": "internalAuth"
+            }
+          ],
+          "parameters": {
+            "Domain": "Domain",
+            "ClientId": "ClientId",
+            "CallbackPath": "CallbackPath",
+            "SignUpSignInPolicyId": "SignupSignInPolicyId",
+            "ResetPasswordPolicyId": "ResetPasswordPolicyId",
+            "EditProfilePolicyId": "EditProfilePolicyId"
+          },
+          "constants": {
+            "auth": "IndividualB2C",
+            "WebAuth": "true"
+          }
+        }
+      ]
     },
     {
       "auth": "Individual",
@@ -35,14 +66,72 @@
       "b2cAuthenticationOptions": "Local"
     },
     {
-      "auth": "SingleOrg",
+      "auth": "None",
       "authenticationType": "OrgAuth",
-      "orgAuthenticationOptions": "SSO"
+      "orgAuthenticationOptions": "SSO",
+      "snippets": [
+        {
+          "templateId": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+          "outputs": [
+            {
+              "name": "__ActiveDirectorySettings__",
+              "destinationSymbol": "__ActiveDirectorySettings__"
+            },
+            {
+              "name": "__ActiveDirectoryStartup__",
+              "destinationSymbol": "__ActiveDirectoryStartup__"
+            },
+            {
+              "name": "internalAuth",
+              "destinationSymbol": "internalAuth"
+            }
+
+          ],
+          "parameters": {
+            "Domain": "Domain",
+            "ClientId": "ClientId",
+            "TenantId": "TenantId",
+            "CallbackPath": "CallbackPath"
+          },
+          "constants": {
+            "auth": "SingleOrg",
+            "WebAuth": "true"
+          }
+        }
+      ]
     },
     {
-      "auth": "MultiOrg",
+      "auth": "None",
       "authenticationType": "OrgAuth",
-      "orgAuthenticationOptions": "MultiOrg"
+      "orgAuthenticationOptions": "MultiOrg",
+      "snippets": [
+        {
+          "templateId": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+          "outputs": [
+            {
+              "name": "__ActiveDirectorySettings__",
+              "destinationSymbol": "__ActiveDirectorySettings__"
+            },
+            {
+              "name": "__ActiveDirectoryStartup__",
+              "destinationSymbol": "__ActiveDirectoryStartup__"
+            },
+            {
+              "name": "internalAuth",
+              "destinationSymbol": "internalAuth"
+            }
+          ],
+          "parameters": {
+            "Domain": "Domain",
+            "ClientId": "ClientId",
+            "CallbackPath": "CallbackPath"
+          },
+          "constants": {
+            "auth": "MultiOrg",
+            "WebAuth": "true"
+          }
+        }
+      ]
     },
     {
       "auth": "Windows",

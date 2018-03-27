@@ -34,12 +34,8 @@ namespace Company.WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-#if (OrganizationalAuth)
-            services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
-                .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
-#elif (IndividualB2CAuth)
-            services.AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
-                .AddAzureADB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
+#if (AzureActiveDirectoryAuth)
+__ActiveDirectoryStartup__
 #endif
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -57,7 +53,7 @@ namespace Company.WebApplication1
             }
 
             app.UseHttpsRedirection();
-#if (OrganizationalAuth || IndividualAuth)
+#if (AzureActiveDirectoryAuth)
             app.UseAuthentication();
 #endif
             app.UseMvc();

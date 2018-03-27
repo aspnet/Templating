@@ -72,44 +72,22 @@
       "defaultValue": "None",
       "description": "The type of authentication to use"
     },
-    "AAdB2CInstance": {
+    "internalAuth": {
       "type": "parameter",
-      "datatype": "string",
-      "defaultValue": "https://login.microsoftonline.com/tfp/",
-      "replaces": "https:////login.microsoftonline.com/tfp/",
-      "description": "The Azure Active Directory B2C instance to connect to (use with IndividualB2C auth)."
-    },
-    "SignUpSignInPolicyId": {
-      "type": "parameter",
-      "datatype": "string",
-      "defaultValue": "",
-      "replaces": "MySignUpSignInPolicyId",
-      "description": "The sign-in and sign-up policy ID for this project (use with IndividualB2C auth)."
-    },
-    "AADInstance": {
-      "type": "parameter",
-      "datatype": "string",
-      "defaultValue": "https://login.microsoftonline.com/",
-      "replaces": "https:////login.microsoftonline.com/",
-      "description": "The Azure Active Directory instance to connect to (use with SingleOrg auth)."
-    },
-    "ClientId": {
-      "type": "parameter",
-      "datatype": "string",
-      "replaces": "11111111-1111-1111-11111111111111111",
-      "description": "The Client ID for this project (use with SingleOrg or IndividualB2C auth)."
-    },
-    "Domain": {
-      "type": "parameter",
-      "datatype": "string",
-      "replaces": "qualified.domain.name",
-      "description": "The domain for the directory tenant (use with SingleOrg or IndividualB2C auth)."
-    },
-    "TenantId": {
-      "type": "parameter",
-      "datatype": "string",
-      "replaces": "22222222-2222-2222-2222-222222222222",
-      "description": "The TenantId ID of the directory to connect to (use with SingleOrg auth)."
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "IndividualB2C"
+        },
+        {
+          "choice": "SingleOrg"
+        },
+        {
+          "choice": "None"
+        }
+      ],
+      "defaultValue": "None",
+      "description": "The type of authentication to use"
     },
     "OrgReadAccess": {
       "type": "parameter",
@@ -182,21 +160,33 @@
       "type": "computed",
       "value": "(auth == \"SingleOrg\")"
     },
-    "IndividualAuth": {
-      "type": "computed",
-      "value": "(auth == \"IndividualB2C\")"
-    },
     "IndividualB2CAuth": {
       "type": "computed",
       "value": "(auth == \"IndividualB2C\")"
     },
+    "AzureActiveDirectoryAuth": {
+      "type": "computed",
+      "value": "(SingleOrgAuth || MultiOrgAuth || IndividualB2CAuth)"
+    },
+    "__ActiveDirectoryStartup__": {
+      "type": "parameter",
+      "replaces": "__ActiveDirectoryStartup__",
+      "datatype": "string",
+      "defaultValue": ""
+    },
+    "__ActiveDirectorySettings__": {
+      "type": "parameter",
+      "replaces": "__ActiveDirectorySettings__",
+      "datatype": "string",
+      "defaultValue": ""
+    },
+    "WebAuth": {
+      "type": "computed",
+      "value": "(SingleOrgAuth || IndividualB2CAuth || IndividualLocalAuth)"
+    },
     "NoAuth": {
       "type": "computed",
-      "value": "(!(IndividualAuth || OrganizationalAuth || WindowsAuth))"
-    },
-    "RequiresHttps": {
-      "type": "computed",
-      "value": "(OrganizationalAuth || IndividualAuth)"
+      "value": "(!(WebAuth || WindowsAuth))"
     },
     "UseLocalDB": {
       "type": "parameter",

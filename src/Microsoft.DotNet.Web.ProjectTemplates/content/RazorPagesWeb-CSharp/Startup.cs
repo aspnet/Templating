@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-#if (OrganizationalAuth || IndividualB2CAuth)
+#if (AzureActiveDirectoryAuth)
 using Microsoft.AspNetCore.Authentication;
 #endif
 #if (OrganizationalAuth)
@@ -59,71 +59,19 @@ namespace Company.WebApplication1
 
 #if (IndividualLocalAuth)
             services.AddDbContext<ApplicationDbContext>(options =>
-    #if (UseLocalDB)
+#if (UseLocalDB)
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-    #else
+#else
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-    #endif
+#endif
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
-#elif (OrganizationalAuth)
-            services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                .AddAzureAD(options => Configuration.Bind("AzureAd", options));
-#if (MultiOrgAuth)
-
-            services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    // Instead of using the default validation (validating against a single issuer value, as we do in
-                    // line of business apps), we inject our own multitenant validation logic
-                    ValidateIssuer = false,
-
-                    // If the app is meant to be accessed by entire organizations, add your issuer validation logic here.
-                    //IssuerValidator = (issuer, securityToken, validationParameters) => {
-                    //    if (myIssuerValidationLogic(issuer)) return issuer;
-                    //}
-                };
-
-                options.Events = new OpenIdConnectEvents
-                {
-                    OnTicketReceived = context =>
-                    {
-                         // If your authentication logic is based on users then add your logic here
-                         return Task.CompletedTask;
-                    },
-                    OnAuthenticationFailed = context =>
-                    {
-                        context.Response.Redirect("/Error");
-                        context.HandleResponse(); // Suppress the exception
-                         return Task.CompletedTask;
-                    },
-                    // If your application needs to do authenticate single users, add your user validation below.
-                    //OnTokenValidated = context =>
-                    //{
-                    //    return myUserValidationLogic(context.Ticket.Principal);
-                    //}
-                };
-            });
+#elif (AzureActiveDirectoryAuth)
+__ActiveDirectoryStartup__
 #endif
-#elif (IndividualB2CAuth)
-            services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                .AddAzureADB2C(options => Configuration.Bind("AzureAdB2C", options));
-#endif
-
-#if (OrganizationalAuth)
-            services.AddMvc(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-#else
+#if (!OrganizationalAuth)
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 #endif
         }
@@ -151,7 +99,7 @@ namespace Company.WebApplication1
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-#if (OrganizationalAuth || IndividualAuth)
+#if (AzureActiveDirectoryAuth || IndividualLocalAuth)
             app.UseAuthentication();
 
 #endif

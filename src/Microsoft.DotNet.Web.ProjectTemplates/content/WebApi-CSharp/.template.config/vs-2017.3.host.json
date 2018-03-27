@@ -26,12 +26,73 @@
     {
       "auth": "Individual",
       "authenticationType": "IndividualAuth",
-      "b2cAuthenticationOptions": "CloudExisting"
+      "b2cAuthenticationOptions": "CloudExisting",
+      "snippets": [
+        {
+          "templateId": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+          "outputs": [
+            {
+              "name": "__ActiveDirectorySettings__",
+              "destinationSymbol": "__ActiveDirectorySettings__"
+            },
+            {
+              "name": "__ActiveDirectoryStartup__",
+              "destinationSymbol": "__ActiveDirectoryStartup__"
+            },
+            {
+              "name": "internalAuth",
+              "destinationSymbol": "internalAuth"
+            }
+          ],
+          "parameters": {
+            "Domain": "Domain",
+            "ClientId": "ClientId",
+            "TenantId": "TenantId",
+            "CallbackPath": "CallbackPath",
+            "SignUpSignInPolicyId": "SignupSignInPolicyId"
+          },
+          "constants": {
+            "auth": "IndividualB2C",
+            "WebAuth": "false"
+          }
+        }
+      ]
     },
     {
       "auth": "SingleOrg",
       "authenticationType": "OrgAuth",
-      "orgAuthenticationOptions": "SSO"
+      "orgAuthenticationOptions": "SSO",
+      "snippets": [
+        {
+          "templateId": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+          "outputs": [
+            {
+              "name": "__ActiveDirectorySettings__",
+              "destinationSymbol": "__ActiveDirectorySettings__"
+            },
+            {
+              "name": "__ActiveDirectoryStartup__",
+              "destinationSymbol": "__ActiveDirectoryStartup__"
+            },
+            {
+              "name": "internalAuth",
+              "destinationSymbol": "internalAuth"
+            }
+
+          ],
+          "parameters": {
+            "Domain": "Domain",
+            "ClientId": "ClientId",
+            "TenantId": "TenantId",
+            "CallbackPath": "CallbackPath",
+            "SignUpSignInPolicyId": "SignupSignInPolicyId"
+          },
+          "constants": {
+            "auth": "SingleOrg",
+            "WebAuth": "false"
+          }
+        }
+      ]
     },
     {
       "auth": "Windows",

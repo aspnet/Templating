@@ -6,64 +6,15 @@
       "longName": "target-framework-override",
       "shortName": ""
     },
-    "UseLocalDB": {
-      "longName": "use-local-db"
-    },
-    "AADInstance": {
-      "longName": "aad-instance",
-      "shortName": ""
-    },
-    "AAdB2CInstance": {
-      "longName": "aad-b2c-instance",
-      "shortName": ""
-    },
-    "SignUpSignInPolicyId": {
-      "longName": "susi-policy-id",
-      "shortName": "ssp"
-    },
-    "ResetPasswordPolicyId": {
-      "longName": "reset-password-policy-id",
-      "shortName": "rp"
-    },
-    "EditProfilePolicyId": {
-      "longName": "edit-profile-policy-id",
-      "shortName": "ep"
-    },
-    "OrgReadAccess": {
-      "longName": "org-read-access",
-      "shortName": "r"
-    },
-    "ClientId": {
-      "longName": "client-id",
-      "shortName": ""
-    },
-    "CallbackPath": {
-      "longName": "callback-path",
-      "shortName": ""
-    },
-    "Domain": {
-      "longName": "domain",
-      "shortName": ""
-    },
-    "TenantId": {
-      "longName": "tenant-id",
-      "shortName": ""
-    },
     "Framework": {
       "longName": "framework"
     },
-    "HttpPort": {
-      "isHidden": true
-    },
-    "HttpsPort": {
-      "isHidden": true
+    "UseLocalDB": {
+      "longName": "use-local-db"
     },
     "ExcludeLaunchSettings": {
       "longName": "exclude-launch-settings",
       "shortName": ""
-    },
-    "UserSecretsId": {
-      "isHidden": true
     },
     "skipRestore": {
       "longName": "no-restore",
@@ -72,6 +23,15 @@
     "UseBrowserLink": {
       "longName": "use-browserlink",
       "shortName": ""
+    },
+    "HttpPort": {
+      "isHidden": true
+    },
+    "HttpsPort": {
+      "isHidden": true
+    },
+    "UserSecretsId": {
+      "isHidden": true
     }
   },
   "usageExamples": [
