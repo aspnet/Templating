@@ -1,8 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Description>Helper snippet templates for the ASP.NET Core templates</Description>
-  </PropertyGroup>
-
-</Project>

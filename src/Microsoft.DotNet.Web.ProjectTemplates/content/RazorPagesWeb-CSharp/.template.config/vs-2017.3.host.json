@@ -31,7 +31,7 @@
       "b2cAuthenticationOptions": "CloudExisting",
       "snippets": [
         {
-          "templateId": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+          "templateId": "Microsoft.Web.Authentication.Internal.CSharp.2.1",
           "outputs": [
             {
               "name": "__ActiveDirectorySettings__",
@@ -73,7 +73,7 @@
       "orgAuthenticationOptions": "SSO",
       "snippets": [
         {
-          "templateId": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+          "templateId": "Microsoft.Web.Authentication.Internal.CSharp.2.1",
           "outputs": [
             {
               "name": "__ActiveDirectorySettings__",
@@ -108,7 +108,7 @@
       "orgAuthenticationOptions": "MultiOrg",
       "snippets": [
         {
-          "templateId": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+          "templateId": "Microsoft.Web.Authentication.Internal.CSharp.2.1",
           "outputs": [
             {
               "name": "__ActiveDirectorySettings__",

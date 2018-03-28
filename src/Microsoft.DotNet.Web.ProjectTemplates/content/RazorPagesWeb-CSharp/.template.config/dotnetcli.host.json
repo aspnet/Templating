@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/dotnetcli.host",
   "symbolInfo": {
     "TargetFrameworkOverride": {
-      "isHidden": "true",
+      "isHidden": true,
       "longName": "target-framework-override",
       "shortName": ""
     },
@@ -32,6 +32,22 @@
     },
     "UserSecretsId": {
       "isHidden": true
+    },
+    "OrgReadAccess": {
+      "isHidden": true,
+      "longName": "debug-org-read-access"
+    },
+    "internalAuth": {
+      "isHidden": true,
+      "longName": "debug-internal-auth"
+    },
+    "__ActiveDirectoryStartup__": {
+      "isHidden": true,
+      "longName": "debug-active-directory-startup"
+    },
+    "__ActiveDirectorySettings__": {
+      "isHidden": true,
+      "longName": "debug-active-directory-settings"
     }
   },
   "usageExamples": [

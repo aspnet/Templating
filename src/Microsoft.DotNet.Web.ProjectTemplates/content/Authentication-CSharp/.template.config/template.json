@@ -5,8 +5,8 @@
   "generatorVersions": "[1.0.0.0-*)",
   "description": "Snippet for authentication settings for the project templates",
   "precedence": "2000",
-  "shortName": "authSnippets",
-  "identity": "Microsoft.Web.TemplateAuthenticationSnippet.CSharp.2.1",
+  "shortName": "internal-authentication",
+  "identity": "Microsoft.Web.Authentication.Internal.CSharp.2.1",
   "tags": {
     "language": "C#",
     "type": "item"
