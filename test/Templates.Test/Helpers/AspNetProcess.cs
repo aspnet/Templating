@@ -27,7 +27,7 @@ namespace Templates.Test.Helpers
         private readonly HttpClient _httpClient;
         private readonly ITestOutputHelper _output;
 
-        public AspNetProcess(ITestOutputHelper output, string workingDirectory, string projectName, string targetFrameworkOverride, bool publish, bool noHttps)
+        public AspNetProcess(ITestOutputHelper output, string workingDirectory, string projectName, string targetFrameworkOverride, bool publish)
         {
             _output = output;
             _httpClient = new HttpClient(new HttpClientHandler()
@@ -63,15 +63,10 @@ namespace Templates.Test.Helpers
                     .WaitForExit(assertSuccess: true);
             }
 
-            var envVars = new Dictionary<string, string>();
-            if (noHttps)
+            var envVars = new Dictionary<string, string>
             {
-                envVars["ASPNETCORE_URLS"] = $"http://127.0.0.1:0";
-            }
-            else
-            {
-                envVars["ASPNETCORE_URLS"] = $"http://127.0.0.1:0;https://127.0.0.1:0";
-            }
+                { "ASPNETCORE_URLS", $"http://127.0.0.1:0;https://127.0.0.1:0" }
+            };
 
             if (!publish)
             {
