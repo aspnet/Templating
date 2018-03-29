@@ -161,9 +161,9 @@ namespace Templates.Test
             return File.ReadAllText(Path.Combine(TemplateOutputDir, path));
         }
 
-        protected AspNetProcess StartAspNetProcess(string targetFrameworkOverride, bool publish = false)
+        protected AspNetProcess StartAspNetProcess(string targetFrameworkOverride, bool publish = false, bool noHttps = false)
         {
-            return new AspNetProcess(Output, TemplateOutputDir, ProjectName, targetFrameworkOverride, publish);
+            return new AspNetProcess(Output, TemplateOutputDir, ProjectName, targetFrameworkOverride, publish, noHttps);
         }
 
         public void Dispose()
