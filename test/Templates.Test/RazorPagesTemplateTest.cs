@@ -105,7 +105,7 @@ namespace Templates.Test
 
             foreach (var publish in new[] { false, true })
             {
-                using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish, noHttps))
+                using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish))
                 {
                     aspNetProcess.AssertOk("/");
                     aspNetProcess.AssertOk("/About");
