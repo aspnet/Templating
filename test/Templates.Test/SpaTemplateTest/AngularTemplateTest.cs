@@ -22,7 +22,7 @@ namespace Templates.Test.SpaTemplateTest
         public void AngularTemplate_NoHttps_Works_NetFramework()
             => SpaTemplateImpl("net461", "angular", true);
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aspnet/templating/issues/400")]
         public void AngularTemplate_Works_NetCore()
             => SpaTemplateImpl(null, "angular");
     }
