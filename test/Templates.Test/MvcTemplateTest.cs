@@ -23,6 +23,16 @@ namespace Templates.Test
         public void MvcTemplate_NoAuth_Works_NetFramework_ForFSharpTemplate()
             => MvcTemplate_NoAuthImpl("net461", languageOverride: "F#");
 
+        [ConditionalFact]
+        [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
+        public void MvcTemplate_NoAuth_NoHttps_Works_NetFramework_ForDefaultTemplate()
+            => MvcTemplate_NoAuthImpl("net471", languageOverride: default, true);
+
+        [ConditionalFact]
+        [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
+        public void MvcTemplate_NoAuth_NoHttps_Works_NetFramework_ForFSharpTemplate()
+            => MvcTemplate_NoAuthImpl("net471", languageOverride: "F#", true);
+
         [Fact]
         public void MvcTemplate_NoAuth_Works_NetCore_ForDefaultTemplate()
             => MvcTemplate_NoAuthImpl(null, languageOverride: default);
