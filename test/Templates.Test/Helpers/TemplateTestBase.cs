@@ -134,11 +134,11 @@ $@"<Project>
         {
             var assembly = typeof(TemplateTestBase).Assembly;
 
-            var DotNetEfFullPath = assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                .FirstOrDefault(attribute => attribute.Key == "DotNetEfFullPath")
+            var dotNetEfFullPath = assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                .First(attribute => attribute.Key == "DotNetEfFullPath")
                 .Value;
 
-            var args = $"{DotNetEfFullPath} migrations add {migrationName}";
+            var args = $"\"{dotNetEfFullPath}\" migrations add {migrationName}";
 
             // Only run one instance of 'dotnet new' at once, as a workaround for
             // https://github.com/aspnet/templating/issues/63

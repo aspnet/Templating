@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Internal.AspNetCore.Sdk" Version="$(InternalAspNetCoreSdkPackageVersion)" />
     <PackageReference Include="dotnet-ef" Version="$(DotNetEfPackageVersion)" />
   </ItemGroup>
   
