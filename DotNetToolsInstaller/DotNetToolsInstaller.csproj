@@ -2,9 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RestoreProjectStyle>DotnetToolReference</RestoreProjectStyle>
-
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="dotnet-ef" Version="$(DotNetEfPackageVersion)" />
   </ItemGroup>
+  
 </Project>
