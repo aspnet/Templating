@@ -19,7 +19,7 @@
       "auth": "None",
       "authenticationType": "NoAuth",
       "allowUnsecured": true
-    },
+    }
   ],
   "supportsDocker": true,
   "ports": [

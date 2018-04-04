@@ -21,7 +21,7 @@
       "auth": "None",
       "authenticationType": "NoAuth",
       "allowUnsecured": true
-    },
+    }
   ],
   "ports": [
     {
