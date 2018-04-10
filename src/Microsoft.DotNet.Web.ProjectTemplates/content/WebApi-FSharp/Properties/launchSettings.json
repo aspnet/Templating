@@ -15,6 +15,11 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      //#if(NoHttps)
+      "launchUrl": "http://localhost:8080/api/values",
+      //#else
+      "launchUrl": "https://localhost:44300/api/values",
+      //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -24,8 +29,10 @@
       "launchBrowser": true,
       //#if(NoHttps)
       "applicationUrl": "http://localhost:5000",
+      "launchUrl": "http://localhost:5000/api/values",
       //#else
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "launchUrl": "https://localhost:5001/api/values",
       //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
