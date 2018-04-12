@@ -4,7 +4,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Package Versions">
     <DotNetEfPackageVersion>2.1.0-preview3-32196</DotNetEfPackageVersion>
-    <InternalAspNetCoreSdkPackageVersion>2.1.0-preview3-17006</InternalAspNetCoreSdkPackageVersion>
+    <InternalAspNetCoreSdkPackageVersion>2.1.0-preview3-17031</InternalAspNetCoreSdkPackageVersion>
     <MicrosoftAspNetCoreAllPackageVersion>2.1.0-preview3-32196</MicrosoftAspNetCoreAllPackageVersion>
     <MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>2.1.0-preview2-32196</MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>
     <MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>2.1.0-preview2-32196</MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>
