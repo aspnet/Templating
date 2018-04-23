@@ -14,6 +14,7 @@ move Company.WebApplication1\Data\Migrations\*.Designer.cs Company.WebApplicatio
 move Company.WebApplication1\Data\Migrations\*_CreateIdentitySchema.cs Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs) -replace('([0-9]{14})_CreateIdentitySchema', '00000000000000_CreateIdentitySchema') | Set-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs"
 powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs) -replace('[0-9].[0-9].[0-9]-[^-]*-[0-9]*', '%version%') | Set-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs"
+powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\ApplicationDbContextModelSnapshot.cs) -replace('[0-9].[0-9].[0-9]-[^-]*-[0-9]*', '%version%') | Set-Content Company.WebApplication1\Data\Migrations\ApplicationDbContextModelSnapshot.cs"
 copy "Company.WebApplication1\Data\Migrations\*" "..\src\Microsoft.DotNet.Web.ProjectTemplates\content\RazorPagesWeb-CSharp\Data\SqlLite"
 
 echo Generating migration for RazorPages-SqlServer(localb)--------------
@@ -28,6 +29,7 @@ move Company.WebApplication1\Data\Migrations\*.Designer.cs Company.WebApplicatio
 move Company.WebApplication1\Data\Migrations\*_CreateIdentitySchema.cs Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs) -replace('([0-9]{14})_CreateIdentitySchema', '00000000000000_CreateIdentitySchema') | Set-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs"
 powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs) -replace('[0-9].[0-9].[0-9]-[^-]*-[0-9]*', '%version%') | Set-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs"
+powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\ApplicationDbContextModelSnapshot.cs) -replace('[0-9].[0-9].[0-9]-[^-]*-[0-9]*', '%version%') | Set-Content Company.WebApplication1\Data\Migrations\ApplicationDbContextModelSnapshot.cs"
 copy "Company.WebApplication1\Data\Migrations\*" "..\src\Microsoft.DotNet.Web.ProjectTemplates\content\RazorPagesWeb-CSharp\Data\SqlServer"
 rd "Company.WebApplication1" /s /q
 
@@ -42,6 +44,7 @@ move Company.WebApplication1\Data\Migrations\*.Designer.cs Company.WebApplicatio
 move Company.WebApplication1\Data\Migrations\*_CreateIdentitySchema.cs Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs) -replace('([0-9]{14})_CreateIdentitySchema', '00000000000000_CreateIdentitySchema') | Set-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs"
 powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs) -replace('[0-9].[0-9].[0-9]-[^-]*-[0-9]*', '%version%') | Set-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs"
+powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\ApplicationDbContextModelSnapshot.cs) -replace('[0-9].[0-9].[0-9]-[^-]*-[0-9]*', '%version%') | Set-Content Company.WebApplication1\Data\Migrations\ApplicationDbContextModelSnapshot.cs"
 copy "Company.WebApplication1\Data\Migrations\*" "..\src\Microsoft.DotNet.Web.ProjectTemplates\content\StarterWeb-CSharp\Data\SqlServer"
 
 echo Generating migration for StarterWeb-SqlLite--------------
@@ -56,5 +59,6 @@ move Company.WebApplication1\Data\Migrations\*.Designer.cs Company.WebApplicatio
 move Company.WebApplication1\Data\Migrations\*_CreateIdentitySchema.cs Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs) -replace('([0-9]{14})_CreateIdentitySchema', '00000000000000_CreateIdentitySchema') | Set-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs"
 powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs) -replace('[0-9].[0-9].[0-9]-[^-]*-[0-9]*', '%version%') | Set-Content Company.WebApplication1\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs"
+powershell.exe -command "(Get-Content Company.WebApplication1\Data\Migrations\ApplicationDbContextModelSnapshot.cs) -replace('[0-9].[0-9].[0-9]-[^-]*-[0-9]*', '%version%') | Set-Content Company.WebApplication1\Data\Migrations\ApplicationDbContextModelSnapshot.cs"
 copy "Company.WebApplication1\Data\Migrations\*" "..\src\Microsoft.DotNet.Web.ProjectTemplates\content\StarterWeb-CSharp\Data\SqlLite"
 rd "Company.WebApplication1" /s /q
