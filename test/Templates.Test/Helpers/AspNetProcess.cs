@@ -115,13 +115,13 @@ namespace Templates.Test.Helpers
             return new Uri(listeningUrlString, UriKind.Absolute);
         }
 
-        public void AssertOk(string requestUrl)
+        public HttpResponseMessage AssertOk(string requestUrl)
             => AssertStatusCode(requestUrl, HttpStatusCode.OK);
 
-        public void AssertNotFound(string requestUrl)
+        public HttpResponseMessage AssertNotFound(string requestUrl)
             => AssertStatusCode(requestUrl, HttpStatusCode.NotFound);
 
-        public void AssertStatusCode(string requestUrl, HttpStatusCode statusCode, string acceptContentType = null)
+        public HttpResponseMessage AssertStatusCode(string requestUrl, HttpStatusCode statusCode, string acceptContentType = null)
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -134,6 +134,8 @@ namespace Templates.Test.Helpers
 
             var response = _httpClient.SendAsync(request).Result;
             Assert.Equal(statusCode, response.StatusCode);
+
+            return response;
         }
 
         public IWebDriver VisitInBrowser()
