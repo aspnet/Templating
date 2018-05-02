@@ -109,34 +109,46 @@ Copyright (c) .NET Foundation. All rights reserved.
         <_ExplicitAspNetCoreAllReference Include="@(_AspNetCoreAllReference->HasMetadata('Version'))" />
         <_AspNetCoreAppReference Include="@(PackageReference->WithMetadataValue('Identity', '$(_AspNetCoreAppPackageName)'))" />
         <_ExplicitAspNetCoreAppReference Include="@(_AspNetCoreAppReference->HasMetadata('Version'))" />
+      </ItemGroup>
 
-        <!-- Update implicit ASPNET metapackage references if needed -->
-        <PackageReference
-          Update="$(_AspNetCoreAllPackageName)"
-          Condition="'@(_AspNetCoreAllReference->Count())' == '1' AND '@(_ExplicitAspNetCoreAllReference->Count())' == '0'">
+      <!-- Update Microsoft.AspNetCore.All references -->
+      <ItemGroup Condition="'@(_AspNetCoreAllReference->Count())' == '1' AND '@(_ExplicitAspNetCoreAllReference->Count())' == '0'">
+        <!-- Update implicit ASPNET metapackage reference versions -->
+        <PackageReference Update="$(_AspNetCoreAllPackageName)">
           <Version>$(AspNetCoreAllRuntimeFrameworkVersion)</Version>
           <IsImplicitlyDefined>true</IsImplicitlyDefined>
-          <PrivateAssets>All</PrivateAssets>
-          <Publish>true</Publish>
         </PackageReference>
+
+        <!-- Mark implicit ASPNET metapackage reference with PrivateAssets if not executable -->
         <PackageReference
-          Update="$(_AspNetCoreAppPackageName)"
-          Condition="'@(_AspNetCoreAppReference->Count())' == '1' AND '@(_ExplicitAspNetCoreAppReference->Count())' == '0'">
-          <Version>$(AspNetCoreAppRuntimeFrameworkVersion)</Version>
-          <IsImplicitlyDefined>true</IsImplicitlyDefined>
+          Update="$(_AspNetCoreAllPackageName)"
+          Condition="'$(OutputType)' != 'Exe' AND '$(_TargetFrameworkVersionWithoutV)' != '' AND '$(_TargetFrameworkVersionWithoutV)' >= '2.0'">
           <PrivateAssets>All</PrivateAssets>
           <Publish>true</Publish>
         </PackageReference>
 
         <!-- Update list of implicit platform packages which require version verification -->
-        <ExpectedPlatformPackages
-          Include="$(_AspNetCoreAllPackageName)"
-          ExpectedVersion="$(AspNetCoreAllRuntimeFrameworkVersion)"
-          Condition="'@(_AspNetCoreAllReference->Count())' == '1' AND '@(_ExplicitAspNetCoreAllReference->Count())' == '0'"/>
-        <ExpectedPlatformPackages
-          Include="$(_AspNetCoreAppPackageName)"
-          ExpectedVersion="$(AspNetCoreAppRuntimeFrameworkVersion)"
-          Condition="'@(_AspNetCoreAppReference->Count())' == '1' AND '@(_ExplicitAspNetCoreAppReference->Count())' == '0'"/>
+        <ExpectedPlatformPackages Include="$(_AspNetCoreAllPackageName)" ExpectedVersion="$(AspNetCoreAllRuntimeFrameworkVersion)"/>
+      </ItemGroup>
+
+      <!-- Update Microsoft.AspNetCore.All references -->
+      <ItemGroup Condition="'@(_AspNetCoreAppReference->Count())' == '1' AND '@(_ExplicitAspNetCoreAppReference->Count())' == '0'">
+        <!-- Update implicit ASPNET metapackage reference versions -->
+        <PackageReference Update="$(_AspNetCoreAppPackageName)">
+          <Version>$(AspNetCoreAppRuntimeFrameworkVersion)</Version>
+          <IsImplicitlyDefined>true</IsImplicitlyDefined>
+        </PackageReference>
+
+        <!-- Mark implicit ASPNET metapackage reference with PrivateAssets if not executable -->
+        <PackageReference
+          Update="$(_AspNetCoreAppPackageName)"
+          Condition="'$(OutputType)' != 'Exe' AND '$(_TargetFrameworkVersionWithoutV)' != '' AND '$(_TargetFrameworkVersionWithoutV)' >= '2.0'">
+          <PrivateAssets>All</PrivateAssets>
+          <Publish>true</Publish>
+        </PackageReference>
+
+        <!-- Update list of implicit platform packages which require version verification -->
+        <ExpectedPlatformPackages Include="$(_AspNetCoreAppPackageName)" ExpectedVersion="$(AspNetCoreAppRuntimeFrameworkVersion)"/>
       </ItemGroup>
 
     </When>

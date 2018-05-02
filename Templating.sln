@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{342602FC-9
 		test\Directory.Build.targets = test\Directory.Build.targets
 		test\GenerateTestProps.targets = test\GenerateTestProps.targets
 		test\TemplateTests.props.in = test\TemplateTests.props.in
+		test\TemplateTests.targets.in = test\TemplateTests.targets.in
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetToolsInstaller", "test\DotNetToolsInstaller\DotNetToolsInstaller.csproj", "{61F386CF-4356-4B7E-8A98-F09759E65AC9}"

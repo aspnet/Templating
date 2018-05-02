@@ -62,7 +62,15 @@ $@"<Project>
             throw new NotImplementedException();
         }
 
-        protected void RunDotNetNew(string templateName, string targetFrameworkOverride, string auth = null, string language = null, bool useLocalDB = false, bool noHttps = false)
+        protected void RunDotNetNew(
+            string templateName,
+            string targetFrameworkOverride,
+            string auth = null,
+            string language = null,
+            bool useLocalDB = false,
+            bool noHttps = false,
+            string outputDirectory = null,
+            bool noRestore = false)
         {
             SetAfterDirectoryBuildPropsContents();
 
@@ -91,6 +99,16 @@ $@"<Project>
             if (noHttps)
             {
                 args += $" --no-https";
+            }
+
+            if (!string.IsNullOrEmpty(outputDirectory))
+            {
+                args += $" -o {outputDirectory}";
+            }
+
+            if (noRestore)
+            {
+                args += $" --no-restore";
             }
 
             // Only run one instance of 'dotnet new' at once, as a workaround for
@@ -210,9 +228,18 @@ $@"<Project>
             return File.ReadAllText(Path.Combine(TemplateOutputDir, path));
         }
 
-        protected AspNetProcess StartAspNetProcess(string targetFrameworkOverride, bool publish = false)
+        protected AspNetProcess StartAspNetProcess(
+            string targetFrameworkOverride,
+            bool publish = false,
+            string workingDirectory = null,
+            string appName = null)
         {
-            return new AspNetProcess(Output, TemplateOutputDir, ProjectName, targetFrameworkOverride, publish);
+            return new AspNetProcess(
+                Output,
+                workingDirectory ?? TemplateOutputDir,
+                appName ?? ProjectName,
+                targetFrameworkOverride,
+                publish);
         }
 
         public void Dispose()
