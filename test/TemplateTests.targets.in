@@ -58,7 +58,7 @@ Copyright (c) .NET Foundation. All rights reserved.
       <!-- Latest patch version of .All Framework -->
       <PropertyGroup Condition="'$(LatestAspNetCoreAllPatchVersion)' == ''">
         <!-- Placeholder for setting latest patch version using the bundled version from CLI -->
-        <!-- <LatestAspNetCoreAllPatchVersion Condition="'$(_TargetFrameworkVersionWithoutV)' == '2.1'">$(LatestPatchVersionForAspNetCoreAll2_1)</LatestAspNetCoreAllPatchVersion> -->
+        <!-- <LatestAspNetCoreAllPatchVersion Condition="'$(_TargetFrameworkVersionWithoutV)' == '2.2'">$(LatestPatchVersionForAspNetCoreAll2_1)</LatestAspNetCoreAllPatchVersion> -->
 
         <!-- If targeting the same pre-release that is bundled with the .NET Core SDK, use the bundled package version
             provided by Microsoft.NETCoreSdk.BundledVersions.props -->
@@ -70,7 +70,7 @@ Copyright (c) .NET Foundation. All rights reserved.
       <!-- Latest patch version of .App Framework -->
       <PropertyGroup Condition="'$(LatestAspNetCoreAppPatchVersion)' == ''">
         <!-- Placeholder for setting latest patch version using the bundled version from CLI -->
-        <!-- <LatestAspNetCoreAppPatchVersion Condition="'$(_TargetFrameworkVersionWithoutV)' == '2.1'">$(LatestPatchVersionForAspNetCoreApp2_1)</LatestAspNetCoreAppPatchVersion> -->
+        <!-- <LatestAspNetCoreAppPatchVersion Condition="'$(_TargetFrameworkVersionWithoutV)' == '2.2'">$(LatestPatchVersionForAspNetCoreApp2_1)</LatestAspNetCoreAppPatchVersion> -->
 
         <!-- If targeting the same pre-release that is bundled with the .NET Core SDK, use the bundled package version
             provided by Microsoft.NETCoreSdk.BundledVersions.props -->
