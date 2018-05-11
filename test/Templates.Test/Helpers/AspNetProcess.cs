@@ -25,11 +25,13 @@ namespace Templates.Test.Helpers
         private readonly ProcessEx _process;
         private readonly Uri _listeningUri;
         private readonly HttpClient _httpClient;
+        private readonly IWebDriver _driver;
         private readonly ITestOutputHelper _output;
 
         public AspNetProcess(ITestOutputHelper output, string workingDirectory, string projectName, string targetFrameworkOverride, bool publish)
         {
             _output = output;
+            _driver = WebDriverFactory.CreateWebDriver();
             _httpClient = new HttpClient(new HttpClientHandler()
             {
                 AllowAutoRedirect = true,
@@ -139,24 +141,23 @@ namespace Templates.Test.Helpers
         public IWebDriver VisitInBrowser()
         {
             _output.WriteLine($"Opening browser at {_listeningUri}...");
-            var driver = WebDriverFactory.CreateWebDriver();
-            driver.Navigate().GoToUrl(_listeningUri);
+            _driver.Navigate().GoToUrl(_listeningUri);
 
-            if (driver is EdgeDriver)
+            if (_driver is EdgeDriver)
             {
                 // Workaround for untrusted ASP.NET Core development certificates.
                 // The edge driver doesn't supported skipping the SSL warning page.
 
-                if (driver.Title.Contains("Certificate error", StringComparison.OrdinalIgnoreCase))
+                if (_driver.Title.Contains("Certificate error", StringComparison.OrdinalIgnoreCase))
                 {
                     _output.WriteLine("Page contains certificate error. Attempting to get around this...");
-                    driver.Click(By.Id("moreInformationDropdownSpan"));
-                    var continueLink = driver.FindElement(By.Id("invalidcert_continue"));
+                    _driver.Click(By.Id("moreInformationDropdownSpan"));
+                    var continueLink = _driver.FindElement(By.Id("invalidcert_continue"));
                     if (continueLink != null)
                     {
                         _output.WriteLine($"Clicking on link '{continueLink.Text}' to skip invalid certificate error page.");
                         continueLink.Click();
-                        driver.Navigate().GoToUrl(_listeningUri);
+                        _driver.Navigate().GoToUrl(_listeningUri);
                     }
                     else
                     {
@@ -165,13 +166,14 @@ namespace Templates.Test.Helpers
                 }
             }
 
-            return driver;
+            return _driver;
         }
 
         public void Dispose()
         {
             _httpClient.Dispose();
             _process.Dispose();
+            _driver.Dispose();
         }
     }
 }

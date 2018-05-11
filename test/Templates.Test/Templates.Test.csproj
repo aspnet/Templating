@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <DefineConstants>$(DefineConstants);XPLAT</DefineConstants>
+    <DefineConstants Condition="'$(ASPNETCORE_BROWSER_AUTOMATION_EDGE)' != '' AND '$(ASPNETCORE_BROWSER_AUTOMATION_EDGE)' == 'True'">$(DefineConstants);EDGE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,10 +16,9 @@
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils.Sources" Version="$(MicrosoftExtensionsCommandLineUtilsSourcesPackageVersion)" />
     <PackageReference Include="Microsoft.Extensions.Process.Sources" Version="$(MicrosoftExtensionsProcessSourcesPackageVersion)" PrivateAssets="All" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
-    <PackageReference Include="Selenium.Firefox.WebDriver" Version="$(SeleniumFirefoxWebDriverPackageVersion)" />
     <PackageReference Include="Selenium.Support" Version="$(SeleniumSupportPackageVersion)" NoWarn="NU1701" />
-    <PackageReference Include="Selenium.WebDriver.MicrosoftDriver" Version="$(SeleniumWebDriverMicrosoftDriverPackageVersion)" />
     <PackageReference Include="Selenium.WebDriver" Version="$(SeleniumWebDriverPackageVersion)" NoWarn="NU1701" />
+    <PackageReference Include="System.Management" Version="$(SystemManagementPackageVersion)" />
     <PackageReference Include="System.Security.Permissions" Version="$(SystemSecurityPermissionsPackageVersion)" />
     <PackageReference Include="xunit" Version="$(XunitPackageVersion)" />
     <PackageReference Include="xunit.analyzers" Version="$(XunitAnalyzersPackageVersion)" />
