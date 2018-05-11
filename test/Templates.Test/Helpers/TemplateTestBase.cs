@@ -11,6 +11,11 @@ using Templates.Test.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
+// Turn off parallel test run for Edge as the driver does not support multiple Selenium tests at the same time
+#if EDGE
+[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
+#endif
+[assembly: TestFramework("Templates.Test.Helpers.XunitExtensions.XunitTestFrameworkWithAssemblyFixture", "Templates.Test")]
 namespace Templates.Test
 {
     public class TemplateTestBase : IDisposable

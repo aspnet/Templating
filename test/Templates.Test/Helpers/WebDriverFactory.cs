@@ -1,10 +1,14 @@
-﻿using System;
-using System.IO;
+﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+
+using System;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 
 namespace Templates.Test.Helpers
 {
@@ -16,6 +20,25 @@ namespace Templates.Test.Helpers
         // significant way and will make them more prone to fail on slower drivers.
         private const int DefaultMaxWaitTimeInSeconds = 10;
 
+        public static IWebDriver CreateWebDriver()
+        {
+            var options = (IsAppVeyor || UseFirefox) ? CreateFirefoxOptions() : UseEdge ? CreateEdgeOptions() : CreateChromeOptions();
+
+            try
+            {
+                var browser = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), options);
+                browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(DefaultMaxWaitTimeInSeconds);
+                return browser;
+            }
+            catch (WebDriverException ex)
+            {
+                var message =
+                    "Failed to connect to the web driver. Please see the readme and follow the instructions to install selenium." +
+                    "Remember to start the web driver with `selenium-standalone start` before running the tests.";
+                throw new InvalidOperationException(message, ex);
+            }
+        }
+
         public static bool HostSupportsBrowserAutomation
             => string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_DISABLED")) &&
                (IsAppVeyor || OSSupportsEdge());
@@ -23,32 +46,11 @@ namespace Templates.Test.Helpers
         private static bool IsAppVeyor
             => Environment.GetEnvironmentVariables().Contains("APPVEYOR");
 
-        public static IWebDriver CreateWebDriver()
-        {
-            // Where possible, it's preferable to use Edge because it's
-            // far faster to automate than Chrome/Firefox. But on AppVeyor
-            // only Firefox is available.
-            var result = (IsAppVeyor || UseFirefox()) ? CreateFirefoxDriver() : CreateEdgeDriver();
-            result.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(DefaultMaxWaitTimeInSeconds);
-            return result;
+        private static bool UseFirefox 
+            => !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_FIREFOX"));
 
-            bool UseFirefox() => !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_FIREFOX"));
-        }
-
-        private static IWebDriver CreateEdgeDriver()
-            => new EdgeDriver(EdgeDriverService.CreateDefaultService(BinDir));
-
-        private static IWebDriver CreateFirefoxDriver()
-            => new FirefoxDriver(
-                FirefoxDriverService.CreateDefaultService(BinDir),
-                new FirefoxOptions()
-                {
-                    AcceptInsecureCertificates = true
-                },
-                TimeSpan.FromSeconds(DefaultMaxWaitTimeInSeconds));
-
-        private static string BinDir
-            => Path.GetDirectoryName(typeof(WebDriverFactory).Assembly.Location);
+        private static bool UseEdge
+            => !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_EDGE"));
 
         private static int GetWindowsVersion()
         {
@@ -62,6 +64,48 @@ namespace Templates.Test.Helpers
             var windowsVersion = GetWindowsVersion();
             return (windowsVersion >= DefaultMaxWaitTimeInSeconds && windowsVersion < 2000)
                 || (windowsVersion >= 2016);
+        }
+
+        private static DriverOptions CreateChromeOptions()
+        {
+            var options = new ChromeOptions
+            {
+                AcceptInsecureCertificates = true
+            };
+
+            options.AddArgument("--headless");
+
+            // On Windows/Linux, we don't need to set opts.BinaryLocation
+            // But for Travis Mac builds we do
+            var binaryLocation = Environment.GetEnvironmentVariable("TEST_CHROME_BINARY");
+            if (!string.IsNullOrEmpty(binaryLocation))
+            {
+                options.BinaryLocation = binaryLocation;
+                Console.WriteLine($"Set {nameof(ChromeOptions)}.{nameof(options.BinaryLocation)} to {binaryLocation}");
+            }
+
+            return options;
+        }
+
+        private static DriverOptions CreateFirefoxOptions()
+        {
+            var options = new FirefoxOptions
+            {
+                AcceptInsecureCertificates = true
+            };
+
+            options.AddArgument("--headless");
+            return options;
+        }
+
+        private static DriverOptions CreateEdgeOptions()
+        {
+            var options = new EdgeOptions
+            {
+                AcceptInsecureCertificates = true
+            };
+
+            return options;
         }
     }
 }
