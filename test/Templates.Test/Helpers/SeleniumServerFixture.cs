@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Management;
 using System.Runtime.InteropServices;
 
 namespace Templates.Test.Helpers
@@ -23,16 +24,44 @@ namespace Templates.Test.Helpers
 
         public void Dispose()
         {
-            _serverProcess.Kill();
-            _serverProcess.Dispose();
-
             // Find the java process running selenium-standalone
-            var childProcesses = Process.GetProcessesByName("java");
-            foreach (var childProcess in childProcesses)
+            foreach (var childProcess in GetChildProcesses(_serverProcess.Id))
             {
                 childProcess.Kill();
                 childProcess.Dispose();
             }
+
+            _serverProcess.Kill();
+            _serverProcess.Dispose();
+        }
+
+        private static List<Process> GetChildProcesses(int parentProcessId)
+        {
+            var results = new List<Process>();
+
+            // find processes with the given parent process id
+            var queryText = $"Select ProcessId From Win32_Process Where ParentProcessId = {parentProcessId}";
+            using (var searcher = new ManagementObjectSearcher(queryText))
+            {
+                foreach (var obj in searcher.Get())
+                {
+                    var data = obj.Properties["processid"].Value;
+                    if (data != null)
+                    {
+                        // retrieve the process
+                        var childId = Convert.ToInt32(data);
+                        var childProcess = Process.GetProcessById(childId);
+
+                        // ensure the current process is still alive
+                        if (childProcess != null)
+                        {
+                            results.Add(childProcess);
+                        }
+                    }
+                }
+            }
+
+            return results;
         }
 
         public void StartSeleniumStandaloneServer()

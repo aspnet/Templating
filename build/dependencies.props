@@ -44,6 +44,7 @@
     <SeleniumSupportPackageVersion>3.7.0</SeleniumSupportPackageVersion>
     <SeleniumWebDriverMicrosoftDriverPackageVersion>16.16299.0</SeleniumWebDriverMicrosoftDriverPackageVersion>
     <SeleniumWebDriverPackageVersion>3.7.0</SeleniumWebDriverPackageVersion>
+    <SystemManagementPackageVersion>4.5.0-rc1</SystemManagementPackageVersion>
     <SystemSecurityPermissionsPackageVersion>4.5.0-preview3-26423-04</SystemSecurityPermissionsPackageVersion>
     <XunitAnalyzersPackageVersion>0.8.0</XunitAnalyzersPackageVersion>
     <XunitPackageVersion>2.3.1</XunitPackageVersion>
