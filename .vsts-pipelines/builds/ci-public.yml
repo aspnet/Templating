@@ -25,6 +25,9 @@ phases:
   parameters:
     agentOs: macOS
     beforeBuild:
+      #libtool being linked breaks NPM on mac
+    - script: brew unlink libtool
+      displayName: Unlinking libtool
     - task: NodeTool@0
       displayName: Use Node 10.x
       inputs:
