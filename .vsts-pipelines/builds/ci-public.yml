@@ -25,13 +25,12 @@ phases:
   parameters:
     agentOs: macOS
     beforeBuild:
-      #libtool being linked breaks NPM on mac
-    - script: brew unlink libtool
-      displayName: Unlinking libtool
     - task: NodeTool@0
       displayName: Use Node 10.x
       inputs:
         versionSpec: 10.x
+    - script: npm i -g @angular/cli
+    - script: npm i -g @angular-devkit/core
     - script: ./run.sh install-tools; $(Agent.WorkFolder)/.dotnet/dotnet dev-certs https 
       displayName: install certs
 
