@@ -42,7 +42,6 @@ namespace Templates.Test
             // Directory.Build.props/targets context
 
             var templatesTestsPropsFilePath = Path.Combine(basePath, "TemplateTests.props");
-            var templatesTestsTargetsFilePath = Path.Combine(basePath, "TemplateTests.targets");
             var directoryBuildPropsContent =
 $@"<Project>
     <Import Project=""{templatesTestsPropsFilePath}"" />
@@ -50,10 +49,7 @@ $@"<Project>
 </Project>";
             File.WriteAllText(Path.Combine(TemplateOutputDir, "Directory.Build.props"), directoryBuildPropsContent);
 
-            var directoryBuildTargetsContent =
-$@"<Project>
-    <Import Project=""{templatesTestsTargetsFilePath}"" />
-</Project>";
+            const string directoryBuildTargetsContent = "<Project></Project>";
             File.WriteAllText(Path.Combine(TemplateOutputDir, "Directory.Build.targets"), directoryBuildTargetsContent);
         }
 
