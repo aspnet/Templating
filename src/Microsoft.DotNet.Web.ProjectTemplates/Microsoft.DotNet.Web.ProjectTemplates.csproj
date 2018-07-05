@@ -14,7 +14,7 @@
   <PropertyGroup>
     <GeneratedContentProperties>
       MicrosoftAspNetCoreAllPackageVersion=$(MicrosoftAspNetCoreAllPackageVersion);
-      MicrosoftAspNetCoreAppPackageVersion=$(MicrosoftAspNetCoreApppackageVersion);
+      MicrosoftAspNetCoreAppPackageVersion=$(MicrosoftAspNetCoreAppPackageVersion);
       MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion=$(MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion);
       MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion=$(MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion);
       MicrosoftAspNetCoreAuthenticationCookiesPackageVersion=$(MicrosoftAspNetCoreAuthenticationCookiesPackageVersion);

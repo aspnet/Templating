@@ -161,7 +161,7 @@ $@"<Project>
         // If this fails, you should generate new migrations via migrations/updateMigrations.cmd
         protected void AssertEmptyMigration(string migration)
         {
-            var fullPath = Path.Combine(TemplateOutputDir, "Data/Migrations");
+            var fullPath = Path.Combine(TemplateOutputDir, "Migrations");
             var file = Directory.EnumerateFiles(fullPath).Where(f => f.EndsWith($"{migration}.cs")).FirstOrDefault();
 
             Assert.NotNull(file);

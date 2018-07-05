@@ -13,12 +13,15 @@
   <!-- Set this last to ensure the properties get the final versions which may be overridden by CI. -->
   <PropertyGroup>
     <GeneratedContentProperties>
+      MicrosoftAspNetCoreAllPackageVersion=$(MicrosoftAspNetCoreAllPackageVersion);
+      MicrosoftAspNetCoreAppPackageVersion=$(MicrosoftAspNetCoreAppPackageVersion);
       MicrosoftAspNetCorePackageVersion=$(MicrosoftAspNetCorePackageVersion);
       MicrosoftAspNetCoreHttpsPolicyPackageVersion=$(MicrosoftAspNetCoreHttpsPolicyPackageVersion);
       MicrosoftAspNetCoreMvcPackageVersion=$(MicrosoftAspNetCoreMvcPackageVersion);
       MicrosoftAspNetCoreSpaServicesPackageVersion=$(MicrosoftAspNetCoreSpaServicesPackageVersion);
       MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion=$(MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion);
       MicrosoftAspNetCoreStaticFilesPackageVersion=$(MicrosoftAspNetCoreStaticFilesPackageVersion);
+      MicrosoftNETCoreApp30PackageVersion=$(MicrosoftNETCoreApp30PackageVersion);
       MicrosoftVisualStudioWebCodeGenerationToolsPackageVersion=$(MicrosoftVisualStudioWebCodeGenerationToolsPackageVersion);
     </GeneratedContentProperties>
   </PropertyGroup>
