@@ -8,21 +8,26 @@ param()
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = 'Stop'
+git clean -xdf
+
+
+$projects = "$PSScriptRoot/../src/Microsoft.DotNet.Web.ProjectTemplates"
+
+$csproj = Join-Path $projects "StarterWeb-CSharp.csproj.in"
+(Get-Content $csproj).replace('<PackageReference Include="Microsoft.AspNetCore.App"', '<PackageReference Include="Microsoft.NETCore.App" Version="${MicrosoftNETCoreApp22PackageVersion}" />
+    <PackageReference Include="Microsoft.AspNetCore.App"') | Set-Content $csproj
 
 ./build.cmd /t:Package
 
 Push-Location "$PSScriptRoot/../src/Microsoft.DotNet.Web.ProjectTemplates/content/StarterWeb-CSharp"
 try {
-    $csproj = "Company.WebApplication1.csproj"
-    (Get-Content $csproj).replace('netcoreapp2.2', 'netcoreapp2.1') | Set-Content $csproj
-    
     $sqlServer = "Data\SqlServer"
     if (Test-Path $sqlServer) {
         Remove-Item -Recurse -Force -Path $sqlServer
     }
 
     $launchSettings = "Properties\launchSettings.json"
-    (Get-Content $launchSettings).replace('"sslPort": 0', '') | Set-Content $launchSettings 
+    (Get-Content $launchSettings).replace('"sslPort": 0', '') | Set-Content $launchSettings
 
     dotnet run
 }
