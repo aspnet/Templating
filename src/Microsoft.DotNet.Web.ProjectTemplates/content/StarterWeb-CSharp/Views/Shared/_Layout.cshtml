@@ -22,8 +22,14 @@
             <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Company.WebApplication1</a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Menu Item 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Menu Item 3</a>
                     </li>
                 </ul>
 @*#if (IndividualAuth || OrganizationalAuth)
@@ -42,7 +48,8 @@
     </main>
     <footer class="footer">
         <div class="container">
-            <span class="text-muted">&copy; copyrightYear - Company.WebApplication1</span>
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <span class="text-muted">&copy; Year - Company.WebApplication1</span>
         </div>
     </footer>
 
