@@ -19,7 +19,7 @@ $csproj = Join-Path $projects "StarterWeb-CSharp.csproj.in"
 
 ./build.cmd /t:Package
 
-Push-Location "$PSScriptRoot/../src/Microsoft.DotNet.Web.ProjectTemplates/content/StarterWeb-CSharp"
+Push-Location "$projects/content/StarterWeb-CSharp"
 try {
     $sqlServer = "Data\SqlServer"
     if (Test-Path $sqlServer) {
