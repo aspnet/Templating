@@ -11,14 +11,7 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
-    <!-- aspnet/BuildTools#662 Don't police what version of NetCoreApp we use -->
-    <NETCoreAppMaximumVersion>99.9</NETCoreAppMaximumVersion>
-    <RuntimeFrameworkVersion>${MicrosoftNETCoreApp30PackageVersion}</RuntimeFrameworkVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <DotNetCoreRuntime Include="${MicrosoftNETCoreApp30PackageVersion}" />
-  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkOverride)' == ''">
     <PackageReference Include="Microsoft.AspNetCore.App" />
