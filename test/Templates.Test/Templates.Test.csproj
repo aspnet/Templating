@@ -2,9 +2,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <DefineConstants>$(DefineConstants);XPLAT</DefineConstants>
-    
-    <!-- Workaround until https://github.com/aspnet/Common/pull/385 is done -->
-    <DefineConstants>$(DefineConstants);NETCOREAPP3_0</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

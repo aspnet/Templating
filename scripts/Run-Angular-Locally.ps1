@@ -1,4 +1,4 @@
-#!/usr/bin/env powershell
+#!/usr/bin/env pwsh -c
 #requires -version 4
 
 [CmdletBinding(PositionalBinding = $false)]
@@ -22,11 +22,10 @@ try {
     (Get-Content $launchSettings).replace('"sslPort": 0', '') | Set-Content $launchSettings 
 
     Push-Location "ClientApp"
-    try
-    {
+    try {
         npm install
     }
-    finally{
+    finally {
         Pop-Location
     }
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env powershell
+#!/usr/bin/env pwsh -c
 #requires -version 4
 
 [CmdletBinding(PositionalBinding = $false)]
