@@ -7,6 +7,7 @@
     <DotNetEfPackageVersion>3.0.0-alpha1-10123</DotNetEfPackageVersion>
     <InternalAspNetCoreSdkPackageVersion>3.0.0-alpha1-10011</InternalAspNetCoreSdkPackageVersion>
     <MicrosoftAspNetCoreAppPackageVersion>3.0.0-alpha1-10123</MicrosoftAspNetCoreAppPackageVersion>
+    <MicrosoftAspNetCoreAllPackageVersion>3.0.0-alpha1-10123</MicrosoftAspNetCoreAllPackageVersion>
     <MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>3.0.0-alpha1-10123</MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>
     <MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>3.0.0-alpha1-10123</MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>
     <MicrosoftAspNetCoreAuthenticationCookiesPackageVersion>3.0.0-alpha1-10123</MicrosoftAspNetCoreAuthenticationCookiesPackageVersion>
