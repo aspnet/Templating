@@ -9,6 +9,23 @@ using Xunit.Abstractions;
 
 namespace Templates.Test.Helpers
 {
+    internal class NullTestOutputHelper : ITestOutputHelper
+    {
+        public bool Throw { get; set; }
+
+        public string Output => null;
+
+        public void WriteLine(string message)
+        {
+            return;
+        }
+
+        public void WriteLine(string format, params object[] args)
+        {
+            return;
+        }
+    }
+
     internal static class TemplatePackageInstaller
     {
         private static object _templatePackagesReinstallationLock = new object();
@@ -27,7 +44,10 @@ namespace Templates.Test.Helpers
             "Microsoft.DotNet.Web.ProjectTemplates.2.0",
             "Microsoft.DotNet.Web.ProjectTemplates.2.1",
             "Microsoft.DotNet.Web.ProjectTemplates.2.2",
+            "Microsoft.DotNet.Web.ProjectTemplates.3.0",
             "Microsoft.DotNet.Web.Spa.ProjectTemplates",
+            "Microsoft.DotNet.Web.Spa.ProjectTemplates.2.2",
+            "Microsoft.DotNet.Web.Spa.ProjectTemplates.3.0"
         };
 
         public static string CustomHivePath { get; } = Path.Combine(AppContext.BaseDirectory, ".templateengine");
@@ -71,7 +91,7 @@ namespace Templates.Test.Helpers
                 // We don't need this command to succeed, because we'll verify next that
                 // uninstallation had the desired effect. This command is expected to fail
                 // in the case where the package wasn't previously installed.
-                RunDotNetNew(output, $"--uninstall {packageName}", assertSuccess: false);
+                RunDotNetNew(new NullTestOutputHelper(), $"--uninstall {packageName}", assertSuccess: false);
             }
 
             VerifyCannotFindTemplate(output, "web");
@@ -94,6 +114,7 @@ namespace Templates.Test.Helpers
             }
             VerifyCanFindTemplate(output, "razor");
             VerifyCanFindTemplate(output, "web");
+            VerifyCanFindTemplate(output, "react");
         }
 
         private static void VerifyCanFindTemplate(ITestOutputHelper output, string templateName)
