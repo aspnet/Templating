@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Testing.xunit;
+using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -6,7 +7,7 @@ namespace Templates.Test.SpaTemplateTest
 {
     public class AngularTemplateTest : SpaTemplateTestBase
     {
-        public AngularTemplateTest(ITestOutputHelper output) : base(output)
+        public AngularTemplateTest(BrowserFixture browserFixture, ITestOutputHelper output) : base(browserFixture, output)
         {
         }
 

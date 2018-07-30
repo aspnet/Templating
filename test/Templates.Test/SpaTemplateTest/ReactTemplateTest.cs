@@ -1,11 +1,12 @@
-﻿using Xunit;
+﻿using Templates.Test.Infrastructure;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test.SpaTemplateTest
 {
     public class ReactTemplateTest : SpaTemplateTestBase
     {
-        public ReactTemplateTest(ITestOutputHelper output) : base(output)
+        public ReactTemplateTest(BrowserFixture browserFixture, ITestOutputHelper output) : base(browserFixture, output)
         {
         }
 
