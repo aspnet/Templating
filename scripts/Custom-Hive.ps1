@@ -1,7 +1,6 @@
 $customHive = "$PSScriptRoot/CustomHive"
 
-function Test-Template($templateName, $templateNupkg, $isSPA)
-{
+function Test-Template($templateName, $templateNupkg, $isSPA) {
     $tmpDir = "$PSScriptRoot/tmp"
     Remove-Item -Path $tmpDir -Recurse -ErrorAction Ignore
 
@@ -14,8 +13,7 @@ function Test-Template($templateName, $templateNupkg, $isSPA)
     Push-Location $tmpDir
     try {
         Run-DotnetNew $templateName
-        if($isSPA)
-        {
+        if ($isSPA) {
             Push-Location "ClientApp"
             try {
                 npm install
@@ -24,6 +22,11 @@ function Test-Template($templateName, $templateNupkg, $isSPA)
                 Pop-Location
             }
         }
+
+        $csproj = "$PSScriptRoot/tmp/tmp.csproj"
+        $content = Get-Content $csproj
+        $content = $content.Replace('<Project Sdk="Microsoft.NET.Sdk.Web">', "<Project Sdk=""Microsoft.NET.Sdk.Web"">`n<Import Project=""../../test/Templates.Test/bin/Release/netcoreapp2.2/TemplateTests.props"" />")
+        $content | Set-Content -Path $csproj
         dotnet run
     }
     finally {
