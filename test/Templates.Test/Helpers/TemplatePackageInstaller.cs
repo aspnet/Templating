@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+
+using System;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.CommandLineUtils;
@@ -6,51 +9,96 @@ using Xunit.Abstractions;
 
 namespace Templates.Test.Helpers
 {
+    internal class NullTestOutputHelper : ITestOutputHelper
+    {
+        public bool Throw { get; set; }
+
+        public string Output => null;
+
+        public void WriteLine(string message)
+        {
+            return;
+        }
+
+        public void WriteLine(string format, params object[] args)
+        {
+            return;
+        }
+    }
+
     internal static class TemplatePackageInstaller
     {
         private static object _templatePackagesReinstallationLock = new object();
         private static bool _haveReinstalledTemplatePackages;
 
+        private static object DotNetNewLock = new object();
+
         private static readonly string[] _templatePackages = new[]
         {
+            "Microsoft.DotNet.Common.ItemTemplates",
+            "Microsoft.DotNet.Common.ProjectTemplates.2.1",
+            "Microsoft.DotNet.Test.ProjectTemplates.2.1",
             "Microsoft.DotNet.Web.Client.ItemTemplates",
             "Microsoft.DotNet.Web.ItemTemplates",
             "Microsoft.DotNet.Web.ProjectTemplates.1.x",
             "Microsoft.DotNet.Web.ProjectTemplates.2.0",
             "Microsoft.DotNet.Web.ProjectTemplates.2.1",
+            "Microsoft.DotNet.Web.ProjectTemplates.2.2",
+            "Microsoft.DotNet.Web.ProjectTemplates.3.0",
             "Microsoft.DotNet.Web.Spa.ProjectTemplates",
+            "Microsoft.DotNet.Web.Spa.ProjectTemplates.2.2",
+            "Microsoft.DotNet.Web.Spa.ProjectTemplates.3.0"
         };
 
-        public static void EnsureTemplatePackagesWereReinstalled(ITestOutputHelper output)
+        public static string CustomHivePath { get; } = Path.Combine(AppContext.BaseDirectory, ".templateengine");
+
+        public static void EnsureTemplatingEngineInitialized(ITestOutputHelper output)
         {
             lock (_templatePackagesReinstallationLock)
             {
                 if (!_haveReinstalledTemplatePackages)
                 {
-                    ReinstallTemplatePackages(output);
+                    if (Directory.Exists(CustomHivePath))
+                    {
+                        Directory.Delete(CustomHivePath, recursive: true);
+                    }
+                    InstallTemplatePackages(output);
                     _haveReinstalledTemplatePackages = true;
                 }
             }
         }
 
-        private static void ReinstallTemplatePackages(ITestOutputHelper output)
+        public static ProcessEx RunDotNetNew(ITestOutputHelper output, string arguments, bool assertSuccess)
         {
-            // Remove any previous or prebundled version of the template packages
-            foreach (var packageName in _templatePackages)
+            lock(DotNetNewLock)
             {
                 var proc = ProcessEx.Run(
                     output,
                     AppContext.BaseDirectory,
                     DotNetMuxer.MuxerPathOrDefault(),
-                    $"new --uninstall {packageName}");
+                    $"new {arguments} --debug:custom-hive \"{CustomHivePath}\"");
+                proc.WaitForExit(assertSuccess);
 
+                return proc;
+            }
+        }
+
+        private static void InstallTemplatePackages(ITestOutputHelper output)
+        {
+            // Remove any previous or prebundled version of the template packages
+            foreach (var packageName in _templatePackages)
+            {
                 // We don't need this command to succeed, because we'll verify next that
                 // uninstallation had the desired effect. This command is expected to fail
                 // in the case where the package wasn't previously installed.
-                proc.WaitForExit(assertSuccess: false);
+                RunDotNetNew(new NullTestOutputHelper(), $"--uninstall {packageName}", assertSuccess: false);
             }
 
-            VerifyCannotFindTemplate(output, "ASP.NET Core Empty");
+            VerifyCannotFindTemplate(output, "web");
+            VerifyCannotFindTemplate(output, "razor");
+            VerifyCannotFindTemplate(output, "react");
+            VerifyCannotFindTemplate(output, "reactredux");
+            VerifyCannotFindTemplate(output, "angular");
 
             // Locate the artifacts directory containing the built template packages
             var solutionDir = FindAncestorDirectoryContaining("Templating.sln");
@@ -61,13 +109,20 @@ namespace Templates.Test.Helpers
                 if (_templatePackages.Any(name => Path.GetFileName(packagePath).StartsWith(name, StringComparison.OrdinalIgnoreCase)))
                 {
                     output.WriteLine($"Installing templates package {packagePath}...");
-                    var proc = ProcessEx.Run(
-                        output,
-                        AppContext.BaseDirectory,
-                        DotNetMuxer.MuxerPathOrDefault(),
-                        $"new --install \"{packagePath}\"");
-                    proc.WaitForExit(assertSuccess: true);
+                    RunDotNetNew(output, $"--install \"{packagePath}\"", assertSuccess: true);
                 }
+            }
+            VerifyCanFindTemplate(output, "razor");
+            VerifyCanFindTemplate(output, "web");
+            VerifyCanFindTemplate(output, "react");
+        }
+
+        private static void VerifyCanFindTemplate(ITestOutputHelper output, string templateName)
+        {
+            var proc = RunDotNetNew(output, $"", assertSuccess: false);
+            if (!proc.Output.Contains($" {templateName}"))
+            {
+                throw new InvalidOperationException($"Couldn't find {templateName} as an option in {proc.Output}.");
             }
         }
 
@@ -79,13 +134,7 @@ namespace Templates.Test.Helpers
 
             try
             {
-                var proc = ProcessEx.Run(
-                    output,
-                    tempDir,
-                    DotNetMuxer.MuxerPathOrDefault(),
-                    $"new \"{templateName}\"");
-
-                proc.WaitForExit(assertSuccess: false);
+                var proc = RunDotNetNew(output, $"\"{templateName}\"", assertSuccess: false);
 
                 if (!proc.Error.Contains($"No templates matched the input template name: {templateName}."))
                 {

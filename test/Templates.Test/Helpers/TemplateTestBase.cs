@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading;
 using Microsoft.Extensions.CommandLineUtils;
 using Templates.Test.Helpers;
+using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -15,19 +16,22 @@ namespace Templates.Test
 {
     public class TemplateTestBase : IDisposable
     {
+        private static readonly AsyncLocal<ITestOutputHelper> _output = new AsyncLocal<ITestOutputHelper>();
+
         private static object DotNetNewLock = new object();
 
         protected string ProjectName { get; set; }
         protected string ProjectGuid { get; set; }
         protected string TemplateOutputDir { get; set; }
-        protected ITestOutputHelper Output { get; private set; }
         protected bool UseRazorSdkPackage { get; set; } = true;
+
+        public static ITestOutputHelper Output => _output.Value;
 
         public TemplateTestBase(ITestOutputHelper output)
         {
-            TemplatePackageInstaller.EnsureTemplatePackagesWereReinstalled(output);
+            _output.Value = output;
+            TemplatePackageInstaller.EnsureTemplatingEngineInitialized(output);
 
-            Output = output;
             ProjectGuid = Guid.NewGuid().ToString("N");
             ProjectName = $"AspNet.Template.{ProjectGuid}";
 
@@ -42,31 +46,24 @@ namespace Templates.Test
             // Directory.Build.props/targets context
 
             var templatesTestsPropsFilePath = Path.Combine(basePath, "TemplateTests.props");
-            var templatesTestsTargetsFilePath = Path.Combine(basePath, "TemplateTests.targets");
             var directoryBuildPropsContent =
 $@"<Project>
-    <Import Project=""{templatesTestsPropsFilePath}"" />
     <Import Project=""Directory.Build.After.props"" Condition=""Exists('Directory.Build.After.props')"" />
 </Project>";
             File.WriteAllText(Path.Combine(TemplateOutputDir, "Directory.Build.props"), directoryBuildPropsContent);
-
             var directoryBuildTargetsContent =
 $@"<Project>
-    <Import Project=""{templatesTestsTargetsFilePath}"" />
+    <Import Project=""{templatesTestsPropsFilePath}"" />
 </Project>";
-            File.WriteAllText(Path.Combine(TemplateOutputDir, "Directory.Build.targets"), directoryBuildTargetsContent);
-        }
 
-        protected void InstallTemplatePackages()
-        {
-            throw new NotImplementedException();
+            File.WriteAllText(Path.Combine(TemplateOutputDir, "Directory.Build.targets"), directoryBuildTargetsContent);
         }
 
         protected void RunDotNetNew(string templateName, string targetFrameworkOverride, string auth = null, string language = null, bool useLocalDB = false, bool noHttps = false)
         {
             SetAfterDirectoryBuildPropsContents();
 
-            var args = $"new {templateName}";
+            var args = $"new {templateName} --debug:custom-hive \"{TemplatePackageInstaller.CustomHivePath}\"";
 
             if (!string.IsNullOrEmpty(targetFrameworkOverride))
             {
@@ -75,7 +72,7 @@ $@"<Project>
 
             if (!string.IsNullOrEmpty(auth))
             {
-                args += $" -au {auth}";
+                args += $" --auth {auth}";
             }
 
             if (!string.IsNullOrEmpty(language))
@@ -85,7 +82,7 @@ $@"<Project>
 
             if (useLocalDB)
             {
-                args += $" -uld";
+                args += $" --use-local-db";
             }
 
             if (noHttps)
@@ -131,7 +128,7 @@ $@"<Project>
         {
             lock (DotNetNewLock)
             {
-                ProcessEx.Run(Output, TemplateOutputDir, DotNetMuxer.MuxerPathOrDefault(), arguments).WaitForExit(assertSuccess: true);
+                ProcessEx.Run(Output, TemplateOutputDir, DotNetMuxer.MuxerPathOrDefault(), arguments + $" --debug:custom-hive \"{TemplatePackageInstaller.CustomHivePath}\"").WaitForExit(assertSuccess: true);
             }
         }
 

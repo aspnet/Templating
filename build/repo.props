@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
   <Import Project="dependencies.props" />
 
   <PropertyGroup>
@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <DotNetCoreRuntime Include="$(MicrosoftNETCoreApp21PackageVersion)" />
+    <DotNetCoreRuntime Include="$(MicrosoftNETCoreApp30PackageVersion)" />
 
     <!-- SkipAspNetCoreRuntimeInstall must be set when building templates before the shared framework is available -->
-    <AspNetCoreRuntime Include="$(MicrosoftAspNetCoreAllPackageVersion)"
+    <AspNetCoreRuntime Include="$(MicrosoftAspNetCoreAppPackageVersion)"
       Condition=" '$(SkipAspNetCoreRuntimeInstall)' != 'true' " />
   </ItemGroup>
 

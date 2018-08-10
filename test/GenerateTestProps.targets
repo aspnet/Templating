@@ -1,30 +1,18 @@
 <Project>
   <Target Name="GenerateTestProps" BeforeTargets="CoreCompile">
     <PropertyGroup>
-      <PropsProperties>RestoreSources=$([MSBuild]::Escape($(RestoreSources)))</PropsProperties>
-      <PropsProperties>$(PropsProperties);RuntimeFrameworkVersion=$(RuntimeFrameworkVersion)</PropsProperties>
-      <PropsProperties>$(PropsProperties);MicrosoftNETSdkRazorPackageVersion=$(MicrosoftNETSdkRazorPackageVersion)</PropsProperties>
-
-      <!-- These properties would normally be bundled in the CLI -->
-
-      <!-- Overriding this property to fix tests until 2.1.0 is released or we have updated the tfm to netcoreapp2.2 https://github.com/aspnet/templating/issues/488 -->
-      <!-- <TargetsProperties>BundledAspNetCoreAllTargetFrameworkVersion=$(MicrosoftAspNetCoreAllPackageVersion.Split('.')[0]).$(MicrosoftAspNetCoreAllPackageVersion.Split('.')[1])</TargetsProperties> -->
-      <TargetsProperties>BundledAspNetCoreAllTargetFrameworkVersion=2.1</TargetsProperties>
-      <TargetsProperties>$(TargetsProperties);BundledAspNetCoreAllPackageVersion=$(MicrosoftAspNetCoreAllPackageVersion)</TargetsProperties>
-
-      <!-- Overriding this property to fix tests until 2.1.0 is released or we have updated the tfm to netcoreapp2.2 https://github.com/aspnet/templating/issues/488 -->
-      <!-- <TargetsProperties>$(TargetsProperties);BundledAspNetCoreAppTargetFrameworkVersion=$(MicrosoftAspNetCoreAppPackageVersion.Split('.')[0]).$(MicrosoftAspNetCoreAppPackageVersion.Split('.')[1])</TargetsProperties> -->
-      <TargetsProperties>BundledAspNetCoreAppTargetFrameworkVersion=2.1</TargetsProperties>
-      <TargetsProperties>$(TargetsProperties);BundledAspNetCoreAppPackageVersion=$(MicrosoftAspNetCoreAppPackageVersion)</TargetsProperties>
+      <PropsProperties>
+        RestoreSources=$([MSBuild]::Escape($(RestoreSources)));
+        RuntimeFrameworkVersion=$(RuntimeFrameworkVersion);
+        MicrosoftNETSdkRazorPackageVersion=$(MicrosoftNETSdkRazorPackageVersion);
+        BundledAspNetCoreAppTargetFrameworkVersion=$(MicrosoftAspNetCoreAppPackageVersion.Split('.')[0]).$(MicrosoftAspNetCoreAppPackageVersion.Split('.')[1]);
+        BundledAspNetCoreAppPackageVersion=$(MicrosoftAspNetCoreAppPackageVersion)
+      </PropsProperties>
     </PropertyGroup>
 
     <Sdk_GenerateFileFromTemplate
       TemplateFile="$(MSBuildThisFileDirectory)TemplateTests.props.in"
       Properties="$(PropsProperties)"
       OutputPath="$(OutputPath)TemplateTests.props" />
-    <Sdk_GenerateFileFromTemplate
-      TemplateFile="$(MSBuildThisFileDirectory)TemplateTests.targets.in"
-      Properties="$(TargetsProperties)"
-      OutputPath="$(OutputPath)TemplateTests.targets" />
   </Target>
 </Project>
