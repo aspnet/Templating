@@ -5,19 +5,18 @@ import { Link } from 'react-router-dom';
 import { actionCreators } from '../store/WeatherForecasts';
 
 class FetchData extends Component {
-  componentWillMount() {
-    // This method runs when the component is first added to the page
-    const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
-    this.props.requestWeatherForecasts(startDateIndex);
-  }
+  state = {
+    startDateIndex: ""
+  };
 
-  componentWillReceiveProps(nextProps) {
-    // This method runs when incoming props (e.g., route params) change
-    const startDateIndex = parseInt(nextProps.match.params.startDateIndex, 10) || 0;
-    this.props.requestWeatherForecasts(startDateIndex);
-  }
+  handleChange = event => {
+    this.setState({ startDateIndex: event.target.value })
+  };
 
   render() {
+    const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
+    this.props.requestWeatherForecasts(startDateIndex);
+
     return (
       <div>
         <h1>Weather forecast</h1>
