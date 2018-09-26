@@ -21,9 +21,6 @@ class FetchData extends Component {
   }
 
   render() {
-    const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
-    this.props.requestWeatherForecasts(startDateIndex);
-
     return (
       <div>
         <h1>Weather forecast</h1>
