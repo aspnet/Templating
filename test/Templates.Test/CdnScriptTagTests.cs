@@ -1,6 +1,8 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using AngleSharp;
+using AngleSharp.Dom;
 using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
 using System;
@@ -23,6 +25,7 @@ namespace Templates.Test
         private static readonly string _solutionDir;
         private static readonly string _artifactsDir;
         private static List<ScriptTag> _scriptTags;
+        private static List<LinkTag> _linkTags;
 
         static CdnScriptTagTests()
         {
@@ -31,9 +34,12 @@ namespace Templates.Test
             var packages = Directory.GetFiles(_artifactsDir, "*.nupkg");
 
             _scriptTags = new List<ScriptTag>();
+            _linkTags = new List<LinkTag>();
             foreach (var packagePath in packages)
             {
-                _scriptTags.AddRange(GetScriptTags(packagePath));
+                var tags = GetScriptTags(packagePath);
+                _scriptTags.AddRange(tags.Scripts);
+                _linkTags.AddRange(tags.Links);
             }
         }
 
@@ -43,21 +49,33 @@ namespace Templates.Test
             _httpClient = new HttpClient();
         }
 
-        public static IEnumerable<object[]> SubresourceIntegrityCheckData
+        public static IEnumerable<object[]> SubresourceIntegrityCheckScriptData
         {
             get
             {
                 var scriptTags = _scriptTags
-                    .Where(st => st.Integrity != null)
+                    .Where(st => st.FallbackSrc != null)
                     .Select(st => new object[] { st });
                 Assert.NotEmpty(scriptTags);
                 return scriptTags;
             }
         }
 
+        public static IEnumerable<object[]> SubresourceIntegrityCheckLinkData
+        {
+            get
+            {
+                var linkTags = _linkTags
+                    .Where(st => st.FallbackHRef != null)
+                    .Select(st => new object[] { st });
+                Assert.NotEmpty(linkTags);
+                return linkTags;
+            }
+        }
+
         [Theory]
-        [MemberData(nameof(SubresourceIntegrityCheckData))]
-        public async Task CheckSubresourceIntegrity(ScriptTag scriptTag)
+        [MemberData(nameof(SubresourceIntegrityCheckScriptData))]
+        public async Task CheckScriptSubresourceIntegrity(ScriptTag scriptTag)
         {
             string expectedIntegrity;
             using (var responseStream = await _httpClient.GetStreamAsync(scriptTag.Src))
@@ -68,6 +86,21 @@ namespace Templates.Test
             }
 
             Assert.Equal(expectedIntegrity, scriptTag.Integrity);
+        }
+
+        [Theory]
+        [MemberData(nameof(SubresourceIntegrityCheckLinkData))]
+        public async Task CheckLinkSubresourceIntegrity(LinkTag linkTag)
+        {
+            string expectedIntegrity;
+            using (var responseStream = await _httpClient.GetStreamAsync(linkTag.HRef))
+            using (var alg = SHA256.Create())
+            {
+                var hash = alg.ComputeHash(responseStream);
+                expectedIntegrity = "sha256-" + Convert.ToBase64String(hash);
+            }
+
+            Assert.Equal(expectedIntegrity, linkTag.Integrity);
         }
 
         public static IEnumerable<object[]> FallbackSrcCheckData
@@ -143,7 +176,7 @@ namespace Templates.Test
             return null;
         }
 
-        private static (List<ScriptTag>, List<LinkTag>) GetScriptTags(string zipFile)
+        private static (List<ScriptTag> Scripts, List<LinkTag> Links) GetScriptTags(string zipFile)
         {
             var scriptTags = new List<ScriptTag>();
             var linkTags = new List<LinkTag>();
@@ -157,10 +190,25 @@ namespace Templates.Test
                     }
 
                     IHtmlDocument htmlDocument;
-                    var htmlParser = new HtmlParser();
+                    var options = new HtmlParserOptions {
+                        IsStrictMode = false,
+                        IsEmbedded = false,
+                    };
+                    var config = Configuration.Default;
+                    var htmlParser = new HtmlParser(options, config);
                     using (var reader = new StreamReader(entry.Open()))
                     {
                         htmlDocument = htmlParser.Parse(entry.Open());
+                    }
+
+                    foreach (IElement link in htmlDocument.Body.GetElementsByTagName("link"))
+                    {
+                        linkTags.Add(new LinkTag
+                        {
+                            HRef = link.GetAttribute("href"),
+                            Integrity = link.GetAttribute("integrity"),
+                            FallbackHRef = link.GetAttribute("asp-fallback-href"),
+                        });
                     }
 
                     foreach (var scriptElement in htmlDocument.Scripts)
@@ -178,14 +226,9 @@ namespace Templates.Test
                         });
                     }
 
-                    foreach (var linkElement in htmlDocument.Links)
-                    {
-                        var fallbackAttribute = linkElement.Attributes
-                            .FirstOrDefault(attr => string.Equals("asp-fallback-href", attr.Name, StringComparison.OrdinalIgnoreCase));
-                    }
                 }
             }
-            return scriptTags;
+            return (scriptTags, linkTags);
         }
 
         private static string GetSolutionDir()
