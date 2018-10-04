@@ -96,6 +96,19 @@ namespace Templates.Test
             Assert.Equal(RemoveLineEndings(cdnContent), RemoveLineEndings(fallbackSrcContent));
         }
 
+        public struct LinkTag
+        {
+            public string Rel;
+            public string HRef;
+            public string FallbackHRef;
+            public string Integrity;
+
+            public override string ToString()
+            {
+                return $"{HRef}, {Integrity}";
+            }
+        }
+
         public struct ScriptTag
         {
             public string Src;
@@ -130,9 +143,10 @@ namespace Templates.Test
             return null;
         }
 
-        private static List<ScriptTag> GetScriptTags(string zipFile)
+        private static (List<ScriptTag>, List<LinkTag>) GetScriptTags(string zipFile)
         {
             var scriptTags = new List<ScriptTag>();
+            var linkTags = new List<LinkTag>();
             using (var zip = new ZipArchive(File.OpenRead(zipFile), ZipArchiveMode.Read, leaveOpen: false))
             {
                 foreach (var entry in zip.Entries)
@@ -162,6 +176,12 @@ namespace Templates.Test
                             FileName = Path.GetFileName(zipFile),
                             Entry = entry.FullName
                         });
+                    }
+
+                    foreach (var linkElement in htmlDocument.Links)
+                    {
+                        var fallbackAttribute = linkElement.Attributes
+                            .FirstOrDefault(attr => string.Equals("asp-fallback-href", attr.Name, StringComparison.OrdinalIgnoreCase));
                     }
                 }
             }
