@@ -37,9 +37,9 @@ namespace Templates.Test
             _linkTags = new List<LinkTag>();
             foreach (var packagePath in packages)
             {
-                var tags = GetScriptTags(packagePath);
-                _scriptTags.AddRange(tags.Scripts);
-                _linkTags.AddRange(tags.Links);
+                var tags = GetTags(packagePath);
+                _scriptTags.AddRange(tags.scripts);
+                _linkTags.AddRange(tags.links);
             }
         }
 
@@ -85,7 +85,10 @@ namespace Templates.Test
                 expectedIntegrity = "sha256-" + Convert.ToBase64String(hash);
             }
 
-            Assert.Equal(expectedIntegrity, scriptTag.Integrity);
+            if (expectedIntegrity.Equals(scriptTag.Integrity, StringComparison.OrdinalIgnoreCase))
+            {
+                Assert.False(true, $"Expected {scriptTag.Src} to have Integrity '{expectedIntegrity}' but it had '{scriptTag.Integrity}'.");
+            }
         }
 
         [Theory]
@@ -100,7 +103,10 @@ namespace Templates.Test
                 expectedIntegrity = "sha256-" + Convert.ToBase64String(hash);
             }
 
-            Assert.Equal(expectedIntegrity, linkTag.Integrity);
+            if (expectedIntegrity.Equals(linkTag.Integrity, StringComparison.OrdinalIgnoreCase))
+            {
+                Assert.False(true, $"Expected {linkTag.HRef} to have Integrity '{expectedIntegrity}' but it had '{linkTag.Integrity}'.");
+            }
         }
 
         public static IEnumerable<object[]> FallbackSrcCheckData
@@ -176,7 +182,7 @@ namespace Templates.Test
             return null;
         }
 
-        private static (List<ScriptTag> Scripts, List<LinkTag> Links) GetScriptTags(string zipFile)
+        private static (List<ScriptTag> scripts, List<LinkTag> links) GetTags(string zipFile)
         {
             var scriptTags = new List<ScriptTag>();
             var linkTags = new List<LinkTag>();
@@ -190,7 +196,8 @@ namespace Templates.Test
                     }
 
                     IHtmlDocument htmlDocument;
-                    var options = new HtmlParserOptions {
+                    var options = new HtmlParserOptions
+                    {
                         IsStrictMode = false,
                         IsEmbedded = false,
                     };
