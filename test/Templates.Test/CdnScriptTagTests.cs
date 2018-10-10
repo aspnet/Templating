@@ -85,7 +85,7 @@ namespace Templates.Test
                 expectedIntegrity = "sha256-" + Convert.ToBase64String(hash);
             }
 
-            if (expectedIntegrity.Equals(scriptTag.Integrity, StringComparison.OrdinalIgnoreCase))
+            if (!expectedIntegrity.Equals(scriptTag.Integrity, StringComparison.OrdinalIgnoreCase))
             {
                 Assert.False(true, $"Expected {scriptTag.Src} to have Integrity '{expectedIntegrity}' but it had '{scriptTag.Integrity}'.");
             }
@@ -103,7 +103,7 @@ namespace Templates.Test
                 expectedIntegrity = "sha256-" + Convert.ToBase64String(hash);
             }
 
-            if (expectedIntegrity.Equals(linkTag.Integrity, StringComparison.OrdinalIgnoreCase))
+            if (!expectedIntegrity.Equals(linkTag.Integrity, StringComparison.OrdinalIgnoreCase))
             {
                 Assert.False(true, $"Expected {linkTag.HRef} to have Integrity '{expectedIntegrity}' but it had '{linkTag.Integrity}'.");
             }
