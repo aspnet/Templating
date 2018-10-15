@@ -36,14 +36,9 @@ namespace Templates.Test.SpaTemplateTest
             // installs run concurrently which otherwise causes errors when tests run
             // in parallel.
             var clientAppSubdirPath = Path.Combine(TemplateOutputDir, "ClientApp");
-            if (File.Exists(Path.Combine(clientAppSubdirPath, "package.json")))
-            {
-                Npm.RestoreWithRetry(Output, clientAppSubdirPath);
-            }
-            else if (File.Exists(Path.Combine(TemplateOutputDir, "package.json")))
-            {
-                Npm.RestoreWithRetry(Output, TemplateOutputDir);
-            }
+            var clientPath = File.Exists(Path.Combine(clientAppSubdirPath, "package.json")) ? clientAppSubdirPath : TemplateOutputDir;
+            Npm.RestoreWithRetry(Output, clientPath);
+            Npm.Test(Output, clientPath);
 
             TestApplication(targetFrameworkOverride, publish: false);
             TestApplication(targetFrameworkOverride, publish: true);

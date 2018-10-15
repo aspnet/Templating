@@ -50,6 +50,12 @@ namespace Templates.Test.Helpers
             }
         }
 
+        public static void Test(ITestOutputHelper output, string workingDirectory)
+        {
+            output.WriteLine($"Testing NPM package in '{workingDirectory}'...");
+            ProcessEx.RunViaShell(output, workingDirectory, "npm run test");
+        }
+
         private static void Restore(ITestOutputHelper output, string workingDirectory)
         {
             // It's not safe to run multiple NPM installs in parallel
