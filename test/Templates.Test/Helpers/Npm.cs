@@ -60,5 +60,10 @@ namespace Templates.Test.Helpers
                 ProcessEx.RunViaShell(output, workingDirectory, "npm install");
             }
         }
+
+        public static void Test(ITestOutputHelper outputHelper, string workingDirectory)
+        {
+            ProcessEx.RunViaShell(outputHelper, workingDirectory, "npm run test");
+        }
     }
 }
