@@ -15,7 +15,7 @@
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
 }
