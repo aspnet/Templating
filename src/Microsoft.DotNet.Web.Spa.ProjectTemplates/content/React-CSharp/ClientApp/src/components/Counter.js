@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 export class Counter extends Component {
+  static displayName = Counter.name;
+
   constructor (props) {
     super(props);
     this.state = { currentCount: 0 };
@@ -27,4 +29,3 @@ export class Counter extends Component {
     );
   }
 }
-Counter.displayName = Counter.name;

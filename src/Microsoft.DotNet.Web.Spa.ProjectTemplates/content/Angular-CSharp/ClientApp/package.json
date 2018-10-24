@@ -8,8 +8,7 @@
     "build:ssr": "ng run Company.WebApplication1:server:dev",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "check": "npm run lint"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

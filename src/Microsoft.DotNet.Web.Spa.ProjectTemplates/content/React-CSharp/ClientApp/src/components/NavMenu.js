@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
+  static displayName = NavMenu.name;
+
   constructor (props) {
     super(props);
 
@@ -45,4 +47,3 @@ export class NavMenu extends Component {
     );
   }
 }
-NavMenu.displayName = NavMenu.name;

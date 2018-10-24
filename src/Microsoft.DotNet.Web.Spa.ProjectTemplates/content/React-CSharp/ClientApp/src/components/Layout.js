@@ -3,6 +3,8 @@ import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
 
 export class Layout extends Component {
+  static displayName = Layout.name;
+
   render () {
     return (
       <div>
@@ -14,4 +16,3 @@ export class Layout extends Component {
     );
   }
 }
-Layout.displayName = Layout.name;
