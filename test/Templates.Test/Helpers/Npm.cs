@@ -63,6 +63,7 @@ namespace Templates.Test.Helpers
 
         public static void Test(ITestOutputHelper outputHelper, string workingDirectory)
         {
+            // Angular should include e2e in "check" once VSTS has proper chrome
             ProcessEx.RunViaShell(outputHelper, workingDirectory, "npm run check");
         }
     }
