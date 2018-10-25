@@ -6,7 +6,8 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 
 export default class App extends Component {
-  static displayName = App.name
+  static displayName = App.name;
+
   render () {
     return (
       <Layout>
