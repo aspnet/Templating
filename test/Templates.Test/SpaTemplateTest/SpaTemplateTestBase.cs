@@ -3,6 +3,7 @@
 
 using OpenQA.Selenium;
 using System.IO;
+using System.Linq;
 using System.Net;
 using Templates.Test.Helpers;
 using Templates.Test.Infrastructure;
@@ -62,17 +63,20 @@ namespace Templates.Test.SpaTemplateTest
         private void TestBasicNavigation()
         {
             Browser.WaitForElement("ul");
+            
             // <title> element gets project ID injected into it during template execution
             Assert.Contains(ProjectGuid, Browser.Title);
 
             // Initially displays the home page
             Assert.Equal("Hello, world!", Browser.GetText("h1"));
+            Assert.True(BrowserHasNoProblems());
 
             // Can navigate to the counter page
             Browser.Click(By.PartialLinkText("Counter"));
             Browser.WaitForUrl("counter");
 
             Assert.Equal("Counter", Browser.GetText("h1"));
+            Assert.True(BrowserHasNoProblems());
 
             // Clicking the counter button works
             var counterComponent = Browser.FindElement("h1").Parent();
@@ -84,12 +88,26 @@ namespace Templates.Test.SpaTemplateTest
             Browser.Click(By.PartialLinkText("Fetch data"));
             Browser.WaitForUrl("fetch-data");
             Assert.Equal("Weather forecast", Browser.GetText("h1"));
+            Assert.True(BrowserHasNoProblems());
 
             // Asynchronously loads and displays the table of weather forecasts
             var fetchDataComponent = Browser.FindElement("h1").Parent();
             Browser.WaitForElement("table>tbody>tr");
             var table = Browser.FindElement(fetchDataComponent, "table", timeoutSeconds: 5);
             Assert.Equal(5, table.FindElements(By.CssSelector("tbody tr")).Count);
+        }
+
+        private bool BrowserHasNoProblems()
+        {
+            var browserLogs = Browser.Manage().Logs.GetLog("browser");
+            var badMessages = browserLogs.Where(l => l.Level >= LogLevel.Warning);
+
+            foreach(var badMessage in badMessages)
+            {
+                Output.WriteLine(badMessage.Message);
+            }
+
+            return badMessages.Count() == 0;
         }
     }
 }

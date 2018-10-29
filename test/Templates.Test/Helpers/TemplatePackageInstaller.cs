@@ -37,7 +37,9 @@ namespace Templates.Test.Helpers
         {
             "Microsoft.DotNet.Common.ItemTemplates",
             "Microsoft.DotNet.Common.ProjectTemplates.2.1",
+            "Microsoft.DotNet.Common.ProjectTemplates.2.2",
             "Microsoft.DotNet.Test.ProjectTemplates.2.1",
+            "Microsoft.DotNet.Test.ProjectTemplates.2.2",
             "Microsoft.DotNet.Web.Client.ItemTemplates",
             "Microsoft.DotNet.Web.ItemTemplates",
             "Microsoft.DotNet.Web.ProjectTemplates.1.x",
