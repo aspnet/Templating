@@ -1,15 +1,19 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Testing.xunit;
+using Templates.Test.Helpers;
+using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test
 {
-    public class RazorPagesTemplateTest : TemplateTestBase
+    public class RazorPagesTemplateTest : BrowserTestBase
     {
-        public RazorPagesTemplateTest(ITestOutputHelper output) : base(output)
+        public RazorPagesTemplateTest(BrowserFixture browserFixture, ITestOutputHelper output)
+            : base(browserFixture, output)
         {
         }
 
@@ -26,6 +30,11 @@ namespace Templates.Test
         [Fact]
         public void RazorPagesTemplate_NoAuth_Works_NetCore()
             => RazorPagesTemplate_NoAuthImpl(null);
+
+        private static readonly IEnumerable<string> Urls = new string[] {
+            "/",
+            "Privacy"
+        };
 
         private void RazorPagesTemplate_NoAuthImpl(string targetFrameworkOverride, bool noHttps = false)
         {
@@ -56,8 +65,7 @@ namespace Templates.Test
             {
                 using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish))
                 {
-                    aspNetProcess.AssertOk("/");
-                    aspNetProcess.AssertOk("/Privacy");
+                    TestBasicNavigation(aspNetProcess, Urls);
                 }
             }
         }

@@ -1,15 +1,20 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Testing.xunit;
+using OpenQA.Selenium;
+using Templates.Test.Helpers;
+using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test
 {
-    public class MvcTemplateTest : TemplateTestBase
+    public class MvcTemplateTest : BrowserTestBase
     {
-        public MvcTemplateTest(ITestOutputHelper output) : base(output)
+        public MvcTemplateTest(BrowserFixture browserFixture, ITestOutputHelper output) : base(browserFixture, output)
         {
         }
 
@@ -40,6 +45,11 @@ namespace Templates.Test
         [Fact(Skip = "https://github.com/aspnet/Templating/issues/673")]
         public void MvcTemplate_NoAuth_Works_NetCore_ForFSharpTemplate()
             => MvcTemplate_NoAuthImpl(null, languageOverride: "F#");
+
+        private static readonly IEnumerable<string> NoAuthUrls = new string[] {
+            "/",
+            "/Home/Privacy"
+        };
 
         private void MvcTemplate_NoAuthImpl(string targetFrameworkOverride, string languageOverride, bool noHttps = false)
         {
@@ -74,8 +84,7 @@ namespace Templates.Test
             {
                 using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish))
                 {
-                    aspNetProcess.AssertOk("/");
-                    aspNetProcess.AssertOk("/Home/Privacy");
+                    TestBasicNavigation(aspNetProcess, NoAuthUrls);
                 }
             }
         }
@@ -98,13 +107,21 @@ namespace Templates.Test
         public void MvcTemplate_IndividualAuth_UsingLocalDB_Works_NetCore()
             => MvcTemplate_IndividualAuthImpl(null, true);
 
+        private static readonly IEnumerable<string> AuthUrls = new string[] {
+            "/",
+            "/Home/Privacy",
+            "Identity/Account/Register",
+            "Identity/Account/Login",
+            "Identity/Account/ForgotPassword"
+        };
+
         private void MvcTemplate_IndividualAuthImpl(string targetFrameworkOverride, bool useLocalDB = false, bool noHttps = false)
         {
             RunDotNetNew("mvc", targetFrameworkOverride, auth: "Individual", useLocalDB: useLocalDB);
 
-            AssertDirectoryExists("Extensions", false);
-            AssertFileExists("urlRewrite.config", false);
-            AssertFileExists("Controllers/AccountController.cs", false);
+            AssertDirectoryExists("Extensions", shouldExist: false);
+            AssertFileExists("urlRewrite.config", shouldExist: false);
+            AssertFileExists("Controllers/AccountController.cs", shouldExist: false);
 
             var projectFileContents = ReadFile($"{ProjectName}.csproj");
             if (!useLocalDB)
@@ -125,8 +142,7 @@ namespace Templates.Test
             {
                 using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish))
                 {
-                    aspNetProcess.AssertOk("/");
-                    aspNetProcess.AssertOk("/Home/Privacy");
+                    TestBasicNavigation(aspNetProcess, AuthUrls);
                 }
             }
         }

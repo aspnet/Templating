@@ -20,7 +20,6 @@ namespace Templates.Test.Helpers
     {
         private const string DefaultFramework = "netcoreapp3.0";
         private const string ListeningMessagePrefix = "Now listening on: ";
-        private static int Port = 5000 + new Random().Next(3000);
 
         private readonly ProcessEx _process;
         private readonly Uri _listeningUri;
@@ -98,10 +97,12 @@ namespace Templates.Test.Helpers
 
         }
 
-        public void VisitInBrowser(IWebDriver driver)
+        public void VisitInBrowser(IWebDriver driver, string uri = null)
         {
-            _output.WriteLine($"Opening browser at {_listeningUri}...");
-            driver.Navigate().GoToUrl(_listeningUri);
+            var uriToVisit = uri == null ? _listeningUri : new Uri(_listeningUri, uri);
+
+            _output.WriteLine($"Opening browser at {uriToVisit}...");
+            driver.Navigate().GoToUrl(uriToVisit);
 
             if (driver is EdgeDriver)
             {
@@ -117,7 +118,7 @@ namespace Templates.Test.Helpers
                     {
                         _output.WriteLine($"Clicking on link '{continueLink.Text}' to skip invalid certificate error page.");
                         continueLink.Click();
-                        driver.Navigate().GoToUrl(_listeningUri);
+                        driver.Navigate().GoToUrl(uriToVisit);
                     }
                     else
                     {

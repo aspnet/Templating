@@ -3,6 +3,7 @@
     "*.json.in": "json",
     "*.*proj.in": "xml"
   },
+  "files.autoSave": "onFocusChange",
   "[json]": {
     "editor.tabSize": 2
   },

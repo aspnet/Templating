@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Threading;
 using Microsoft.Extensions.CommandLineUtils;
 using Templates.Test.Helpers;
-using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -18,7 +17,7 @@ namespace Templates.Test
     {
         private static readonly AsyncLocal<ITestOutputHelper> _output = new AsyncLocal<ITestOutputHelper>();
 
-        private static object DotNetNewLock = new object();
+        private static readonly object DotNetNewLock = new object();
 
         protected string ProjectName { get; set; }
         protected string ProjectGuid { get; set; }

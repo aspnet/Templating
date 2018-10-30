@@ -41,6 +41,7 @@
       MicrosoftEntityFrameworkCoreToolsDotNetPackageVersion=$(MicrosoftEntityFrameworkCoreToolsDotNetPackageVersion);
       MicrosoftEntityFrameworkCoreToolsPackageVersion=$(MicrosoftEntityFrameworkCoreToolsPackageVersion);
       MicrosoftNETCoreApp30PackageVersion=$(MicrosoftNETCoreApp30PackageVersion);
+      MicrosoftWebLibraryManagerBuildPackageVersion=$(MicrosoftWebLibraryManagerBuildPackageVersion);
     </GeneratedContentProperties>
   </PropertyGroup>
 
