@@ -2,10 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Testing.xunit;
-using OpenQA.Selenium;
-using Templates.Test.Helpers;
 using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
@@ -110,9 +107,9 @@ namespace Templates.Test
         private static readonly IEnumerable<string> AuthUrls = new string[] {
             "/",
             "/Home/Privacy",
-            "Identity/Account/Register",
-            "Identity/Account/Login",
-            "Identity/Account/ForgotPassword"
+            "/Identity/Account/Register",
+            "/Identity/Account/Login",
+            "/Identity/Account/ForgotPassword"
         };
 
         private void MvcTemplate_IndividualAuthImpl(string targetFrameworkOverride, bool useLocalDB = false, bool noHttps = false)

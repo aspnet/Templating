@@ -1,10 +1,6 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using AngleSharp;
-using AngleSharp.Dom;
-using AngleSharp.Dom.Html;
-using AngleSharp.Parser.Html;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +9,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using AngleSharp;
+using AngleSharp.Dom;
+using AngleSharp.Dom.Html;
+using AngleSharp.Parser.Html;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -20,12 +20,11 @@ namespace Templates.Test
 {
     public class CdnScriptTagTests : IDisposable
     {
-        private readonly ITestOutputHelper _output;
         private readonly HttpClient _httpClient;
         private static readonly string _solutionDir;
         private static readonly string _artifactsDir;
-        private static List<ScriptTag> _scriptTags;
-        private static List<LinkTag> _linkTags;
+        private static readonly List<ScriptTag> _scriptTags;
+        private static readonly List<LinkTag> _linkTags;
 
         static CdnScriptTagTests()
         {
@@ -37,15 +36,14 @@ namespace Templates.Test
             _linkTags = new List<LinkTag>();
             foreach (var packagePath in packages)
             {
-                var tags = GetTags(packagePath);
-                _scriptTags.AddRange(tags.scripts);
-                _linkTags.AddRange(tags.links);
+                var (scripts, links) = GetTags(packagePath);
+                _scriptTags.AddRange(scripts);
+                _linkTags.AddRange(links);
             }
         }
 
         public CdnScriptTagTests(ITestOutputHelper output)
         {
-            _output = output;
             _httpClient = new HttpClient();
         }
 
@@ -109,32 +107,6 @@ namespace Templates.Test
             }
         }
 
-        public static IEnumerable<object[]> FallbackSrcCheckData
-        {
-            get
-            {
-                var scriptTags = _scriptTags
-                    .Where(st => st.FallbackSrc != null)
-                    .Select(st => new object[] { st });
-                Assert.NotEmpty(scriptTags);
-                return scriptTags;
-            }
-        }
-
-        [Theory]
-        [MemberData(nameof(FallbackSrcCheckData))]
-        public async Task FallbackSrcContent_Matches_CDNContent(ScriptTag scriptTag)
-        {
-            var fallbackSrc = scriptTag.FallbackSrc
-                .TrimStart('~')
-                .TrimStart('/');
-
-            var cdnContent = await _httpClient.GetStringAsync(scriptTag.Src);
-            var fallbackSrcContent = GetFileContentFromArchive(scriptTag, fallbackSrc);
-
-            Assert.Equal(RemoveLineEndings(cdnContent), RemoveLineEndings(fallbackSrcContent));
-        }
-
         public struct LinkTag
         {
             public string Rel;
@@ -160,26 +132,6 @@ namespace Templates.Test
             {
                 return $"{Src}, {Entry}";
             }
-        }
-
-        private static string GetFileContentFromArchive(ScriptTag scriptTag, string relativeFilePath)
-        {
-            var file = Path.Combine(_artifactsDir, scriptTag.FileName);
-            using (var zip = new ZipArchive(File.OpenRead(file), ZipArchiveMode.Read, leaveOpen: false))
-            {
-                var entry = zip.Entries
-                    .Where(e => e.FullName.EndsWith(relativeFilePath, StringComparison.OrdinalIgnoreCase))
-                    .FirstOrDefault();
-
-                if (entry != null)
-                {
-                    using (var reader = new StreamReader(entry.Open()))
-                    {
-                        return reader.ReadToEnd();
-                    }
-                }
-            }
-            return null;
         }
 
         private static (List<ScriptTag> scripts, List<LinkTag> links) GetTags(string zipFile)
@@ -250,11 +202,6 @@ namespace Templates.Test
                 dir = dir.Parent;
             }
             return dir.FullName;
-        }
-
-        private static string RemoveLineEndings(string originalString)
-        {
-            return originalString.Replace("\r\n", "").Replace("\n", "");
         }
 
         public void Dispose()

@@ -28,10 +28,10 @@ namespace Templates.Test.Helpers
 
     internal static class TemplatePackageInstaller
     {
-        private static object _templatePackagesReinstallationLock = new object();
+        private static readonly object _templatePackagesReinstallationLock = new object();
         private static bool _haveReinstalledTemplatePackages;
 
-        private static object DotNetNewLock = new object();
+        private static readonly object DotNetNewLock = new object();
 
         private static readonly string[] _templatePackages = new[]
         {

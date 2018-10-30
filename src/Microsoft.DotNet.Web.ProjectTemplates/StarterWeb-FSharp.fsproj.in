@@ -18,7 +18,7 @@
 
   <ItemGroup Condition="'$(TargetFrameworkOverride)' == ''">
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="$(MicrosoftWebLibraryManagerBuildPackageVersion)" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="${MicrosoftWebLibraryManagerBuildPackageVersion}" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkOverride)' != ''">
     <PackageReference Include="Microsoft.AspNetCore" Version="${MicrosoftAspNetCorePackageVersion}" />
@@ -26,7 +26,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="${MicrosoftAspNetCoreMvcPackageVersion}" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="${MicrosoftAspNetCoreStaticFilesPackageVersion}" />
     <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="${MicrosoftAspNetCoreHttpsPolicyPackageVersion}" Condition="'$(NoHttps)' != 'True'"/>
-    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="$(MicrosoftWebLibraryManagerBuildPackageVersion)" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="${MicrosoftWebLibraryManagerBuildPackageVersion}" />
   </ItemGroup>
 
 </Project>

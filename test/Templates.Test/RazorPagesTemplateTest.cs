@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Testing.xunit;
-using Templates.Test.Helpers;
 using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
@@ -31,7 +30,7 @@ namespace Templates.Test
         public void RazorPagesTemplate_NoAuth_Works_NetCore()
             => RazorPagesTemplate_NoAuthImpl(null);
 
-        private static readonly IEnumerable<string> Urls = new string[] {
+        private static readonly IEnumerable<string> NoAuthUrls = new string[] {
             "/",
             "Privacy"
         };
@@ -65,7 +64,7 @@ namespace Templates.Test
             {
                 using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish))
                 {
-                    TestBasicNavigation(aspNetProcess, Urls);
+                    TestBasicNavigation(aspNetProcess, NoAuthUrls);
                 }
             }
         }
@@ -87,6 +86,14 @@ namespace Templates.Test
         [Fact]
         public void RazorPagesTemplate_IndividualAuth_UsingLocalDB_Works_NetCore()
             => RazorPagesTemplate_IndividualAuthImpl(null, true);
+
+        private static readonly IEnumerable<string> AuthUrls = new string[] {
+            "/",
+            "/Privacy",
+            "/Identity/Account/Register",
+            "/Identity/Account/Login",
+            "/Identity/Account/ForgotPassword"
+        };
 
         private void RazorPagesTemplate_IndividualAuthImpl(string targetFrameworkOverride, bool useLocalDB = false, bool noHttps = false)
         {
@@ -113,8 +120,7 @@ namespace Templates.Test
             {
                 using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish))
                 {
-                    aspNetProcess.AssertOk("/");
-                    aspNetProcess.AssertOk("/Privacy");
+                    TestBasicNavigation(aspNetProcess, AuthUrls);
                 }
             }
         }
