@@ -43,12 +43,14 @@ namespace Templates.Test.Infrastructure
 
         public void TestBasicNavigation(AspNetProcess aspNetProcess, IEnumerable<string> urls)
         {
-            aspNetProcess.VisitInBrowser(Browser);
             foreach (var url in urls)
             {
                 aspNetProcess.AssertOk(url);
-                aspNetProcess.VisitInBrowser(Browser, url);
-                AssertLogsOk();
+                if(WebDriverFactory.HostSupportsBrowserAutomation)
+                {
+                    aspNetProcess.VisitInBrowser(Browser, url);
+                    AssertLogsOk();
+                }
             }
         }
     }
