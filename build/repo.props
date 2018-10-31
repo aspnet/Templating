@@ -1,6 +1,10 @@
 <Project>
   <Import Project="dependencies.props" />
 
+  <ItemGroup>
+    <ExcludeFromTest Include="$(RepositoryRoot)test\Templates.Test.Common\*.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <!-- These properties are use by the automation that updates dependencies.props -->
     <LineupPackageId>Internal.AspNetCore.Universe.Lineup</LineupPackageId>
