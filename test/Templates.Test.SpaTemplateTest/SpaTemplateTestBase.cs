@@ -13,7 +13,7 @@ using Xunit.Abstractions;
 #if EDGE
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
 #endif
-[assembly: TestFramework("Templates.Test.Helpers.XunitExtensions.XunitTestFrameworkWithAssemblyFixture", "Templates.Test")]
+[assembly: TestFramework("Templates.Test.Helpers.XunitExtensions.XunitTestFrameworkWithAssemblyFixture", "Templates.Test.SpaTemplateTest")]
 namespace Templates.Test.SpaTemplateTest
 {
     public class SpaTemplateTestBase : BrowserTestBase
