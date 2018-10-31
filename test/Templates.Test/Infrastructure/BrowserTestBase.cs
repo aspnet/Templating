@@ -17,6 +17,8 @@ namespace Templates.Test.Infrastructure
         private static readonly AsyncLocal<IWebDriver> _browser = new AsyncLocal<IWebDriver>();
         private static readonly AsyncLocal<ILogs> _logs = new AsyncLocal<ILogs>();
 
+        private bool _disposed = false;
+
         public static IWebDriver Browser => _browser.Value;
 
         public static ILogs Logs => _logs.Value;
@@ -52,6 +54,21 @@ namespace Templates.Test.Infrastructure
                     AssertLogsOk();
                 }
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+            if (disposing)
+            {
+                Browser.Dispose();
+            }
+
+            _disposed = true;
+            base.Dispose(disposing);
         }
     }
 }

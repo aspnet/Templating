@@ -18,6 +18,8 @@ namespace Templates.Test
         private static readonly AsyncLocal<ITestOutputHelper> _output = new AsyncLocal<ITestOutputHelper>();
 
         private static readonly object DotNetNewLock = new object();
+        private bool _disposed = false;
+
 
         protected string ProjectName { get; set; }
         protected string ProjectGuid { get; set; }
@@ -220,7 +222,21 @@ $@"<Project>
 
         public void Dispose()
         {
-            DeleteOutputDirectory();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                DeleteOutputDirectory();
+            }
+
+            _disposed = true;
         }
 
         private void DeleteOutputDirectory()
