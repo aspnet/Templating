@@ -62,10 +62,6 @@ namespace Templates.Test.Infrastructure
             {
                 return;
             }
-            if (disposing)
-            {
-                Browser.Dispose();
-            }
 
             _disposed = true;
             base.Dispose(disposing);
