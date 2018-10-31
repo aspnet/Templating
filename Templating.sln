@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetToolsInstaller", "tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Test.SpaTemplateTest", "test\Templates.Test.SpaTemplateTest\Templates.Test.SpaTemplateTest.csproj", "{D7906F1C-42C6-4F1E-AFD4-CF09EEA9B5AD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Test.Common", "test\Templates.Test.Common\Templates.Test.Common.csproj", "{D9E99D9F-53F9-4561-9D61-71E3EA89C369}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{D7906F1C-42C6-4F1E-AFD4-CF09EEA9B5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7906F1C-42C6-4F1E-AFD4-CF09EEA9B5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7906F1C-42C6-4F1E-AFD4-CF09EEA9B5AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9E99D9F-53F9-4561-9D61-71E3EA89C369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9E99D9F-53F9-4561-9D61-71E3EA89C369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9E99D9F-53F9-4561-9D61-71E3EA89C369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9E99D9F-53F9-4561-9D61-71E3EA89C369}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{260EBA09-DEF5-429C-99BF-90CA1456A576} = {0AD6E692-E423-408C-B523-DAFB19412E4B}
 		{61F386CF-4356-4B7E-8A98-F09759E65AC9} = {342602FC-9FF3-448D-B12D-F0E91B23DBBF}
 		{D7906F1C-42C6-4F1E-AFD4-CF09EEA9B5AD} = {342602FC-9FF3-448D-B12D-F0E91B23DBBF}
+		{D9E99D9F-53F9-4561-9D61-71E3EA89C369} = {342602FC-9FF3-448D-B12D-F0E91B23DBBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9B27B0D-4F85-431B-9C26-80CFE4393D36}
