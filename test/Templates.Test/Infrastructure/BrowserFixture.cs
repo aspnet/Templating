@@ -12,6 +12,8 @@ namespace Templates.Test.Infrastructure
 {
     public class BrowserFixture : IDisposable
     {
+        private static readonly object _driverCreationLock = new object();
+
         public IWebDriver Browser { get; }
 
         public ILogs Logs { get; }
@@ -42,9 +44,12 @@ namespace Templates.Test.Infrastructure
 
                 try
                 {
-                    var driver = new RemoteWebDriver(opts);
-                    Browser = driver;
-                    Logs = new RemoteLogs(driver);
+                    lock (_driverCreationLock)
+                    {
+                        var driver = new RemoteWebDriver(opts);
+                        Browser = driver;
+                        Logs = new RemoteLogs(driver);
+                    }
                 }
                 catch (WebDriverException ex)
                 {

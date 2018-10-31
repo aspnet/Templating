@@ -7,6 +7,11 @@ using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
+[assembly: AssemblyFixture(typeof(SeleniumServerFixture))]
+#if EDGE
+[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
+#endif
+[assembly: TestFramework("Templates.Test.Helpers.XunitExtensions.XunitTestFrameworkWithAssemblyFixture", "Templates.Test")]
 namespace Templates.Test
 {
     public class MvcTemplateTest : BrowserTestBase
