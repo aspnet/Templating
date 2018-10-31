@@ -8,6 +8,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 [assembly: AssemblyFixture(typeof(SeleniumServerFixture))]
+// Turn off parallel test run for Edge as the driver does not support multiple Selenium tests at the same time
 #if EDGE
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
 #endif

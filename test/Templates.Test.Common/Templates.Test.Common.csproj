@@ -25,4 +25,8 @@
       <_Parameter2>$([MSBuild]::EnsureTrailingSlash('$(NuGetPackageRoot)'))dotnet-ef/$(DotnetEfPackageVersion)/tools/netcoreapp3.0/any/dotnet-ef.dll</_Parameter2>
     </AssemblyAttribute>
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Infrastructure/**/*.cs" />
+  </ItemGroup>
 </Project>

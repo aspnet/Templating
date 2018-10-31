@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Internal.AspNetCore.Sdk" Version="$(InternalAspNetCoreSdkPackageVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Testing" Version="$(MicrosoftAspNetCoreTestingPackageVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Process.Sources" Version="$(MicrosoftExtensionsProcessSourcesPackageVersion)" PrivateAssets="All" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
     <PackageReference Include="xunit" Version="$(XunitPackageVersion)" />
     <PackageReference Include="xunit.analyzers" Version="$(XunitAnalyzersPackageVersion)" />
@@ -19,5 +20,9 @@
   <ItemGroup>
     <ProjectReference Include="../Templates.Test.Common/Templates.Test.Common.csproj" />
   </ItemGroup>
-  
+
+  <ItemGroup>
+    <!-- For some reason xunit doesn't work if the Fixture stuff isn't in the same project as the tests. -->
+    <Compile Include="../Templates.Test.Common/Infrastructure/**/*.cs" />
+  </ItemGroup>  
 </Project>
