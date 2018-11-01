@@ -7,18 +7,17 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using Microsoft.Extensions.CommandLineUtils;
+using Microsoft.Extensions.Logging.Testing;
 using Templates.Test.Helpers;
-using Templates.Test.Infrastructure;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test
 {
-    public class TemplateTestBase : IDisposable
+    public class TemplateTestBase : LoggedTest, IDisposable
     {
         private static readonly AsyncLocal<ITestOutputHelper> _output = new AsyncLocal<ITestOutputHelper>();
 
-        private static object DotNetNewLock = new object();
+        private static readonly object DotNetNewLock = new object();
 
         protected string ProjectName { get; set; }
         protected string ProjectGuid { get; set; }
@@ -39,7 +38,7 @@ namespace Templates.Test
             var assemblyUri = new Uri(assemblyPath, UriKind.Absolute);
             var basePath = Path.GetDirectoryName(assemblyUri.LocalPath);
             TemplateOutputDir = Path.Combine(basePath, "TestTemplates", ProjectName);
-            Directory.CreateDirectory(TemplateOutputDir);
+            var info = Directory.CreateDirectory(TemplateOutputDir);
 
             // We don't want any of the host repo's build config interfering with
             // how the test project is built, so disconnect it from the
@@ -219,9 +218,10 @@ $@"<Project>
             return new AspNetProcess(Output, TemplateOutputDir, ProjectName, targetFrameworkOverride, publish);
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             DeleteOutputDirectory();
+            base.Dispose();
         }
 
         private void DeleteOutputDirectory()

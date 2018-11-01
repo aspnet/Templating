@@ -30,6 +30,7 @@
     <MicrosoftEntityFrameworkCoreSqlServerPackageVersion>3.0.0-alpha1-10620</MicrosoftEntityFrameworkCoreSqlServerPackageVersion>
     <MicrosoftEntityFrameworkCoreToolsPackageVersion>3.0.0-alpha1-10620</MicrosoftEntityFrameworkCoreToolsPackageVersion>
     <MicrosoftExtensionsCommandLineUtilsSourcesPackageVersion>3.0.0-alpha1-10620</MicrosoftExtensionsCommandLineUtilsSourcesPackageVersion>
+    <MicrosoftExtensionsLoggingTestingPackageVersion>3.0.0-alpha1-10617</MicrosoftExtensionsLoggingTestingPackageVersion>
     <MicrosoftExtensionsProcessSourcesPackageVersion>3.0.0-alpha1-10620</MicrosoftExtensionsProcessSourcesPackageVersion>
     <MicrosoftNETCoreApp30PackageVersion>3.0.0-preview1-26907-05</MicrosoftNETCoreApp30PackageVersion>
     <MicrosoftNETSdkRazorPackageVersion>3.0.0-alpha1-10620</MicrosoftNETSdkRazorPackageVersion>

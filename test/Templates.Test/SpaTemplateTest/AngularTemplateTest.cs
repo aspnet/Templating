@@ -6,12 +6,11 @@ using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
-[assembly: AssemblyFixture(typeof(SeleniumServerFixture))]
 namespace Templates.Test.SpaTemplateTest
 {
     public class AngularTemplateTest : SpaTemplateTestBase
     {
-        public AngularTemplateTest(BrowserFixture browserFixture, ITestOutputHelper output) : base(browserFixture, output)
+        public AngularTemplateTest(ITestOutputHelper output) : base(output)
         {
         }
 

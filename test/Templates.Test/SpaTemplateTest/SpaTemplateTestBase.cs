@@ -1,24 +1,17 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using OpenQA.Selenium;
 using System.IO;
 using System.Net;
 using Templates.Test.Helpers;
 using Templates.Test.Infrastructure;
-using Xunit;
 using Xunit.Abstractions;
 
-// Turn off parallel test run for Edge as the driver does not support multiple Selenium tests at the same time
-#if EDGE
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
-#endif
-[assembly: TestFramework("Templates.Test.Helpers.XunitExtensions.XunitTestFrameworkWithAssemblyFixture", "Templates.Test")]
 namespace Templates.Test.SpaTemplateTest
 {
     public class SpaTemplateTestBase : BrowserTestBase
     {
-        public SpaTemplateTestBase(BrowserFixture browserFixture, ITestOutputHelper output) : base(browserFixture, output)
+        public SpaTemplateTestBase(ITestOutputHelper output) : base(output)
         {
         }
 

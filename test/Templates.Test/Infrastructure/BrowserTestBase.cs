@@ -1,27 +1,84 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System.Threading;
-using OpenQA.Selenium;
-using Xunit;
+using System;
+using System.Collections.Generic;
 using Xunit.Abstractions;
 
 namespace Templates.Test.Infrastructure
 {
-    [CaptureSeleniumLogs]
-    public class BrowserTestBase : TemplateTestBase, IClassFixture<BrowserFixture>
+    public class BrowserTestBase : TemplateTestBase
     {
-        private static readonly AsyncLocal<IWebDriver> _browser = new AsyncLocal<IWebDriver>();
-        private static readonly AsyncLocal<ILogs> _logs = new AsyncLocal<ILogs>();
-
-        public static IWebDriver Browser => _browser.Value;
-
-        public static ILogs Logs => _logs.Value;
-
-        public BrowserTestBase(BrowserFixture browserFixture, ITestOutputHelper output) : base(output)
+        public BrowserTestBase(ITestOutputHelper output) : base(output)
         {
-            _browser.Value = browserFixture.Browser;
-            _logs.Value = browserFixture.Logs;
+        }
+
+        public Browser Browser => new Browser();
+    }
+
+    public class Browser
+    {
+        public IEnumerable<string> Title { get; internal set; }
+
+        internal void WaitForElement(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IEnumerable<char> GetText(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Click(ParObj counterComponent, object p)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void WaitForUrl(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal ParObj FindElement(ParObj fetchDataComponent, string v = null, int? timeoutSeconds = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal ParObj FindElement(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Click(ParObj parObj)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ParObj : Browser
+    {
+        public ParObj Parent()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal List<object> FindElements(object p)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class By
+    {
+        internal static ParObj PartialLinkText(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static object CssSelector(string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
