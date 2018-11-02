@@ -3,8 +3,14 @@
     <RestoreDependsOn>$(RestoreDependsOn);RestoreNpm</RestoreDependsOn>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <TestFolder>$(RepositoryRoot)test\Templates.Test\PuppeteerTests\</TestFolder>
+  </PropertyGroup>
+
   <Target Name="RestoreNpm" Condition="'$(PreflightRestore)' != 'True'">
     <Message Text="Restoring NPM modules" Importance="high" />
-    <Exec Command="npm install --no-optional" WorkingDirectory="$(RepositoryRoot)test\Templates.Test\PuppeteerTests" />
+    <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)mvc" />
+    <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)razor" />
+    <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)testFuncs" />
   </Target>
 </Project>

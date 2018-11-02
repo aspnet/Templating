@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Testing;
-using Templates.Test.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -40,6 +39,18 @@ namespace Templates.Test
                 Assert.DoesNotContain("Microsoft.VisualStudio.Web.CodeGeneration.Design", projectFileContents);
                 Assert.DoesNotContain("Microsoft.EntityFrameworkCore.Tools.DotNet", projectFileContents);
                 Assert.DoesNotContain("Microsoft.Extensions.SecretManager.Tools", projectFileContents);
+
+                if (targetFrameworkOverride != null)
+                {
+                    if (noHttps)
+                    {
+                        Assert.DoesNotContain("Microsoft.AspNetCore.HttpsPolicy", projectFileContents);
+                    }
+                    else
+                    {
+                        Assert.Contains("Microsoft.AspNetCore.HttpsPolicy", projectFileContents);
+                    }
+                }
 
                 foreach (var publish in new[] { false, true })
                 {

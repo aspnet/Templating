@@ -1,5 +1,0 @@
-{
-  "scripts": {
-    "install": "cd Mvc && npm install && cd ../Razor && npm install"
-  }
-}
