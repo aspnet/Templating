@@ -18,16 +18,13 @@ namespace Templates.Test.Helpers
     {
         private const string DefaultFramework = "netcoreapp3.0";
         private const string ListeningMessagePrefix = "Now listening on: ";
-        private static int Port = 5000 + new Random().Next(3000);
 
         private readonly ProcessEx _process;
         private readonly Uri _listeningUri;
         private readonly HttpClient _httpClient;
-        private readonly ITestOutputHelper _output;
 
         public AspNetProcess(ITestOutputHelper output, string workingDirectory, string projectName, string targetFrameworkOverride, bool publish)
         {
-            _output = output;
             _httpClient = new HttpClient(new HttpClientHandler()
             {
                 AllowAutoRedirect = true,
@@ -61,13 +58,13 @@ namespace Templates.Test.Helpers
             {
                 output.WriteLine("Building ASP.NET application...");
                 ProcessEx
-                    .Run(output, workingDirectory, DotNetMuxer.MuxerPathOrDefault(), "build --no-restore -c Debug")
+                    .Run(output, workingDirectory, DotNetMuxer.MuxerPathOrDefault(), $"build --no-restore -c Debug -f {framework}")
                     .WaitForExit(assertSuccess: true);
             }
 
             var envVars = new Dictionary<string, string>
             {
-                { "ASPNETCORE_URLS", $"http://127.0.0.1:0;https://127.0.0.1:0" }
+                { "ASPNETCORE_URLS", $"http://127.0.0.1:5001;https://127.0.0.1:5002" }
             };
 
             if (!publish)

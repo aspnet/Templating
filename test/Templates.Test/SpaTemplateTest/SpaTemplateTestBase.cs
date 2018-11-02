@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using Templates.Test.Helpers;
 using Templates.Test.Infrastructure;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test.SpaTemplateTest

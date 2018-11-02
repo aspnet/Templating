@@ -9,6 +9,7 @@ using System.Threading;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Logging.Testing;
 using Templates.Test.Helpers;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test
@@ -220,7 +221,7 @@ $@"<Project>
 
         public override void Dispose()
         {
-            DeleteOutputDirectory();
+            //DeleteOutputDirectory();
             base.Dispose();
         }
 

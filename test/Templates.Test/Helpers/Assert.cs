@@ -6,7 +6,7 @@ using Xunit.Sdk;
 
 namespace Templates.Test
 {
-    public class Assert : Xunit.Assert
+    public class AssertNpmTest : Xunit.Assert
     {
         public static void Success(in ProcessResult processResult)
         {
