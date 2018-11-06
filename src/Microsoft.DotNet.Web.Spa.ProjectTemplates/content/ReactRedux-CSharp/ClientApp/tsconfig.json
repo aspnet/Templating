@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es5",
     "allowJs": true,
-    "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -13,9 +12,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "lib": [ "es2015", "dom" ]
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "skipLibCheck": false
   },
   "include": [
-    "src/index.tsx"
+    "src"
   ]
 }
