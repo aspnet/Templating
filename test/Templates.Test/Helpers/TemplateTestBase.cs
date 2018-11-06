@@ -214,14 +214,14 @@ $@"<Project>
             return File.ReadAllText(Path.Combine(TemplateOutputDir, path));
         }
 
-        protected AspNetProcess StartAspNetProcess(string targetFrameworkOverride, bool publish = false)
+        protected AspNetProcess StartAspNetProcess(string targetFrameworkOverride, bool publish, int httpPort, int httpsPort)
         {
-            return new AspNetProcess(Output, TemplateOutputDir, ProjectName, targetFrameworkOverride, publish);
+            return new AspNetProcess(Output, TemplateOutputDir, ProjectName, targetFrameworkOverride, publish, httpPort, httpsPort);
         }
 
         public override void Dispose()
         {
-            //DeleteOutputDirectory();
+            DeleteOutputDirectory();
             base.Dispose();
         }
 

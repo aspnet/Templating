@@ -1,7 +1,7 @@
 import { Page, Browser, launch } from 'puppeteer';
-import { bindConsole, maybeValidateIdentity, validateMessages } from '../../testFuncs/testFuncs';
+import { bindConsole, validateMessages } from '../../testFuncs/testFuncs';
 
-const serverPath = `https://localhost:5003`;
+const serverPath = `https://localhost:5101`;
 
 jest.setTimeout(30000);
 
@@ -21,7 +21,7 @@ afterAll(async () => {
     }
 });
 
-describe('mvc pages are ok', () => {
+describe('razor pages are ok', () => {
     it('index page works', async () => {
         await page.goto(serverPath);
         await page.waitFor('h1');
@@ -32,22 +32,11 @@ describe('mvc pages are ok', () => {
     });
 
     it('privacy page works', async () => {
-        await page.goto(`${serverPath}/Home/Privacy`);
+        await page.goto(`${serverPath}/Privacy`);
         await page.waitFor('h1');
 
         let heading = await page.$eval('h1', heading => heading.textContent);
         expect(heading).toBe('Privacy Policy');
         validateMessages(badMessages);
     });
-
-    it('fails on missing', async () => {
-        let path = `${serverPath}/Falso`;
-
-        const response = await page.goto(path);
-        expect(response.status()).toBe(404);
-    });
-
-    it('identity works', async () => {
-        maybeValidateIdentity(serverPath);
-    });
-})
+});

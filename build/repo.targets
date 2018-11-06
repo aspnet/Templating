@@ -11,6 +11,11 @@
     <Message Text="Restoring NPM modules" Importance="high" />
     <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)mvc" />
     <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)razor" />
+    <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)webapi" />
+    <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)web" />
+    <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)angular" />
+    <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)react" />
+    <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)reactredux" />
     <Exec Command="npm install --no-optional" WorkingDirectory="$(TestFolder)testFuncs" />
   </Target>
 </Project>

@@ -12,6 +12,10 @@ export function bindConsole(page: Page): string[] {
     return messages;
 }
 
+export function maybeValidateIdentity(serverPath: string): void {
+    // TODO: validate identity here in the future
+}
+
 export function validateMessages(messages: string[]): void {
     if (messages.length > 0) {
         fail(messages);

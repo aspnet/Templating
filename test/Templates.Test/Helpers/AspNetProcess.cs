@@ -4,12 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using Microsoft.AspNetCore.Certificates.Generation;
 using Microsoft.Extensions.CommandLineUtils;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test.Helpers
@@ -17,24 +13,19 @@ namespace Templates.Test.Helpers
     public class AspNetProcess : IDisposable
     {
         private const string DefaultFramework = "netcoreapp3.0";
-        private const string ListeningMessagePrefix = "Now listening on: ";
 
         private readonly ProcessEx _process;
-        private readonly Uri _listeningUri;
-        private readonly HttpClient _httpClient;
 
-        public AspNetProcess(ITestOutputHelper output, string workingDirectory, string projectName, string targetFrameworkOverride, bool publish)
+        public AspNetProcess(
+            ITestOutputHelper output,
+            string workingDirectory,
+            string projectName,
+            string targetFrameworkOverride,
+            bool publish,
+            int httpPort,
+            int httpsPort)
         {
-            _httpClient = new HttpClient(new HttpClientHandler()
-            {
-                AllowAutoRedirect = true,
-                UseCookies = true,
-                CookieContainer = new CookieContainer(),
-                ServerCertificateCustomValidationCallback = (m, c, ch, p) => true
-            });
-
             var now = DateTimeOffset.Now;
-            new CertificateManager().EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1));
 
             var framework = string.IsNullOrEmpty(targetFrameworkOverride) ? DefaultFramework : targetFrameworkOverride;
             if (publish)
@@ -43,10 +34,10 @@ namespace Templates.Test.Helpers
 
                 // Workaround for issue with runtime store not yet being published
                 // https://github.com/aspnet/Home/issues/2254#issuecomment-339709628
-                var extraArgs = "-p:PublishWithAspNetCoreTargetManifest=false";
+                //var extraArgs = "-p:PublishWithAspNetCoreTargetManifest=false";
 
                 ProcessEx
-                    .Run(output, workingDirectory, DotNetMuxer.MuxerPathOrDefault(), $"publish -c Release {extraArgs}")
+                    .Run(output, workingDirectory, DotNetMuxer.MuxerPathOrDefault(), $"publish -c Release")
                     .WaitForExit(assertSuccess: true);
                 workingDirectory = Path.Combine(workingDirectory, "bin", "Release", framework, "publish");
                 if (File.Exists(Path.Combine(workingDirectory, "ClientApp", "package.json")))
@@ -64,7 +55,7 @@ namespace Templates.Test.Helpers
 
             var envVars = new Dictionary<string, string>
             {
-                { "ASPNETCORE_URLS", $"http://127.0.0.1:5001;https://127.0.0.1:5002" }
+                { "ASPNETCORE_URLS", $"http://127.0.0.1:{httpPort};https://127.0.0.1:{httpsPort}" }
             };
 
             if (!publish)
@@ -77,7 +68,6 @@ namespace Templates.Test.Helpers
             {
                 var dllPath = publish ? $"{projectName}.dll" : $"bin/Debug/{framework}/{projectName}.dll";
                 _process = ProcessEx.Run(output, workingDirectory, DotNetMuxer.MuxerPathOrDefault(), $"exec {dllPath}", envVars: envVars);
-                _listeningUri = GetListeningUri(output);
             }
             else
             {
@@ -87,7 +77,6 @@ namespace Templates.Test.Helpers
                 using (new AddFirewallExclusion(exeFullPath))
                 {
                     _process = ProcessEx.Run(output, workingDirectory, exeFullPath, envVars: envVars);
-                    _listeningUri = GetListeningUri(output);
                 }
             }
 
@@ -98,27 +87,6 @@ namespace Templates.Test.Helpers
             throw new NotImplementedException("Don't use Selenium!");
         }
 
-        private Uri GetListeningUri(ITestOutputHelper output)
-        {
-            // Wait until the app is accepting HTTP requests
-            output.WriteLine("Waiting until ASP.NET application is accepting connections...");
-            var listeningMessage = _process
-                .OutputLinesAsEnumerable
-                .Where(line => line != null)
-                .FirstOrDefault(line => line.StartsWith(ListeningMessagePrefix, StringComparison.Ordinal));
-            Assert.True(!string.IsNullOrEmpty(listeningMessage), $"ASP.NET process exited without listening for requests.\nOutput: { _process.Output }\nError: { _process.Error }");
-
-            // Verify we have a valid URL to make requests to
-            var listeningUrlString = listeningMessage.Substring(ListeningMessagePrefix.Length);
-            output.WriteLine($"Detected that ASP.NET application is accepting connections on: {listeningUrlString}");
-            listeningUrlString = listeningUrlString.Substring(0, listeningUrlString.IndexOf(':')) +
-                "://localhost" +
-                listeningUrlString.Substring(listeningUrlString.LastIndexOf(':'));
-
-            output.WriteLine("Sending requests to " + listeningUrlString);
-            return new Uri(listeningUrlString, UriKind.Absolute);
-        }
-
         public void AssertOk(string requestUrl)
             => AssertStatusCode(requestUrl, HttpStatusCode.OK);
 
@@ -127,22 +95,11 @@ namespace Templates.Test.Helpers
 
         public void AssertStatusCode(string requestUrl, HttpStatusCode statusCode, string acceptContentType = null)
         {
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                new Uri(_listeningUri, requestUrl));
-
-            if (!string.IsNullOrEmpty(acceptContentType))
-            {
-                request.Headers.Add("Accept", acceptContentType);
-            }
-
-            var response = _httpClient.SendAsync(request).Result;
-            Assert.Equal(statusCode, response.StatusCode);
+            throw new NotImplementedException("Don't use selenium");
         }
 
         public void Dispose()
         {
-            _httpClient.Dispose();
             _process.Dispose();
         }
     }

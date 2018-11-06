@@ -29,7 +29,7 @@ namespace Templates.Test
 
             foreach (var publish in new[] { false, true })
             {
-                using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish))
+                using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish, httpPort: 5200, httpsPort: 5201))
                 {
                     aspNetProcess.AssertOk("/");
                 }

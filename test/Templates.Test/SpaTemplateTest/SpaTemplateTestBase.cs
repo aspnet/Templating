@@ -41,7 +41,7 @@ namespace Templates.Test.SpaTemplateTest
 
         private void TestApplication(string targetFrameworkOverride, bool publish)
         {
-            using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish))
+            using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish, httpPort: 6000, httpsPort: 6001))
             {
                 aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
 
