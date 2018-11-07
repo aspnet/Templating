@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Templates.Test.Helpers;
@@ -21,13 +20,7 @@ namespace Templates.Test.SpaTemplateTest
         // so they can be run in parallel. Xunit doesn't parallelize within a test class.
         protected async Task SpaTemplateImpl(string targetFrameworkOverride, string template, int httpPort, int httpsPort, bool noHttps = false)
         {
-            var stopwatch = new Stopwatch();
-
-            Output.WriteLine($"Dotnet new {template}");
-            stopwatch.Start();
             RunDotNetNew(template, targetFrameworkOverride, noHttps: noHttps);
-            stopwatch.Stop();
-            Output.WriteLine($"Dotnet new {template} took {stopwatch.Elapsed.TotalSeconds}");
 
             // For some SPA templates, the NPM root directory is './ClientApp'. In other
             // templates it's at the project root. Strictly speaking we shouldn't have
@@ -37,19 +30,10 @@ namespace Templates.Test.SpaTemplateTest
             // in parallel.
             var clientAppSubdirPath = Path.Combine(TemplateOutputDir, "ClientApp");
             Assert.True(File.Exists(Path.Combine(clientAppSubdirPath, "package.json")), "Missing a package.json");
-
-            Output.WriteLine($"puppeteer tests start");
-            stopwatch.Restart();
+            
             await RunPuppeteerTests(template, targetFrameworkOverride, httpPort, httpsPort);
-            stopwatch.Stop();
-            Output.WriteLine($"puppeteer tests took {stopwatch.Elapsed.TotalSeconds}");
-
-            stopwatch.Restart();
-            Output.WriteLine($"npm test starts");
-            stopwatch.Start();
+            
             Npm.Test(Output, clientAppSubdirPath);
-            stopwatch.Stop();
-            Output.WriteLine($"npm test took {stopwatch.Elapsed.TotalSeconds}");
         }
     }
 }
