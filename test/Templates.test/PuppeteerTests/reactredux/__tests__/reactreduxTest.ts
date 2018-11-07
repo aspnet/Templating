@@ -54,7 +54,9 @@ describe('reactredux pages are ok', () => {
 
         heading = await page.$eval('h1', heading => heading.textContent);
         expect(heading).toBe('Weather forecast');
-        await page.waitFor(200);
+        await page.waitForSelector("td");
+        await page.waitForFunction('document.querySelector("td").innerText.length > 0');
+
         let trs = await page.$x('//tbody//tr');
 
         expect(trs.length).toBe(5);

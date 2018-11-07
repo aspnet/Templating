@@ -1,11 +1,10 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using Templates.Test.Helpers;
-using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -22,7 +21,13 @@ namespace Templates.Test.SpaTemplateTest
         // so they can be run in parallel. Xunit doesn't parallelize within a test class.
         protected async Task SpaTemplateImpl(string targetFrameworkOverride, string template, int httpPort, int httpsPort, bool noHttps = false)
         {
+            var stopwatch = new Stopwatch();
+
+            Output.WriteLine($"Dotnet new {template}");
+            stopwatch.Start();
             RunDotNetNew(template, targetFrameworkOverride, noHttps: noHttps);
+            stopwatch.Stop();
+            Output.WriteLine($"Dotnet new {template} took {stopwatch.Elapsed.TotalSeconds}");
 
             // For some SPA templates, the NPM root directory is './ClientApp'. In other
             // templates it's at the project root. Strictly speaking we shouldn't have
@@ -33,43 +38,18 @@ namespace Templates.Test.SpaTemplateTest
             var clientAppSubdirPath = Path.Combine(TemplateOutputDir, "ClientApp");
             Assert.True(File.Exists(Path.Combine(clientAppSubdirPath, "package.json")), "Missing a package.json");
 
-            Npm.RestoreWithRetry(Output, clientAppSubdirPath);
-            Npm.Test(Output, clientAppSubdirPath);
-
+            Output.WriteLine($"puppeteer tests start");
+            stopwatch.Restart();
             await RunPuppeteerTests(template, targetFrameworkOverride, httpPort, httpsPort);
+            stopwatch.Stop();
+            Output.WriteLine($"puppeteer tests took {stopwatch.Elapsed.TotalSeconds}");
+
+            stopwatch.Restart();
+            Output.WriteLine($"npm test starts");
+            stopwatch.Start();
+            Npm.Test(Output, clientAppSubdirPath);
+            stopwatch.Stop();
+            Output.WriteLine($"npm test took {stopwatch.Elapsed.TotalSeconds}");
         }
-
-        //private void TestBasicNavigation()
-        //{
-        //    Browser.WaitForElement("ul");
-        //    // <title> element gets project ID injected into it during template execution
-        //    Assert.Contains(ProjectGuid, Browser.Title);
-
-        //    // Initially displays the home page
-        //    Assert.Equal("Hello, world!", Browser.GetText("h1"));
-
-        //    // Can navigate to the counter page
-        //    Browser.Click(By.PartialLinkText("Counter"));
-        //    Browser.WaitForUrl("counter");
-
-        //    Assert.Equal("Counter", Browser.GetText("h1"));
-
-        //    // Clicking the counter button works
-        //    var counterComponent = Browser.FindElement("h1").Parent();
-        //    Assert.Equal("0", counterComponent.GetText("strong"));
-        //    Browser.Click(counterComponent, "button");
-        //    Assert.Equal("1", counterComponent.GetText("strong"));
-
-        //    // Can navigate to the 'fetch data' page
-        //    Browser.Click(By.PartialLinkText("Fetch data"));
-        //    Browser.WaitForUrl("fetch-data");
-        //    Assert.Equal("Weather forecast", Browser.GetText("h1"));
-
-        //    // Asynchronously loads and displays the table of weather forecasts
-        //    var fetchDataComponent = Browser.FindElement("h1").Parent();
-        //    Browser.WaitForElement("table>tbody>tr");
-        //    var table = Browser.FindElement(fetchDataComponent, "table", timeoutSeconds: 5);
-        //    Assert.Equal(5, table.FindElements(By.CssSelector("tbody tr")).Count);
-        //}
     }
 }

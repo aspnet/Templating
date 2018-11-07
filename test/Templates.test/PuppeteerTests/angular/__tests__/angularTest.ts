@@ -1,7 +1,7 @@
 import { Page, Browser, launch } from 'puppeteer';
 import { bindConsole, clickByText, validateMessages } from '../../testFuncs/testFuncs';
 
-const serverPath = `https://localhost:5001`;
+const serverPath = `https://localhost:6011`;
 
 jest.setTimeout(30000);
 
