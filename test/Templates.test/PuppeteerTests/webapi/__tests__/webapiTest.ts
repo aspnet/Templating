@@ -1,7 +1,7 @@
 import { Page, Browser, launch } from 'puppeteer';
 import { bindConsole, validateMessages } from '../../testFuncs/testFuncs';
 
-const serverPath = `https://localhost:5101`;
+const serverPath = `https://localhost:5001`;
 
 jest.setTimeout(30000);
 
@@ -15,28 +15,29 @@ beforeAll(async () => {
     badMessages = bindConsole(page);
 });
 
+afterEach(async () => {
+    validateMessages(badMessages);
+});
+
 afterAll(async () => {
     if (browser) {
         await browser.close();
     }
 });
 
-describe('razor pages are ok', () => {
-    it('index page works', async () => {
-        await page.goto(serverPath);
-        await page.waitFor('h1');
+describe('webapi pages are ok', () => {
+    it('index page fails', async () => {
+        let response = await page.goto(serverPath);
 
-        let heading = await page.$eval('h1', heading => heading.textContent);
-        expect(heading).toBe('Welcome');
-        validateMessages(badMessages);
+        expect(response.status()).toBe(404);
+
+        //This puts a 404 message on the console, we need to remove it.
+        badMessages.pop();
     });
 
-    it('privacy page works', async () => {
-        await page.goto(`${serverPath}/Privacy`);
-        await page.waitFor('h1');
+    it('api/values works', async () => {
+        let response = await page.goto(`${serverPath}/api/values`);
 
-        let heading = await page.$eval('h1', heading => heading.textContent);
-        expect(heading).toBe('Privacy Policy');
-        validateMessages(badMessages);
+        expect(response.status()).toBe(200);
     });
 });

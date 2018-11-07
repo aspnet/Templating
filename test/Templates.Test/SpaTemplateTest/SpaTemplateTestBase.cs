@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using Templates.Test.Helpers;
 using Templates.Test.Infrastructure;
 using Xunit;
@@ -10,7 +11,7 @@ using Xunit.Abstractions;
 
 namespace Templates.Test.SpaTemplateTest
 {
-    public class SpaTemplateTestBase : BrowserTestBase
+    public class SpaTemplateTestBase : PuppeteerTestsBase
     {
         public SpaTemplateTestBase(ITestOutputHelper output) : base(output)
         {
@@ -19,7 +20,7 @@ namespace Templates.Test.SpaTemplateTest
         // Rather than using [Theory] to pass each of the different values for 'template',
         // it's important to distribute the SPA template tests over different test classes
         // so they can be run in parallel. Xunit doesn't parallelize within a test class.
-        protected void SpaTemplateImpl(string targetFrameworkOverride, string template, bool noHttps = false)
+        protected async Task SpaTemplateImpl(string targetFrameworkOverride, string template, int httpPort, int httpsPort, bool noHttps = false)
         {
             RunDotNetNew(template, targetFrameworkOverride, noHttps: noHttps);
 
@@ -35,55 +36,40 @@ namespace Templates.Test.SpaTemplateTest
             Npm.RestoreWithRetry(Output, clientAppSubdirPath);
             Npm.Test(Output, clientAppSubdirPath);
 
-            TestApplication(targetFrameworkOverride, publish: false);
-            TestApplication(targetFrameworkOverride, publish: true);
+            await RunPuppeteerTests(template, targetFrameworkOverride, httpPort, httpsPort);
         }
 
-        private void TestApplication(string targetFrameworkOverride, bool publish)
-        {
-            using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish, httpPort: 6000, httpsPort: 6001))
-            {
-                aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
+        //private void TestBasicNavigation()
+        //{
+        //    Browser.WaitForElement("ul");
+        //    // <title> element gets project ID injected into it during template execution
+        //    Assert.Contains(ProjectGuid, Browser.Title);
 
-                if (WebDriverFactory.HostSupportsBrowserAutomation)
-                {
-                    aspNetProcess.VisitInBrowser(Browser);
-                    TestBasicNavigation();
-                }
-            }
-        }
+        //    // Initially displays the home page
+        //    Assert.Equal("Hello, world!", Browser.GetText("h1"));
 
-        private void TestBasicNavigation()
-        {
-            Browser.WaitForElement("ul");
-            // <title> element gets project ID injected into it during template execution
-            Assert.Contains(ProjectGuid, Browser.Title);
+        //    // Can navigate to the counter page
+        //    Browser.Click(By.PartialLinkText("Counter"));
+        //    Browser.WaitForUrl("counter");
 
-            // Initially displays the home page
-            Assert.Equal("Hello, world!", Browser.GetText("h1"));
+        //    Assert.Equal("Counter", Browser.GetText("h1"));
 
-            // Can navigate to the counter page
-            Browser.Click(By.PartialLinkText("Counter"));
-            Browser.WaitForUrl("counter");
+        //    // Clicking the counter button works
+        //    var counterComponent = Browser.FindElement("h1").Parent();
+        //    Assert.Equal("0", counterComponent.GetText("strong"));
+        //    Browser.Click(counterComponent, "button");
+        //    Assert.Equal("1", counterComponent.GetText("strong"));
 
-            Assert.Equal("Counter", Browser.GetText("h1"));
+        //    // Can navigate to the 'fetch data' page
+        //    Browser.Click(By.PartialLinkText("Fetch data"));
+        //    Browser.WaitForUrl("fetch-data");
+        //    Assert.Equal("Weather forecast", Browser.GetText("h1"));
 
-            // Clicking the counter button works
-            var counterComponent = Browser.FindElement("h1").Parent();
-            Assert.Equal("0", counterComponent.GetText("strong"));
-            Browser.Click(counterComponent, "button");
-            Assert.Equal("1", counterComponent.GetText("strong"));
-
-            // Can navigate to the 'fetch data' page
-            Browser.Click(By.PartialLinkText("Fetch data"));
-            Browser.WaitForUrl("fetch-data");
-            Assert.Equal("Weather forecast", Browser.GetText("h1"));
-
-            // Asynchronously loads and displays the table of weather forecasts
-            var fetchDataComponent = Browser.FindElement("h1").Parent();
-            Browser.WaitForElement("table>tbody>tr");
-            var table = Browser.FindElement(fetchDataComponent, "table", timeoutSeconds: 5);
-            Assert.Equal(5, table.FindElements(By.CssSelector("tbody tr")).Count);
-        }
+        //    // Asynchronously loads and displays the table of weather forecasts
+        //    var fetchDataComponent = Browser.FindElement("h1").Parent();
+        //    Browser.WaitForElement("table>tbody>tr");
+        //    var table = Browser.FindElement(fetchDataComponent, "table", timeoutSeconds: 5);
+        //    Assert.Equal(5, table.FindElements(By.CssSelector("tbody tr")).Count);
+        //}
     }
 }

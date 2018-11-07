@@ -26,17 +26,7 @@ namespace Templates.Test
 
         private async Task WebApiTemplateImpl(string targetFrameworkOverride)
         {
-            await TemplateBase("webapi", targetFrameworkOverride, httpPort: 7000, httpsPort: 7001);
-            //RunDotNetNew("webapi", targetFrameworkOverride);
-
-            //foreach (var publish in new[] { false, true })
-            //{
-            //    using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish, httpPort: 5300, httpsPort: 5301))
-            //    {
-            //        aspNetProcess.AssertOk("/api/values");
-            //        aspNetProcess.AssertNotFound("/");
-            //    }
-            //}
+            await TemplateBase("webapi", targetFrameworkOverride, httpPort: 6050, httpsPort: 6051);
         }
     }
 }

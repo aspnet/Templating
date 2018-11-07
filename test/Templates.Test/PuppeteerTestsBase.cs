@@ -91,23 +91,28 @@ namespace Templates.Test
                     Assert.DoesNotContain("Microsoft.EntityFrameworkCore.Tools", projectFileContents);
                 }
 
-                if (targetFrameworkOverride != null && !noHttps)
+                if (targetFrameworkOverride != null && !noHttps && templateName != "web")
                 {
                     Assert.Contains("Microsoft.AspNetCore.HttpsPolicy", projectFileContents);
                 }
 
-                foreach (var publish in new[] { false, true })
-                {
-                    // Arrange
-                    using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish, httpPort, httpsPort))
-                    {
-                        // Act
-                        var testResult = await RunTest(templateName);
+                await RunPuppeteerTests(templateName, targetFrameworkOverride, httpPort, httpsPort);
+            }
+        }
 
-                        // Assert
-                        AssertNpmTest.Success(testResult);
-                        Assert.Contains("Test Suites: 1 passed, 1 total", testResult.Output);
-                    }
+        protected async Task RunPuppeteerTests(string templateName, string targetFrameworkOverride, int httpPort, int httpsPort)
+        {
+            foreach (var publish in new[] { false, true })
+            {
+                // Arrange
+                using (var aspNetProcess = StartAspNetProcess(targetFrameworkOverride, publish, httpPort, httpsPort))
+                {
+                    // Act
+                    var testResult = await RunTest(templateName);
+
+                    // Assert
+                    AssertNpmTest.Success(testResult);
+                    Assert.Contains("Test Suites: 1 passed, 1 total", testResult.Output);
                 }
             }
         }

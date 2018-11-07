@@ -1,7 +1,7 @@
 import { Page, Browser, launch } from 'puppeteer';
 import { bindConsole, validateMessages } from '../../testFuncs/testFuncs';
 
-const serverPath = `https://localhost:5101`;
+const serverPath = `https://localhost:6041`;
 
 jest.setTimeout(30000);
 
@@ -21,22 +21,11 @@ afterAll(async () => {
     }
 });
 
-describe('razor pages are ok', () => {
+describe('web pages are ok', () => {
     it('index page works', async () => {
-        await page.goto(serverPath);
-        await page.waitFor('h1');
+        let response = await page.goto(serverPath);
 
-        let heading = await page.$eval('h1', heading => heading.textContent);
-        expect(heading).toBe('Welcome');
-        validateMessages(badMessages);
-    });
-
-    it('privacy page works', async () => {
-        await page.goto(`${serverPath}/Privacy`);
-        await page.waitFor('h1');
-
-        let heading = await page.$eval('h1', heading => heading.textContent);
-        expect(heading).toBe('Privacy Policy');
+        expect(response.status()).toBe(200);
         validateMessages(badMessages);
     });
 });
