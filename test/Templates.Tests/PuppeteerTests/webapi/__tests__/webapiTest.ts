@@ -19,6 +19,7 @@ afterEach(async () => {
     validateMessages(badMessages);
 });
 
+
 afterAll(async () => {
     if (browser) {
         await browser.close();
