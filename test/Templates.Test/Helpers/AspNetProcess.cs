@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using Microsoft.Extensions.CommandLineUtils;
 using Xunit.Abstractions;
 
@@ -31,10 +30,6 @@ namespace Templates.Test.Helpers
             if (publish)
             {
                 output.WriteLine("Publishing ASP.NET application...");
-
-                // Workaround for issue with runtime store not yet being published
-                // https://github.com/aspnet/Home/issues/2254#issuecomment-339709628
-                //var extraArgs = "-p:PublishWithAspNetCoreTargetManifest=false";
 
                 ProcessEx
                     .Run(output, workingDirectory, DotNetMuxer.MuxerPathOrDefault(), $"publish -c Release")
@@ -80,22 +75,6 @@ namespace Templates.Test.Helpers
                 }
             }
 
-        }
-
-        public void VisitInBrowser(object driver = null)
-        {
-            throw new NotImplementedException("Don't use Selenium!");
-        }
-
-        public void AssertOk(string requestUrl)
-            => AssertStatusCode(requestUrl, HttpStatusCode.OK);
-
-        public void AssertNotFound(string requestUrl)
-            => AssertStatusCode(requestUrl, HttpStatusCode.NotFound);
-
-        public void AssertStatusCode(string requestUrl, HttpStatusCode statusCode, string acceptContentType = null)
-        {
-            throw new NotImplementedException("Don't use selenium");
         }
 
         public void Dispose()
