@@ -13,10 +13,11 @@
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <RootNamespace Condition="'$(name)' != '$(name{-VALUE-FORMS-}safe_namespace)'">Company.WebApplication1</RootNamespace>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkOverride)' == ''">
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <FrameworkReference Include="Microsoft.AspNetCore" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkOverride)' != ''">
     <PackageReference Include="Microsoft.AspNetCore" Version="${MicrosoftAspNetCorePackageVersion}" />

@@ -10,6 +10,7 @@
     <NoDefaultLaunchSettingsFile Condition="'$(ExcludeLaunchSettings)' == 'True'">True</NoDefaultLaunchSettingsFile>
     <AspNetCoreHostingModel Condition="'$(TargetFrameworkOverride)' == ''">InProcess</AspNetCoreHostingModel>
     <RootNamespace Condition="'$(name)' != '$(name{-VALUE-FORMS-}safe_namespace)'">Company.WebApplication1</RootNamespace>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
   </PropertyGroup>
 
   <!--#if (IndividualLocalAuth && !UseLocalDB) -->
@@ -20,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkOverride)' == ''">
-    <PackageReference Include="Microsoft.AspNetCore.App"/>
+    <FrameworkReference Include="Microsoft.AspNetCore" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="${MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion}" Condition="'$(OrganizationalAuth)' == 'True'" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" Version="${MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion}" Condition="'$(IndividualB2CAuth)' == 'True'" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="${MicrosoftEntityFrameworkCoreSqlitePackageVersion}" Condition=" '$(IndividualLocalAuth)' == 'True' AND '$(UseLocalDB)' != 'True'" />
