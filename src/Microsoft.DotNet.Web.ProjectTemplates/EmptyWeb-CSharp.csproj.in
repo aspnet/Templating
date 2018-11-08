@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkOverride)' == ''">
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <FrameworkReference Include="Microsoft.AspNetCore" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkOverride)' != ''">
     <PackageReference Include="Microsoft.AspNetCore" Version="${MicrosoftAspNetCorePackageVersion}" />

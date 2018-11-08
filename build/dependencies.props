@@ -5,36 +5,36 @@
   <PropertyGroup Label="Package Versions">
     <AngleSharpPackageVersion>0.9.9</AngleSharpPackageVersion>
     <DotNetEfPackageVersion>3.0.0-alpha1-10620</DotNetEfPackageVersion>
-    <InternalAspNetCoreSdkPackageVersion>3.0.0-alpha1-20181017.4</InternalAspNetCoreSdkPackageVersion>
-    <MicrosoftAspNetCoreAppPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreAppPackageVersion>
-    <MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>
-    <MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>
-    <MicrosoftAspNetCoreAuthenticationCookiesPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreAuthenticationCookiesPackageVersion>
-    <MicrosoftAspNetCoreAuthenticationJwtBearerPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreAuthenticationJwtBearerPackageVersion>
-    <MicrosoftAspNetCoreAuthenticationOpenIdConnectPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreAuthenticationOpenIdConnectPackageVersion>
-    <MicrosoftAspNetCoreCertificatesGenerationSourcesPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreCertificatesGenerationSourcesPackageVersion>
-    <MicrosoftAspNetCoreCookiePolicyPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreCookiePolicyPackageVersion>
-    <MicrosoftAspNetCoreDiagnosticsEntityFrameworkCorePackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreDiagnosticsEntityFrameworkCorePackageVersion>
-    <MicrosoftAspNetCoreHttpsPolicyPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreHttpsPolicyPackageVersion>
-    <MicrosoftAspNetCoreIdentityEntityFrameworkCorePackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreIdentityEntityFrameworkCorePackageVersion>
-    <MicrosoftAspNetCoreIdentityUIPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreIdentityUIPackageVersion>
-    <MicrosoftAspNetCoreMvcPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreMvcPackageVersion>
-    <MicrosoftAspNetCorePackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCorePackageVersion>
-    <MicrosoftAspNetCoreServerIntegrationTestingPackageVersion>0.7.0-alpha1-10617</MicrosoftAspNetCoreServerIntegrationTestingPackageVersion>
-    <MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>
-    <MicrosoftAspNetCoreSpaServicesPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreSpaServicesPackageVersion>
-    <MicrosoftAspNetCoreStaticFilesPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreStaticFilesPackageVersion>
-    <MicrosoftAspNetCoreTestingPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreTestingPackageVersion>
-    <MicrosoftBuildFrameworkPackageVersion>15.6.82</MicrosoftBuildFrameworkPackageVersion>
-    <MicrosoftBuildUtilitiesCorePackageVersion>15.6.82</MicrosoftBuildUtilitiesCorePackageVersion>
-    <MicrosoftEntityFrameworkCoreSqlitePackageVersion>3.0.0-alpha1-10620</MicrosoftEntityFrameworkCoreSqlitePackageVersion>
-    <MicrosoftEntityFrameworkCoreSqlServerPackageVersion>3.0.0-alpha1-10620</MicrosoftEntityFrameworkCoreSqlServerPackageVersion>
-    <MicrosoftEntityFrameworkCoreToolsPackageVersion>3.0.0-alpha1-10620</MicrosoftEntityFrameworkCoreToolsPackageVersion>
-    <MicrosoftExtensionsCommandLineUtilsSourcesPackageVersion>3.0.0-alpha1-10620</MicrosoftExtensionsCommandLineUtilsSourcesPackageVersion>
-    <MicrosoftExtensionsLoggingTestingPackageVersion>3.0.0-alpha1-10617</MicrosoftExtensionsLoggingTestingPackageVersion>
-    <MicrosoftExtensionsProcessSourcesPackageVersion>3.0.0-alpha1-10620</MicrosoftExtensionsProcessSourcesPackageVersion>
+    <InternalAspNetCoreSdkPackageVersion>3.0.0-alpha1-20181108.5</InternalAspNetCoreSdkPackageVersion>
+    <MicrosoftAspNetCoreAppPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreAppPackageVersion>
+    <MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>
+    <MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>
+    <MicrosoftAspNetCoreAuthenticationCookiesPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreAuthenticationCookiesPackageVersion>
+    <MicrosoftAspNetCoreAuthenticationJwtBearerPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreAuthenticationJwtBearerPackageVersion>
+    <MicrosoftAspNetCoreAuthenticationOpenIdConnectPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreAuthenticationOpenIdConnectPackageVersion>
+    <MicrosoftAspNetCoreCertificatesGenerationSourcesPackageVersion>3.0.0-preview-181106-14</MicrosoftAspNetCoreCertificatesGenerationSourcesPackageVersion>
+    <MicrosoftAspNetCoreCookiePolicyPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreCookiePolicyPackageVersion>
+    <MicrosoftAspNetCoreDiagnosticsEntityFrameworkCorePackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreDiagnosticsEntityFrameworkCorePackageVersion>
+    <MicrosoftAspNetCoreHttpsPolicyPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreHttpsPolicyPackageVersion>
+    <MicrosoftAspNetCoreIdentityEntityFrameworkCorePackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreIdentityEntityFrameworkCorePackageVersion>
+    <MicrosoftAspNetCoreIdentityUIPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreIdentityUIPackageVersion>
+    <MicrosoftAspNetCoreMvcPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreMvcPackageVersion>
+    <MicrosoftAspNetCorePackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCorePackageVersion>
+    <MicrosoftAspNetCoreServerIntegrationTestingPackageVersion>0.7.0-alpha1-10716</MicrosoftAspNetCoreServerIntegrationTestingPackageVersion>
+    <MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>
+    <MicrosoftAspNetCoreSpaServicesPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreSpaServicesPackageVersion>
+    <MicrosoftAspNetCoreStaticFilesPackageVersion>3.0.0-alpha1-10716</MicrosoftAspNetCoreStaticFilesPackageVersion>
+    <MicrosoftAspNetCoreTestingPackageVersion>3.0.0-preview-181106-14</MicrosoftAspNetCoreTestingPackageVersion>
+    <MicrosoftBuildFrameworkPackageVersion>15.8.166</MicrosoftBuildFrameworkPackageVersion>
+    <MicrosoftBuildUtilitiesCorePackageVersion>15.8.166</MicrosoftBuildUtilitiesCorePackageVersion>
+    <MicrosoftEntityFrameworkCoreSqlitePackageVersion>3.0.0-alpha1-10706</MicrosoftEntityFrameworkCoreSqlitePackageVersion>
+    <MicrosoftEntityFrameworkCoreSqlServerPackageVersion>3.0.0-alpha1-10706</MicrosoftEntityFrameworkCoreSqlServerPackageVersion>
+    <MicrosoftEntityFrameworkCoreToolsPackageVersion>3.0.0-alpha1-10706</MicrosoftEntityFrameworkCoreToolsPackageVersion>
+    <MicrosoftExtensionsCommandLineUtilsSourcesPackageVersion>3.0.0-preview-181106-14</MicrosoftExtensionsCommandLineUtilsSourcesPackageVersion>
+    <MicrosoftExtensionsLoggingTestingPackageVersion>3.0.0-preview-181106-14</MicrosoftExtensionsLoggingTestingPackageVersion>
+    <MicrosoftExtensionsProcessSourcesPackageVersion>3.0.0-preview-181106-14</MicrosoftExtensionsProcessSourcesPackageVersion>
     <MicrosoftNETCoreApp30PackageVersion>3.0.0-preview1-26907-05</MicrosoftNETCoreApp30PackageVersion>
-    <MicrosoftNETSdkRazorPackageVersion>3.0.0-alpha1-10706</MicrosoftNETSdkRazorPackageVersion>
+    <MicrosoftNETSdkRazorPackageVersion>3.0.0-alpha1-10716</MicrosoftNETSdkRazorPackageVersion>
     <MicrosoftNETTestSdkPackageVersion>15.6.1</MicrosoftNETTestSdkPackageVersion>
     <NETStandardLibrary20PackageVersion>2.0.3</NETStandardLibrary20PackageVersion>
     <SeleniumSupportPackageVersion>3.12.1</SeleniumSupportPackageVersion>
