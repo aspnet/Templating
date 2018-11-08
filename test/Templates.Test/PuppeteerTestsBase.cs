@@ -24,7 +24,6 @@ namespace Templates.Test
 
         protected async Task<ProcessResult> RunTest(string test)
         {
-            var testDir = Path.Join(PuppeteerDir, test);
             ProcessStartInfo processStartInfo;
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -32,8 +31,8 @@ namespace Templates.Test
                 processStartInfo = new ProcessStartInfo
                 {
                     FileName = "cmd",
-                    WorkingDirectory = testDir,
-                    Arguments = $"/c npm test"
+                    WorkingDirectory = PuppeteerDir,
+                    Arguments = $"/c npm run test-{test}"
                 };
             }
             else
@@ -41,8 +40,8 @@ namespace Templates.Test
                 processStartInfo = new ProcessStartInfo
                 {
                     FileName = "npm",
-                    WorkingDirectory = testDir,
-                    Arguments = $"test"
+                    WorkingDirectory = PuppeteerDir,
+                    Arguments = $"run test-{test}"
                 };
             }
 

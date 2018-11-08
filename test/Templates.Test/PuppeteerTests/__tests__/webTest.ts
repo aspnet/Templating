@@ -1,5 +1,5 @@
 import { Page, Browser, launch } from 'puppeteer';
-import { bindConsole, validateMessages } from '../../testFuncs/testFuncs';
+import { bindConsole, validateMessages } from '../testFuncs';
 
 const serverPath = `https://localhost:6041`;
 

@@ -1,7 +1,7 @@
 import { Page, Browser, launch } from 'puppeteer';
-import { bindConsole, clickByText, validateMessages } from '../../testFuncs/testFuncs';
+import { bindConsole, clickByText, validateMessages } from '../testFuncs';
 
-const serverPath = `https://localhost:6031`;
+const serverPath = `https://localhost:6021`;
 
 jest.setTimeout(30000);
 
@@ -26,7 +26,7 @@ afterAll(async () => {
     }
 });
 
-describe('reactredux pages are ok', () => {
+describe('react pages are ok', () => {
     it('all pages work', async () => {
         await page.goto(serverPath);
         await page.waitFor('ul');
@@ -54,9 +54,7 @@ describe('reactredux pages are ok', () => {
 
         heading = await page.$eval('h1', heading => heading.textContent);
         expect(heading).toBe('Weather forecast');
-        await page.waitForSelector("td");
-        await page.waitForFunction('document.querySelector("td").innerText.length > 0');
-
+        await page.waitFor(200);
         let trs = await page.$x('//tbody//tr');
 
         expect(trs.length).toBe(5);
