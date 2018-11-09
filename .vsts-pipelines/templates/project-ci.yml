@@ -6,18 +6,18 @@ phases:
     agentOs: Windows
     beforeBuild:
     - task: NodeTool@0
-      displayName: Use Node 11.x
+      displayName: Use Node 10.x
       inputs:
-        versionSpec: 11.x
+        versionSpec: 10.x
 
 - template: .azure/templates/jobs/default-build.yml@buildtools
   parameters:
     agentOs: macOS
     beforeBuild:
     - task: NodeTool@0
-      displayName: Use Node 11.x
+      displayName: Use Node 10.x
       inputs:
-        versionSpec: 11.x
+        versionSpec: 10.x
     - script: ./run.sh install-tools; $(Agent.WorkFolder)/.dotnet/dotnet dev-certs https
       displayName: install certs
       env:
@@ -29,8 +29,8 @@ phases:
     agentOs: Linux
     beforeBuild:
     - task: NodeTool@0
-      displayName: Use Node 11.x
+      displayName: Use Node 10.x
       inputs:
-        versionSpec: 11.x
+        versionSpec: 10.x
     - script: ./run.sh install-tools; $(Agent.WorkFolder)/.dotnet/dotnet dev-certs https
       displayName: install certs
