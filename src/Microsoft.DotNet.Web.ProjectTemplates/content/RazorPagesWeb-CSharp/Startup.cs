@@ -156,13 +156,18 @@ namespace Company.WebApplication1
 
 #endif
             app.UseStaticFiles();
+
+            app.UseEndpointRouting(routes =>
+            {
+                routes.MapApplication();
+            });
+
             app.UseCookiePolicy();
 
 #if (OrganizationalAuth || IndividualAuth)
             app.UseAuthentication();
-
 #endif
-            app.UseMvc();
+            app.UseAuthorization();
         }
     }
 }

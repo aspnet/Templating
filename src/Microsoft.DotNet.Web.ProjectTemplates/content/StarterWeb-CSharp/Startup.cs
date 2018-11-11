@@ -155,18 +155,21 @@ namespace Company.WebApplication1
 
 #endif
             app.UseStaticFiles();
+
+            app.UseEndpointRouting(routes =>
+            {
+                routes.MapApplication();
+                routes.MapControllerRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
             app.UseCookiePolicy();
 
 #if (OrganizationalAuth || IndividualAuth)
             app.UseAuthentication();
-
 #endif
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseAuthorization();
         }
     }
 }

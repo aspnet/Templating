@@ -61,13 +61,17 @@ namespace Company.WebApplication1
             }
 
             app.UseHttpsRedirection();
-#else
-
 #endif
+
+            app.UseEndpointRouting(routes =>
+            {
+                routes.MapApplication();
+            });
+
 #if (OrganizationalAuth || IndividualAuth)
             app.UseAuthentication();
 #endif
-            app.UseMvc();
+            app.UseAuthorization();
         }
     }
 }
