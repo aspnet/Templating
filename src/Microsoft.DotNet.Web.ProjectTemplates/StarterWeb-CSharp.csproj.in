@@ -10,6 +10,7 @@
     <NoDefaultLaunchSettingsFile Condition="'$(ExcludeLaunchSettings)' == 'True'">True</NoDefaultLaunchSettingsFile>
     <AspNetCoreHostingModel Condition="'$(TargetFrameworkOverride)' == ''">InProcess</AspNetCoreHostingModel>
     <RootNamespace Condition="'$(name)' != '$(name{-VALUE-FORMS-}safe_namespace)'">Company.WebApplication1</RootNamespace>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
   </PropertyGroup>
 
   <!--#if (IndividualLocalAuth && !UseLocalDB) -->
