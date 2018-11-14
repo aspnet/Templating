@@ -796,9 +796,9 @@
       ],
       "AuthOption": "MultiOrg"
     },
-    "FSharp":  {
+    "FSharp": {
       "Template": "mvc",
-      "Arguments": "new mvc --lang F#",
+      "Arguments": "new mvc -lang F#",
       "Files": [
         "appsettings.Development.json",
         "appsettings.json",
@@ -889,7 +889,6 @@
         "ClientApp/src/app/app.module.ts",
         "ClientApp/src/app/app.server.module.ts",
         "ClientApp/src/assets/.gitkeep",
-        "ClientApp/src/environements/environment.prod.ts",
         "ClientApp/src/environements/environment.ts",
         "ClientApp/src/browserlist",
         "ClientApp/src/index.html",
@@ -992,7 +991,6 @@
         "Pages/Error.cshtml.cs",
         "Properties/launchSettings.json",
         ".gitignore",
-        "app.config",
         "appsettings.Development.json",
         "appsettings.json",
         "Program.cs",
