@@ -15,11 +15,11 @@
     "os": "^0.1.1"
   },
   "scripts": {
-    "test-angular": "jest __test__/angularTest.ts",
-    "test-mvc": "jest __test__/mvcTest.ts",
-    "test-razor": "jest __test__/razorTest.ts",
-    "test-react": "jest __test__/reactTest.ts",
-    "test-reactredux": "jest __test__/reactreduxTest.ts",
+    "test-angular": "jest __tests__/angularTest.ts",
+    "test-mvc": "jest __tests__/mvcTest.ts",
+    "test-razor": "jest __tests__/razorTest.ts",
+    "test-react": "jest __tests__/reactTest.ts",
+    "test-reactredux": "jest __tests__/reactreduxTest.ts",
     "test-webapi": "jest __tests__/webapiTest.ts",
     "test-web": "jest __tests__/webTest.ts"
   },
