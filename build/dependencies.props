@@ -24,7 +24,7 @@
     <MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion>
     <MicrosoftAspNetCoreSpaServicesPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreSpaServicesPackageVersion>
     <MicrosoftAspNetCoreStaticFilesPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreStaticFilesPackageVersion>
-    <MicrosoftAspNetCoreTestingPackageVersion>3.0.0-alpha1-10620</MicrosoftAspNetCoreTestingPackageVersion>
+    <MicrosoftAspNetCoreTestingPackageVersion>3.0.0-preview-181106-14</MicrosoftAspNetCoreTestingPackageVersion>
     <MicrosoftBuildFrameworkPackageVersion>15.6.82</MicrosoftBuildFrameworkPackageVersion>
     <MicrosoftBuildUtilitiesCorePackageVersion>15.6.82</MicrosoftBuildUtilitiesCorePackageVersion>
     <MicrosoftEntityFrameworkCoreSqlitePackageVersion>3.0.0-alpha1-10620</MicrosoftEntityFrameworkCoreSqlitePackageVersion>
