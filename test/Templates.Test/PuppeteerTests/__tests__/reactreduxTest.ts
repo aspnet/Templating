@@ -28,7 +28,10 @@ afterAll(async () => {
 
 describe('reactredux pages are ok', () => {
     it('all pages work', async () => {
-        await page.goto(serverPath);
+        await page.goto(serverPath, {
+            waitUntil: "networkidle0",
+            timeout: 120000
+        });
         await page.waitFor('ul');
 
         let heading = await page.$eval('h1', heading => heading.textContent);
