@@ -3,7 +3,7 @@ import { bindConsole, clickByText, validateMessages } from '../testFuncs';
 
 const serverPath = `https://localhost:6011`;
 
-jest.setTimeout(30000);
+jest.setTimeout(120000);
 
 let browser: Browser = null;
 let page: Page = null;
