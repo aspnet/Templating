@@ -4,7 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.Extensions.CommandLineUtils;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test.Helpers
@@ -12,6 +14,7 @@ namespace Templates.Test.Helpers
     public class AspNetProcess : IDisposable
     {
         private const string DefaultFramework = "netcoreapp3.0";
+        private const string ListeningMessagePrefix = "Now listening on: ";
 
         private readonly ProcessEx _process;
 
@@ -74,7 +77,28 @@ namespace Templates.Test.Helpers
                     _process = ProcessEx.Run(output, workingDirectory, exeFullPath, envVars: envVars);
                 }
             }
+            GetListeningUri(output);
+        }
 
+        private Uri GetListeningUri(ITestOutputHelper output)
+        {
+            // Wait until the app is accepting HTTP requests
+            output.WriteLine("Waiting until ASP.NET application is accepting connections...");
+            var listeningMessage = _process
+                .OutputLinesAsEnumerable
+                .Where(line => line != null)
+                .FirstOrDefault(line => line.StartsWith(ListeningMessagePrefix, StringComparison.Ordinal));
+            Assert.True(!string.IsNullOrEmpty(listeningMessage), $"ASP.NET process exited without listening for requests.\nOutput: { _process.Output }\nError: { _process.Error }");
+
+            // Verify we have a valid URL to make requests to
+            var listeningUrlString = listeningMessage.Substring(ListeningMessagePrefix.Length);
+            output.WriteLine($"Detected that ASP.NET application is accepting connections on: {listeningUrlString}");
+            listeningUrlString = listeningUrlString.Substring(0, listeningUrlString.IndexOf(':')) +
+                "://localhost" +
+                listeningUrlString.Substring(listeningUrlString.LastIndexOf(':'));
+
+            output.WriteLine("Sending requests to " + listeningUrlString);
+            return new Uri(listeningUrlString, UriKind.Absolute);
         }
 
         public void Dispose()
