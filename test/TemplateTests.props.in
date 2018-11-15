@@ -9,4 +9,11 @@
     <!-- aspnet/BuildTools#662 Don't police what version of NetCoreApp we use -->
     <NETCoreAppMaximumVersion>99.9</NETCoreAppMaximumVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <KnownFrameworkReference Update="Microsoft.AspNetCore.App"
+      DefaultRuntimeFrameworkVersion="${BundledAspNetCoreAppPackageVersion}"
+      LatestRuntimeFrameworkVersion="${BundledAspNetCoreAppPackageVersion}"
+      TargetingPackVersion="${BundledAspNetCoreAppPackageVersion}" />
+  </ItemGroup>
 </Project>

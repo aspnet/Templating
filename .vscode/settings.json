@@ -1,7 +1,8 @@
 {
   "files.associations": {
     "*.json.in": "json",
-    "*.*proj.in": "xml"
+    "*.*proj.in": "xml",
+    "*.props.in": "xml"
   },
   "[json]": {
     "editor.tabSize": 2
