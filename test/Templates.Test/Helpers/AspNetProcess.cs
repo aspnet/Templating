@@ -77,24 +77,15 @@ namespace Templates.Test.Helpers
             }
 
             output.WriteLine("Running ASP.NET application...");
-            if (framework.StartsWith("netcore"))
+
+            var exeFullPath = publish
+                ? Path.Combine(workingDirectory, $"{projectName}.exe")
+                : Path.Combine(workingDirectory, "bin", "Debug", framework, $"{projectName}.exe");
+            using (new AddFirewallExclusion(exeFullPath))
             {
-                var exePath = publish ? $"./{projectName}.exe" : $"./bin/Debug/{framework}/{projectName}.exe";
-                _process = ProcessEx.Run(output, workingDirectory, exePath, envVars: envVars);
+                _process = ProcessEx.Run(output, workingDirectory, exeFullPath, envVars: envVars);
                 _listeningUri = GetListeningUri(output);
             }
-            else
-            {
-                var exeFullPath = publish
-                    ? Path.Combine(workingDirectory, $"{projectName}.exe")
-                    : Path.Combine(workingDirectory, "bin", "Debug", framework, $"{projectName}.exe");
-                using (new AddFirewallExclusion(exeFullPath))
-                {
-                    _process = ProcessEx.Run(output, workingDirectory, exeFullPath, envVars: envVars);
-                    _listeningUri = GetListeningUri(output);
-                }
-            }
-
         }
 
         public void VisitInBrowser(IWebDriver driver)
