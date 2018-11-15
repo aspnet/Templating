@@ -917,7 +917,6 @@
         "Properties/launchSettings.json",
         "wwwroot/favicon.ico",
         ".gitignore",
-        "app.config",
         "appsettings.Development.json",
         "appsettings.json",
         "Program.cs",
