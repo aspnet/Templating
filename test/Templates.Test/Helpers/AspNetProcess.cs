@@ -79,7 +79,7 @@ namespace Templates.Test.Helpers
             output.WriteLine("Running ASP.NET application...");
             if (framework.StartsWith("netcore"))
             {
-                var exePath = publish ? $"{projectName}.exe" : $"bin/Debug/{framework}/{projectName}.exe";
+                var exePath = publish ? $"./{projectName}.exe" : $"./bin/Debug/{framework}/{projectName}.exe";
                 _process = ProcessEx.Run(output, workingDirectory, exePath, envVars: envVars);
                 _listeningUri = GetListeningUri(output);
             }
