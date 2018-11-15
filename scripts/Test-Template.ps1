@@ -27,7 +27,7 @@ function Test-Template($templateName, $templateArgs, $templateNupkg, $isSPA) {
         $projContent | Set-Content $proj
 
         dotnet publish --configuration Release
-        dotnet bin\Release\netcoreapp3.0\publish\$templateName.dll
+        & bin\Release\netcoreapp3.0\publish\$templateName.exe
     }
     finally {
         Pop-Location

@@ -20,7 +20,6 @@ namespace Templates.Test.Helpers
     {
         private const string DefaultFramework = "netcoreapp3.0";
         private const string ListeningMessagePrefix = "Now listening on: ";
-        private static int Port = 5000 + new Random().Next(3000);
 
         private readonly ProcessEx _process;
         private readonly Uri _listeningUri;
@@ -80,8 +79,8 @@ namespace Templates.Test.Helpers
             output.WriteLine("Running ASP.NET application...");
             if (framework.StartsWith("netcore"))
             {
-                var dllPath = publish ? $"{projectName}.dll" : $"bin/Debug/{framework}/{projectName}.dll";
-                _process = ProcessEx.Run(output, workingDirectory, DotNetMuxer.MuxerPathOrDefault(), $"exec {dllPath}", envVars: envVars);
+                var exePath = publish ? $"{projectName}.exe" : $"bin/Debug/{framework}/{projectName}.exe";
+                _process = ProcessEx.Run(output, workingDirectory, exePath, envVars: envVars);
                 _listeningUri = GetListeningUri(output);
             }
             else
