@@ -4,18 +4,4 @@
         This file intentionally left mostly blank to ensure the template projects
         are independent from the template package build config.
     -->
-
-    <ItemGroup>
-        <KnownFrameworkReference Update="Microsoft.AspNetCore.App"
-                              DefaultRuntimeFrameworkVersion="3.0.0-alpha1-t010"
-                              LatestRuntimeFrameworkVersion="3.0.0-alpha1-t010"
-                              TargetingPackVersion="3.0.0-alpha1-t010"
-                              />
-    </ItemGroup>
-
-    <PropertyGroup>
-        <DefaultItemExcludes Condition=" '$(IndividualLocalAuth)' != 'True' ">$(DefaultItemExcludes);Data\**\*</DefaultItemExcludes>
-        <DefaultItemExcludes Condition=" '$(IndividualLocalAuth)' == 'True' AND '$(UseLocalDB)' == 'True'">$(DefaultItemExcludes);Data\SqlLite\**\*</DefaultItemExcludes>
-        <DefaultItemExcludes Condition=" '$(IndividualLocalAuth)' == 'True' AND '$(UseLocalDB)' != 'True'">$(DefaultItemExcludes);Data\SqlServer\**\*</DefaultItemExcludes>
-    </PropertyGroup>
 </Project>
