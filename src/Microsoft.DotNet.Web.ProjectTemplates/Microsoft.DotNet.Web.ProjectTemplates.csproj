@@ -30,6 +30,7 @@
       MicrosoftAspNetCoreDiagnosticsEntityFrameworkCorePackageVersion=$(MicrosoftAspNetCoreDiagnosticsEntityFrameworkCorePackageVersion);
       MicrosoftAspNetCoreHttpsPolicyPackageVersion=$(MicrosoftAspNetCoreHttpsPolicyPackageVersion);
       MicrosoftAspNetCoreIdentityEntityFrameworkCorePackageVersion=$(MicrosoftAspNetCoreIdentityEntityFrameworkCorePackageVersion);
+      MicrosoftAspNetCoreIdentityUIPackageVersion=$(MicrosoftAspNetCoreIdentityUIPackageVersion);
       MicrosoftAspNetCoreMvcPackageVersion=$(MicrosoftAspNetCoreMvcPackageVersion);
       MicrosoftAspNetCoreMvcRazorViewCompilationPackageVersion=$(MicrosoftAspNetCoreMvcRazorViewCompilationPackageVersion);
       MicrosoftAspNetCorePackageVersion=$(MicrosoftAspNetCorePackageVersion);
