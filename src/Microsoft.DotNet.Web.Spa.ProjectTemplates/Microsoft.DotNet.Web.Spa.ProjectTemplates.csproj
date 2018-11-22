@@ -20,15 +20,9 @@
   <!-- Set this last to ensure the properties get the final versions which may be overridden by CI. -->
   <PropertyGroup>
     <GeneratedContentProperties>
-      MicrosoftAspNetCoreAppPackageVersion=$(MicrosoftAspNetCoreAppPackageVersion);
       MicrosoftAspNetCorePackageVersion=$(MicrosoftAspNetCorePackageVersion);
       MicrosoftAspNetCoreAppPackageVersion=$(MicrosoftAspNetCoreAppPackageVersion);
-      MicrosoftAspNetCoreHttpsPolicyPackageVersion=$(MicrosoftAspNetCoreHttpsPolicyPackageVersion);
-      MicrosoftAspNetCoreMvcPackageVersion=$(MicrosoftAspNetCoreMvcPackageVersion);
-      MicrosoftAspNetCoreRazorDesignPackageVersion=$(MicrosoftAspNetCoreRazorDesignPackageVersion);
-      MicrosoftAspNetCoreSpaServicesPackageVersion=$(MicrosoftAspNetCoreSpaServicesPackageVersion);
       MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion=$(MicrosoftAspNetCoreSpaServicesExtensionsPackageVersion);
-      MicrosoftAspNetCoreStaticFilesPackageVersion=$(MicrosoftAspNetCoreStaticFilesPackageVersion);
       MicrosoftNETCoreApp22PackageVersion=$(MicrosoftNETCoreApp22PackageVersion);
     </GeneratedContentProperties>
   </PropertyGroup>
