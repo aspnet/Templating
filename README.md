@@ -1,9 +1,11 @@
-# Templates
+# Templates [Archived]
+
+**This GitHub project has been archived.** Ongoing development on this project can be found in <https://github.com/aspnet/AspNetCore>.
 
 ## Getting Started
 ASP.NET Templates provide project templates which are used in .NET Core for creating ASP.NET Core applications.
 
-This project is part of ASP.NET Core. You can find samples, documentation and getting started instructions for ASP.NET Core at the [Home](https://github.com/aspnet/home) repo.
+This project is part of ASP.NET Core. You can find samples, documentation and getting started instructions for ASP.NET Core at the [AspNetCore](https://github.com/aspnet/AspNetCore) repo.
 
 ## Building Templates
 - Running build.cmd in this repo requires NPM which can be installed from https://nodejs.org/en/.
