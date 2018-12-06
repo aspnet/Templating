@@ -36,7 +36,7 @@ type Startup private () =
 #else
 
 #endif
-        app.UseEndpointRouting(fun routes ->
+        app.UseRouting(fun routes ->
             routes.MapApplication() |> ignore
             ) |> ignore
 

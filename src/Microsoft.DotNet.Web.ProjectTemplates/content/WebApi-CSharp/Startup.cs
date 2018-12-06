@@ -63,7 +63,7 @@ namespace Company.WebApplication1
             app.UseHttpsRedirection();
 #endif
 
-            app.UseEndpointRouting(routes =>
+            app.UseRouting(routes =>
             {
                 routes.MapApplication();
             });

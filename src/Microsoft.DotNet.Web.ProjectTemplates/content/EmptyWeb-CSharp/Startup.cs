@@ -25,7 +25,7 @@ namespace Company.WebApplication1
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseEndpointRouting(routes =>
+            app.UseRouting(routes =>
             {
                 routes.MapGet("/", async context =>
                 {

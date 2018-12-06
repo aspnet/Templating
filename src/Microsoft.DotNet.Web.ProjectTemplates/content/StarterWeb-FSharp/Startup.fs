@@ -40,7 +40,7 @@ type Startup private () =
 #endif
         app.UseStaticFiles() |> ignore
 
-        app.UseEndpointRouting(fun routes ->
+        app.UseRouting(fun routes ->
             routes.MapApplication() |> ignore
             routes.MapControllerRoute(
                 name = "default",

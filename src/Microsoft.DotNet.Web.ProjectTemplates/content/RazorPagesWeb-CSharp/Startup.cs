@@ -157,7 +157,7 @@ namespace Company.WebApplication1
 #endif
             app.UseStaticFiles();
 
-            app.UseEndpointRouting(routes =>
+            app.UseRouting(routes =>
             {
                 routes.MapApplication();
             });
