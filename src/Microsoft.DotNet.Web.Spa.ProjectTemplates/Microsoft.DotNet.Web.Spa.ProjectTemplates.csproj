@@ -1,6 +1,7 @@
 <Project>
 
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <Import Project="$(RepositoryEngineeringDir)\Package.props" />
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -38,5 +39,4 @@
       <Properties>$(GeneratedContentProperties)</Properties>
     </GeneratedContent>
   </ItemGroup>
-
 </Project>

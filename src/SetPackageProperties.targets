@@ -1,5 +1,5 @@
 <Project>
-  <Target Name="SetPackageProperties" BeforeTargets="GenerateNuspec">
+<!--  <Target Name="SetPackageProperties" BeforeTargets="GenerateNuspec">
     <PropertyGroup>
       <NuspecProperties>
         $(NuspecProperties);
@@ -16,6 +16,6 @@
         repositoryType=$(RepositoryType);
         repositoryCommit=$(RepositoryCommit);
       </NuspecProperties>
-    </PropertyGroup>
-  </Target>
+    </PropertyGroup> 
+  </Target> -->
 </Project>

@@ -1,7 +1,7 @@
 <Project>
 
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
-
+  <Import Project="$(RepositoryEngineeringDir)\Package.props" />
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <PackageId>Microsoft.DotNet.Web.ProjectTemplates.3.0</PackageId>
@@ -62,6 +62,4 @@
       <Properties>$(GeneratedContentProperties)</Properties>
     </GeneratedContent>
   </ItemGroup>
-
-
 </Project>

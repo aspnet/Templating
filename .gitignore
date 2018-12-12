@@ -1,6 +1,7 @@
 [Oo]bj/
 [Bb]in/
 TestResults/
+.dotnet/
 .nuget/
 *.sln.ide/
 _ReSharper.*/
