@@ -2,19 +2,16 @@
   <Import Project="$(RepositoryEngineeringDir)\Package.props" />
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    
+    <Description>Web Client-Side File Templates for Microsoft Template Engine
+
+    To install the templates in this package, run 'dotnet new --install &lt;PackageId&gt;::&lt;PackageVersion&gt;'.
+    </Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="content/**" />
-  </ItemGroup> 
-
-  <Target Name="SetPackageProperties2" BeforeTargets="GenerateNuspec" AfterTargets="_InitializeStandardNuspecProperties">
-    <PropertyGroup>
-      <Description>Web Client-Side File Templates for Microsoft Template Engine
-
-    To install the templates in this package, run 'dotnet new --install $(PackageId)::$(PackageVersion)'.
-      </Description>
-    </PropertyGroup>
-  </Target>
+    <Content Include="content/**">
+      <Pack>true</Pack>
+      <PackagePath>content</PackagePath>
+    </Content>
+  </ItemGroup>
 </Project>
