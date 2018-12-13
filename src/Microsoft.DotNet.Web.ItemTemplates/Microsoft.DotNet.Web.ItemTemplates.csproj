@@ -9,10 +9,4 @@
     To install the templates in this package, run 'dotnet new --install &lt;PackageId&gt;::&lt;PackageVersion&gt;'.</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="content/**">
-     <Pack>true</Pack>
-     <PackagePath>content</PackagePath>
-    </Content>
-  </ItemGroup>
 </Project>
