@@ -3,6 +3,11 @@
   <PropertyGroup>
     <VersionPrefix>3.0.0</VersionPrefix>
     <PreReleaseVersionLabel>alpha1</PreReleaseVersionLabel>
+
+    <!-- Compiler version overrides -->
+    <UsingToolMicrosoftNetCompilers Condition="'$(UsingToolMicrosoftNetCompilers)' == ''">true</UsingToolMicrosoftNetCompilers>
+    <MicrosoftNetCompilersVersion Condition="'$(MicrosoftNetCompilersVersion)' == ''">2.8.0</MicrosoftNetCompilersVersion>
+    <MicrosoftNETCoreCompilersVersion Condition="'$(MicrosoftNETCoreCompilersVersion)' == ''">$(MicrosoftNetCompilersVersion)</MicrosoftNETCoreCompilersVersion>
   </PropertyGroup>
   <PropertyGroup>
     <RestoreSources>
